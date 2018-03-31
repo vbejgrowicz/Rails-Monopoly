@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'devise'
 gem 'pry-rails'
 
 group :development, :test do
