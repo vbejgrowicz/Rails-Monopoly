@@ -1,0 +1,7 @@
+<%- if controller_name != 'sessions' %>
+  <div class='auth-informational'>Sign up and start playing today!</div>
+<% end -%>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class='auth-informational'>Log in to start playing!</div>
+<% end -%>
