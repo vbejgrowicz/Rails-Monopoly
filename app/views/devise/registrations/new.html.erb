@@ -1,5 +1,5 @@
 <%= render 'shared/main_logo' %>
-<div class='auth-informational'>Sign up to start playing today!</div>
+<%= render 'shared/auth_informational' %>
 <div class="auth-group">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
