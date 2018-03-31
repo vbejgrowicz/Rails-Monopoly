@@ -1,5 +1,12 @@
 @import "colors";
 
+.auth-informational {
+  text-align: center;
+  font-size: 26px;
+  color: $darkblue;
+  padding-bottom: 10px;
+}
+
 .auth-group {
   background-color: $green;
   min-width: max-content;
