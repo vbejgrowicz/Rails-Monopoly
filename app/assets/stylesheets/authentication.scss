@@ -22,6 +22,7 @@
     font-size: 12px;
     border: 1px solid $darkgray;
     margin: 5px;
+    cursor: text;
   }
 
   input[type=submit] {
@@ -30,6 +31,15 @@
     box-shadow: 0px 0px 3px 0px $darkgray;
     border: none;
     outline: none;
+    cursor: pointer;
+  }
+
+  input[type=checkbox] {
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 12px;
   }
 
   .link-to {
