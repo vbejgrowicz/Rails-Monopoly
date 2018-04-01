@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'better_errors'
 gem 'binding_of_caller'
 gem 'devise'
+gem 'font-awesome-rails'
 gem 'pry-rails'
 
 group :development, :test do
