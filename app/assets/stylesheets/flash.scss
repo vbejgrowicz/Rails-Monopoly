@@ -1,0 +1,28 @@
+.flash-message {
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+  position: absolute;
+  top: -32px;
+  animation: in-out 3s;
+  width: 100%;
+
+  &.notice {
+    color: #278400;
+    background: #d8eeca;
+    border-bottom: 1px solid #278400;
+  }
+
+  &.alert {
+    z-index: 1;
+    color: #d3080c;
+    background: #f3e9e8;
+    border-bottom: 1px solid #d3080c;
+
+  }
+}
+
+@keyframes in-out {
+    50% { top: 0; }
+    100% { top: -32px; }
+}

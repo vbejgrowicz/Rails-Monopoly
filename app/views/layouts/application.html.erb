@@ -9,8 +9,12 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if notice %>
+      <p class="flash-message notice"><%= fa_icon "check-circle" %> <%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="flash-message alert"><%= fa_icon "exclamation-triangle" %> <%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
