@@ -5,6 +5,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { counter } from './application.js';
+let store = createStore(counter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const Hello = props => (
   <div>Hello {props.name}!</div>
@@ -20,7 +24,9 @@ Hello.propTypes = {
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    (<Provider store={store}>
+      <Hello name="React" />
+    </Provider>),
     document.body.appendChild(document.createElement('div')),
   )
 })
