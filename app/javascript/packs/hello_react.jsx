@@ -2,25 +2,23 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import { createStore } from 'redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { counter } from './application.js';
-let store = createStore(counter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+import store from '../store';
 
 const Hello = props => (
   <div>Hello {props.name}!</div>
-)
+);
 
 Hello.defaultProps = {
-  name: 'David'
-}
+  name: 'David',
+};
 
 Hello.propTypes = {
-  name: PropTypes.string
-}
+  name: PropTypes.string,
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -28,5 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
       <Hello name="React" />
     </Provider>),
     document.body.appendChild(document.createElement('div')),
-  )
-})
+  );
+});
