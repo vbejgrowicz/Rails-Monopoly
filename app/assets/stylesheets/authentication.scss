@@ -50,4 +50,23 @@
     }
 
   }
+
+  #error_explanation {
+    margin: auto;
+    width: max-content;
+    font-size: 14px;
+
+    h2 {
+      font-weight: bold;
+    }
+
+    ul {
+      padding: 2px;
+    }
+
+    li {
+      font-size: 12px;
+      color: #cb0000;
+    }
+  }
 }
