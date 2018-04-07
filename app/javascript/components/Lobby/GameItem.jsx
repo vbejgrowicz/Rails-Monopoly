@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(joinGameRequest());
     const resp = await post(`/api/games/${gameId}/players`);
     const json = await resp.json();
-    dispatch(joinGameReceived(json.game));
+    dispatch(joinGameReceived(json.player));
   },
 });
 
