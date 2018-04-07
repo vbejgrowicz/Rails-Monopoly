@@ -4,6 +4,7 @@ import { get } from '../../utils/fetch';
 import { fetchGamesRequest, fetchGamesReceived } from '../../actions';
 import GameItem from './GameItem';
 import HeaderItem from './HeaderItem';
+import CreateGameButton from './CreateGameButton';
 
 class GameTable extends React.Component {
   componentWillMount() {
@@ -15,9 +16,7 @@ class GameTable extends React.Component {
       <div className="game-table">
         <div className="game-row">
           <div className="header-title">Active Games</div>
-          <div className="header-create">
-            <button>Create New Game</button>
-          </div>
+          <CreateGameButton />
         </div>
         <HeaderItem />
         {this.props.games.map(game => (
