@@ -7,7 +7,18 @@ const fetchGamesReceived = games => ({
   payload: { games },
 });
 
+const createGameRequest = () => ({
+  type: 'CREATE_GAME_REQUEST',
+});
+
+const createGameReceived = game => ({
+  type: 'CREATE_GAME_RECEIVED',
+  payload: { game },
+});
+
 export {
   fetchGamesRequest,
   fetchGamesReceived,
+  createGameRequest,
+  createGameReceived,
 };
