@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class GameTable extends React.Component {
   render() {
+    this.props.fetchGames();
     return (
       <div className="game-table">
         <div className="game-row">
@@ -29,4 +31,15 @@ class GameTable extends React.Component {
   }
 }
 
-export default GameTable;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchGames: async () => {
+      console.log('fetching');
+      const x = await fetch('http://localhost:5000/api/games', { 'Content-Type': 'application/json' });
+      const y = await x.json();
+      console.log(y);
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(GameTable);
