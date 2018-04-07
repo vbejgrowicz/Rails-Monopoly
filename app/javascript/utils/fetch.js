@@ -1,3 +1,5 @@
+import store from '../store';
+
 const baseUrl = 'http://localhost:5000';
 const baseOpts = {
   'Content-Type': 'application/json',
@@ -15,4 +17,14 @@ const put = (relPath, params = {}) => fetch(`${baseUrl}${relPath}`, { ...baseOpt
 
 const destroy = (relPath, params = {}) => fetch(`${baseUrl}${relPath}`, { ...baseOpts, method: 'DELETE', body: JSON.stringify(params) });
 
-export { get, post, put, destroy };
+const apiRequest = async (fetchReq, callBack) => {
+  const resp = await fetchReq();
+  const json = await resp.json();
+  if (resp.status === 500) {
+    store.dispatch({ type: 'SERVER_ERROR', error: json.error });
+  } else {
+    callBack(json);
+  }
+};
+
+export { get, post, put, destroy, apiRequest };

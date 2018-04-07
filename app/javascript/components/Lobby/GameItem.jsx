@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { post } from '../../utils/fetch';
+import { post, apiRequest } from '../../utils/fetch';
 import { joinGameRequest, joinGameReceived } from '../../actions';
 
 class GameItem extends React.Component {
@@ -29,9 +29,10 @@ GameItem.propTypes = {
 const mapDispatchToProps = dispatch => ({
   joinGame: async (gameId) => {
     dispatch(joinGameRequest());
-    const resp = await post(`/api/games/${gameId}/players`);
-    const json = await resp.json();
-    dispatch(joinGameReceived(json.player));
+    const joinGame = () => post(`/api/games/${gameId}/players`);
+    apiRequest(joinGame, (json) => {
+      dispatch(joinGameReceived(json.player));
+    });
   },
 });
 

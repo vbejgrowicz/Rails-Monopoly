@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { get } from '../../utils/fetch';
+import { get, apiRequest } from '../../utils/fetch';
 import { fetchGamesRequest, fetchGamesReceived } from '../../actions';
 import GameItem from './GameItem';
 import HeaderItem from './HeaderItem';
@@ -40,9 +40,10 @@ const mapStateToProps = ({ games }) => ({
 const mapDispatchToProps = dispatch => ({
   fetchGames: async () => {
     dispatch(fetchGamesRequest());
-    const resp = await get('/api/games');
-    const json = await resp.json();
-    dispatch(fetchGamesReceived(json.games));
+    const getGames = () => get('/api/games');
+    apiRequest(getGames, (json) => {
+      dispatch(fetchGamesReceived(json.games));
+    });
   },
 });
 

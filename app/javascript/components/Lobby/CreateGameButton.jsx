@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { post } from '../../utils/fetch';
+import { post, apiRequest } from '../../utils/fetch';
 import { createGameRequest, createGameReceived } from '../../actions';
 
 class CreateGameButton extends React.Component {
@@ -21,9 +21,10 @@ CreateGameButton.propTypes = {
 const mapDispatchToProps = dispatch => ({
   createGame: async () => {
     dispatch(createGameRequest());
-    const resp = await post('/api/games');
-    const json = await resp.json();
-    dispatch(createGameReceived(json.game));
+    const createGame = () => post('/api/games');
+    apiRequest(createGame, (json) => {
+      dispatch(createGameReceived(json.game));
+    });
   },
 });
 
