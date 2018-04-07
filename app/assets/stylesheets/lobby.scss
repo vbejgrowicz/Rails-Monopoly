@@ -11,6 +11,7 @@
   .game-row {
     padding: 5px;
     color: white;
+    font-size: 12px;
 
     &:nth-child(even) {
       background-color: $darkblue;
@@ -23,6 +24,7 @@
       background-color: $green;
       padding: 0;
       padding-bottom: 5px;
+      font-size: 16px;
 
       .header-title {
         display: inline-block;
@@ -45,6 +47,12 @@
       display: inline-block;
       width: 20%;
       text-align: center;
+    }
+
+    &.header {
+      font-weight: bold;
+      background-color: $red;
+      font-size: 14px;
     }
   }
 }

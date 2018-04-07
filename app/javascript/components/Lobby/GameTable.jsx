@@ -1,10 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { get } from '../../utils/fetch';
+import { fetchGamesRequest, fetchGamesReceived } from '../../actions';
+import GameItem from './GameItem';
+import HeaderItem from './HeaderItem';
 
 class GameTable extends React.Component {
-  render() {
+  componentWillMount() {
     this.props.fetchGames();
+  }
+
+  render() {
     return (
       <div className="game-table">
         <div className="game-row">
@@ -13,34 +19,30 @@ class GameTable extends React.Component {
             <button>Create New Game</button>
           </div>
         </div>
-        <div className="game-row">
-          <div className="game-item id">id</div>
-          <div className="game-item host">host</div>
-          <div className="game-item created">created</div>
-          <div className="game-item players">players</div>
-          <div className="game-item join">join</div>
-        </div>
-        <div className="game-row">
-          <div className="game-item id">id</div>
-          <div className="game-item host">host</div>
-          <div className="game-item created">created</div>
-          <div className="game-item players">players</div>
-          <div className="game-item join">join</div>
-        </div>
+        <HeaderItem />
+        {this.props.games.map(game => (
+          <GameItem key={game.id} game={game} />
+        ))}
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ games }) => {
+  return {
+    games: games.items,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchGames: async () => {
-      console.log('fetching');
-      const x = await get('/api/games');
-      const y = await x.json();
-      console.log(y);
+      dispatch(fetchGamesRequest());
+      const resp = await get('/api/games');
+      const json = await resp.json();
+      dispatch(fetchGamesReceived(json.games));
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(GameTable);
+export default connect(mapStateToProps, mapDispatchToProps)(GameTable);
