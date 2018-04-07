@@ -1,4 +1,20 @@
-export default function games(state = { items: [], isFetching: false, isCreating: false }, action) {
+const initialState = {
+  isFetching: false,
+  isCreating: false,
+  isJoining: false,
+  items: [],
+};
+
+const incrementPlayerCount = (player, currentGames) => (
+  currentGames.map((game) => {
+    if (game.id === player.game_id) {
+      return { ...game, players: game.players + 1 };
+    }
+    return game;
+  })
+);
+
+export default function games(state = initialState, action) {
   switch (action.type) {
     case 'FETCH_GAMES_REQUEST':
       return {
@@ -22,6 +38,17 @@ export default function games(state = { items: [], isFetching: false, isCreating
         items: state.items.concat(action.payload.game),
         isCreating: false,
       };
+    case 'JOIN_GAME_REQUEST':
+      return {
+        ...state,
+        isJoining: true,
+      };
+    case 'JOIN_GAME_RECEIVED':
+      return {
+        ...state,
+        isJoining: false,
+        items: incrementPlayerCount(action.payload.player, state.items),
+      }
     default:
       return state;
   }
