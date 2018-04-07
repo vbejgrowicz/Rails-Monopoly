@@ -13,4 +13,10 @@ Rails.application.routes.draw do
         # get :cancel
       end
   end
+
+  namespace :api do
+    defaults format: :json do
+      resources :games, only: [:index]
+    end
+  end
 end
