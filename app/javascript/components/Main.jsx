@@ -1,16 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import GameTable from './Lobby/GameTable';
 
-const Hello = props => (
-  <div>Hi {props.name}!</div>
+const Main = () => (
+  <GameTable />
 );
 
-Hello.defaultProps = {
-  name: 'David',
-};
-
-Hello.propTypes = {
-  name: PropTypes.string,
-};
-
-export default Hello;
+export default Main;

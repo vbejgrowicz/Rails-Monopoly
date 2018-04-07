@@ -1,0 +1,50 @@
+@import "colors";
+
+.game-table {
+  background-color: $green;
+  min-width: max-content;
+  width: 80%;
+  margin: auto;
+  margin-top: 15px;
+  padding: 10px;
+
+  .game-row {
+    padding: 5px;
+    color: white;
+
+    &:nth-child(even) {
+      background-color: $darkblue;
+    }
+    &:nth-child(odd) {
+      background-color: $lightblue;
+    }
+    &:nth-child(1) {
+      font-weight: bold;
+      background-color: $green;
+      padding: 0;
+      padding-bottom: 5px;
+
+      .header-title {
+        display: inline-block;
+        width: 55%;
+        text-align: end;
+      }
+
+      .header-create {
+        display: inline-block;
+        width: 45%;
+        text-align: end;
+        button {
+          padding: 5px;
+          background-color: $lightblue;
+        }
+      }
+    }
+
+    .game-item {
+      display: inline-block;
+      width: 20%;
+      text-align: center;
+    }
+  }
+}
