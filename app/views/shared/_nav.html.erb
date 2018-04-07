@@ -1,0 +1,11 @@
+<div class="nav-group">
+  <div class="nav-item">
+    Welcome <%= @current_user.email %>!
+  </div>
+  <%= render 'shared/nav_logo' %>
+  <form class="nav-item" method='POST' action='<%= destroy_user_session_path %>'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>' />
+    <input type='hidden' name='_method' value='DELETE' />
+    <input type='submit' value='Log Out' />
+  </form>
+</div>

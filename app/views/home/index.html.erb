@@ -1,8 +1,4 @@
-<div>Hello logged in user!</div>
-<form method='POST' action='<%= destroy_user_session_path %>'>
-  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>' />
-  <input type='hidden' name='_method' value='DELETE' />
-  <input type='submit' value='Log Out' />
-</form>
-<%= javascript_pack_tag 'hello_react' %>
-<%= javascript_pack_tag 'application' %> 
+<%= render 'shared/nav' %>
+
+<%= javascript_pack_tag 'app' %>
+<%= javascript_pack_tag 'application' %>
