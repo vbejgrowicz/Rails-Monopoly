@@ -48,6 +48,15 @@
       display: inline-block;
       width: 20%;
       text-align: center;
+
+      &.join {
+        span {
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
     }
 
     &.header {
