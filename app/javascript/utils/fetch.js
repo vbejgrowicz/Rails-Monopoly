@@ -1,6 +1,10 @@
 const baseUrl = 'http://localhost:5000';
 const baseOpts = {
   'Content-Type': 'application/json',
+  credentials: 'same-origin',
+  headers: {
+    'X-CSRF-Token': document.getElementsByName('csrf-token')[0].content,
+  },
 };
 
 const get = relPath => fetch(`${baseUrl}${relPath}`, { ...baseOpts, method: 'GET' });
