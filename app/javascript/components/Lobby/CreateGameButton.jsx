@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { post } from '../../utils/fetch';
 import { createGameRequest, createGameReceived } from '../../actions';
@@ -13,15 +14,17 @@ class CreateGameButton extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createGame: async () => {
-      dispatch(createGameRequest());
-      const resp = await post('/api/games');
-      const json = await resp.json();
-      dispatch(createGameReceived(json.game));
-    },
-  };
+CreateGameButton.propTypes = {
+  createGame: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = dispatch => ({
+  createGame: async () => {
+    dispatch(createGameRequest());
+    const resp = await post('/api/games');
+    const json = await resp.json();
+    dispatch(createGameReceived(json.game));
+  },
+});
 
 export default connect(null, mapDispatchToProps)(CreateGameButton);

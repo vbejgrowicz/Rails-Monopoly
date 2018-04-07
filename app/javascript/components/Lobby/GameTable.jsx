@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from '../../utils/fetch';
 import { fetchGamesRequest, fetchGamesReceived } from '../../actions';
@@ -27,21 +28,22 @@ class GameTable extends React.Component {
   }
 }
 
-const mapStateToProps = ({ games }) => {
-  return {
-    games: games.items,
-  };
+GameTable.propTypes = {
+  games: PropTypes.array.isRequired,
+  fetchGames: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchGames: async () => {
-      dispatch(fetchGamesRequest());
-      const resp = await get('/api/games');
-      const json = await resp.json();
-      dispatch(fetchGamesReceived(json.games));
-    },
-  };
-};
+const mapStateToProps = ({ games }) => ({
+  games: games.items,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchGames: async () => {
+    dispatch(fetchGamesRequest());
+    const resp = await get('/api/games');
+    const json = await resp.json();
+    dispatch(fetchGamesReceived(json.games));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameTable);
