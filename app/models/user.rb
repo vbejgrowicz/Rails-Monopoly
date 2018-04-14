@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :players
   has_many :hosted_games, class_name: 'Game', primary_key: :id, foreign_key: :host_id
+  has_many :active_games, through: :players, source: :game
 end
