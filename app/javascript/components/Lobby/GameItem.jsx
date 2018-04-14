@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { post, apiRequest } from '../../utils/fetch';
-import { joinGameRequest, joinGameReceived } from '../../actions';
 
 class GameItem extends React.Component {
   render() {
@@ -14,7 +11,7 @@ class GameItem extends React.Component {
         <div className="game-item created">{created_at}</div>
         <div className="game-item players">{players}</div>
         <div className="game-item join">
-          <span onClick={() => this.props.joinGame(id)}>Join This Game</span>
+          <span onClick={() => this.props.onGameClick(id)}>{this.props.gameItemDisplay}</span>
         </div>
       </div>
     );
@@ -23,17 +20,8 @@ class GameItem extends React.Component {
 
 GameItem.propTypes = {
   game: PropTypes.object.isRequired,
-  joinGame: PropTypes.func.isRequired,
+  onGameClick: PropTypes.func.isRequired,
+  gameItemDisplay: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  joinGame: async (gameId) => {
-    dispatch(joinGameRequest());
-    const joinGame = () => post(`/api/games/${gameId}/players`);
-    apiRequest(joinGame, (json) => {
-      dispatch(joinGameReceived(json.player));
-    });
-  },
-});
-
-export default connect(null, mapDispatchToProps)(GameItem);
+export default GameItem;
