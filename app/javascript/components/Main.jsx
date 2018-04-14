@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GameTables from './Lobby/GameTables';
+import GameBoard from './Board/GameBoard';
 import ServerError from './ServerError';
 import { fetchUserRequest, fetchUserReceived } from '../actions';
 import { get, apiRequest } from '../utils/fetch';
@@ -12,6 +13,7 @@ class Main extends React.Component {
   }
 
   render() {
+    return <GameBoard />;
     return this.props.isFetching === false && (
       [
         <ServerError key="1" />,
