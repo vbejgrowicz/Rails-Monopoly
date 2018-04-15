@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180407192619) do
+ActiveRecord::Schema.define(version: 20180415163704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "color_sets", force: :cascade do |t|
+    t.string "color", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.integer "host_id", null: false
@@ -30,6 +43,25 @@ ActiveRecord::Schema.define(version: 20180407192619) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "game_id"], name: "index_players_on_user_id_and_game_id", unique: true
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.integer "color_set_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_set_id"], name: "index_properties_on_color_set_id"
+  end
+
+  create_table "spaces", force: :cascade do |t|
+    t.integer "position", null: false
+    t.integer "property_id"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_spaces_on_event_id"
+    t.index ["position"], name: "index_spaces_on_position", unique: true
+    t.index ["property_id"], name: "index_spaces_on_property_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
