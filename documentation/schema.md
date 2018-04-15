@@ -19,23 +19,18 @@
 | dice_1        | int           |
 | dice_2        | int           |
 
-| *Board_actions* | Type          |
+| Events          | Type          |
 | --------------- |:-------------:|
 | id              | int           |
-| name            | int           |
-
-| *Card_actions*  | Type          |
-| --------------- |:-------------:|
-| id              | int           |
-| card_type       | string        |
+| name            | string        |
+| description     | string        |
 
 | Spaces            | Type          |
 | ----------------- |:-------------:|
 | id                | int           |
 | position          | int           |
-| name              | int           |
-| *actionable_id*   | int           |
-| *actionable_type* | string        |
+| property_id       | int           |
+| event_id          | int           |
 
 | Tokens        | Type          |
 | ------------- |:-------------:|
