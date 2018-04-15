@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get, apiRequest } from '../../utils/fetch';
 import { fetchSpacesRequest, fetchSpacesReceived } from '../../actions';
+import GameRow from './GameRow';
 
 class GameBoard extends React.Component {
   componentWillMount() {
@@ -10,53 +11,17 @@ class GameBoard extends React.Component {
   }
 
   render() {
+    const topItems = this.props.spaces.filter(space => space.position >= 20 && space.position <= 30);
+    const leftItems = this.props.spaces.filter(space => space.position > 10 && space.position < 20).reverse();
+    const rightItems = this.props.spaces.filter(space => space.position > 30 && space.position < 40);
+    const bottomItems = this.props.spaces.filter(space => space.position >= 0 && space.position <= 10).reverse();
     return (
       <div className="board">
-        <div className="row top">
-          <div className="corner">Free Parking</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="corner">Go to Jail</div>
-        </div>
-        <div className="row left">
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-        </div>
-        <div className="row middle" />
-        <div className="row right">
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-          <div className="tile"><div>Space</div></div>
-        </div>
-        <div className="row bottom">
-          <div className="corner">Jail</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="tile">Space</div>
-          <div className="corner">Go</div>
-        </div>
+        <GameRow items={topItems} key="top" position="top" />
+        <GameRow items={leftItems} key="left" position="left" />
+        <GameRow items={[]} key="middle" position="middle" />
+        <GameRow items={rightItems} key="right" position="right" />
+        <GameRow items={bottomItems} key="bottom" position="bottom" />
       </div>
     );
   }
@@ -64,7 +29,12 @@ class GameBoard extends React.Component {
 
 GameBoard.propTypes = {
   fetchSpaces: PropTypes.func.isRequired,
+  spaces: PropTypes.array.isRequired,
 };
+
+const mapStateToProps = ({ spaces }) => ({
+  spaces: spaces.items,
+});
 
 const mapDispatchToProps = dispatch => ({
   fetchSpaces: async () => {
@@ -76,4 +46,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(GameBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);
