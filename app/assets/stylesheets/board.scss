@@ -1,34 +1,57 @@
+@import "colors";
+
 .board {
   width: 1200px;
-  margin: auto;
-  padding: 10px;
+  margin: 10px auto;
+  background-color: $green;
+  border: 5px solid $green;
+
   .row {
+    background-color: #a8e2d1;
+
+    .corner,.tile {
+      box-sizing: border-box;
+    }
 
     &.top {
-      background-color: blue;
       width: 1200px;
+
       .corner {
         display: inline-block;
         width: 150px;
         height: 150px;
         vertical-align: top;
+        border: 1px solid black;
       }
       .tile {
         display: inline-block;
         vertical-align: top;
         width: 100px;
         height: 150px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+        &:nth-child(2) {
+          border-left: none;
+        }
       }
+
     }
     &.left {
       width: 150px;
       display: inline-block;
       vertical-align: top;
-      background-color: yellow;
+
       .tile {
         width: 150px;
         height: 100px;
         position: relative;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-top: 1px solid black;
+        &:nth-child(1) {
+          border-top: none;
+        }
         div {
           position: absolute;
           left: 25px;
@@ -49,10 +72,17 @@
       width: 150px;
       display: inline-block;
       vertical-align: top;
+
       .tile {
         width: 150px;
         height: 100px;
         position: relative;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-top: 1px solid black;
+        &:nth-child(1) {
+          border-top: none;
+        }
         div {
           position: absolute;
           left: 25px;
@@ -62,22 +92,28 @@
           height: 150px;
         }
       }
-      background-color: orange;
     }
     &.bottom {
       width: 1200px;
-      background-color: rebeccapurple;
+
       .corner {
         display: inline-block;
         vertical-align: top;
         width: 150px;
         height: 150px;
+        border: 1px solid black;
       }
       .tile {
         display: inline-block;
         vertical-align: top;
         width: 100px;
         height: 150px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+        &:nth-child(2) {
+          border-left: none;
+        }
       }
     }
   }
