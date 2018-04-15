@@ -7,7 +7,7 @@ class CreateSpacessTable < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :spaces, :position, unique: true
-    add_index :spaces, :property_id, unique: true
+    add_index :spaces, :property_id
     add_index :spaces, :event_id
   end
 end

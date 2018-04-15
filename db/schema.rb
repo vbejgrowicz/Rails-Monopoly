@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20180415163704) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_spaces_on_event_id"
     t.index ["position"], name: "index_spaces_on_position", unique: true
-    t.index ["property_id"], name: "index_spaces_on_property_id", unique: true
+    t.index ["property_id"], name: "index_spaces_on_property_id"
   end
 
   create_table "users", force: :cascade do |t|
