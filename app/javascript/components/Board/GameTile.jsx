@@ -8,7 +8,9 @@ class GameTile extends React.Component {
       <div className={item.position % 10 === 0 ? 'corner' : 'tile'}>
         <div className="tile-data">
           <div className={item.color && `color ${item.color}`} />
-          <div>{item.title}</div>
+          <div className="title">{item.title}</div>
+          <div className="image" />
+          {item.color && (<div className="price">Price $100</div>)}
         </div>
       </div>
     );

@@ -11,12 +11,56 @@
 
     .corner, .tile-data {
       box-sizing: border-box;
+      font-size: 11px;
+      text-transform: uppercase;
+      text-align: center;
+
+      .title {
+        padding: 2px;
+        height: 20%;
+      }
+
+      .image {
+        height: 50%;
+      }
+
+      .price {
+        height: 10%;
+      }
     }
 
     .color {
       width: 100%;
-      height: 25px;
+      height: 15%;
       border-bottom: 1px solid black;
+
+      &.brown {
+        background-color: $tile-brown;
+      }
+      &.light-blue {
+        background-color: $tile-light-blue;
+      }
+      &.purple {
+        background-color: $tile-purple;
+      }
+      &.orange {
+        background-color: $tile-orange;
+      }
+      &.red {
+        background-color: $tile-red;
+      }
+      &.yellow {
+        background-color: $tile-yellow;
+      }
+      &.green {
+        background-color: $tile-green;
+      }
+      &.dark-blue {
+        background-color: $tile-dark-blue;
+      }
+      &.white, &.black {
+        border-bottom: none;
+      }
     }
 
     &.top {
@@ -36,13 +80,14 @@
         .tile-data {
           width: 100px;
           height: 150px;
+          transform: rotate(180deg);
           border-top: 1px solid black;
           border-bottom: 1px solid black;
-          border-left: 1px solid black;
+          border-right: 1px solid black;
         }
         &:nth-child(2) {
           .tile-data {
-            border-left: none;
+            border-right: none;
           }
         }
       }
