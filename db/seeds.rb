@@ -7,13 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 brown = ColorSet.create!(color: 'brown')
-light_blue = ColorSet.create!(color: 'light blue')
+light_blue = ColorSet.create!(color: 'light-blue')
 purple = ColorSet.create!(color: 'purple')
 orange = ColorSet.create!(color: 'orange')
 red = ColorSet.create!(color: 'red')
 yellow = ColorSet.create!(color: 'yellow')
 green = ColorSet.create!(color: 'green')
-dark_blue = ColorSet.create!(color: 'dark blue')
+dark_blue = ColorSet.create!(color: 'dark-blue')
 black = ColorSet.create!(color: 'black')
 white = ColorSet.create!(color: 'white')
 
