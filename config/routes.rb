@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :players, only: [:create]
       end
       resources :users, only: [:show]
+      resources :spaces, only: [:index]
     end
   end
 end
