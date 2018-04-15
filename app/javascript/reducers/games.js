@@ -48,7 +48,7 @@ export default function games(state = initialState, action) {
         ...state,
         isJoining: false,
         items: incrementPlayerCount(action.payload.player, state.items),
-      }
+      };
     default:
       return state;
   }
