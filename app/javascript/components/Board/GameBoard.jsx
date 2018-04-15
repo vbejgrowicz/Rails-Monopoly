@@ -1,6 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { get, apiRequest } from '../../utils/fetch';
+import { fetchSpacesRequest, fetchSpacesReceived } from '../../actions';
 
 class GameBoard extends React.Component {
+  componentWillMount() {
+    this.props.fetchSpaces();
+  }
+
   render() {
     return (
       <div className="board">
@@ -54,4 +62,18 @@ class GameBoard extends React.Component {
   }
 }
 
-export default GameBoard;
+GameBoard.propTypes = {
+  fetchSpaces: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchSpaces: async () => {
+    dispatch(fetchSpacesRequest());
+    const getSpaces = () => get('/api/spaces');
+    apiRequest(getSpaces, (json) => {
+      dispatch(fetchSpacesReceived(json.spaces));
+    });
+  },
+});
+
+export default connect(null, mapDispatchToProps)(GameBoard);
