@@ -9,8 +9,14 @@
   .row {
     background-color: #a8e2d1;
 
-    .corner,.tile {
+    .corner, .tile-data {
       box-sizing: border-box;
+    }
+
+    .color {
+      width: 100%;
+      height: 25px;
+      border-bottom: 1px solid black;
     }
 
     &.top {
@@ -26,13 +32,18 @@
       .tile {
         display: inline-block;
         vertical-align: top;
-        width: 100px;
-        height: 150px;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        border-left: 1px solid black;
+
+        .tile-data {
+          width: 100px;
+          height: 150px;
+          border-top: 1px solid black;
+          border-bottom: 1px solid black;
+          border-left: 1px solid black;
+        }
         &:nth-child(2) {
-          border-left: none;
+          .tile-data {
+            border-left: none;
+          }
         }
       }
 
@@ -46,19 +57,22 @@
         width: 150px;
         height: 100px;
         position: relative;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
-        border-top: 1px solid black;
-        &:nth-child(1) {
-          border-top: none;
-        }
-        div {
+
+        .tile-data {
           position: absolute;
           left: 25px;
           top: -25px;
           transform: rotate(90deg);
           width: 100px;
           height: 150px;
+          border-left: 1px solid black;
+          border-bottom: 1px solid black;
+          border-top: 1px solid black;
+        }
+        &:nth-child(1) {
+          .tile-data {
+            border-left: none;
+          }
         }
       }
     }
@@ -77,19 +91,22 @@
         width: 150px;
         height: 100px;
         position: relative;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
-        border-top: 1px solid black;
-        &:nth-child(1) {
-          border-top: none;
-        }
-        div {
+        .tile-data {
           position: absolute;
           left: 25px;
           top: -25px;
           transform: rotate(-90deg);
           width: 100px;
           height: 150px;
+          border-right: 1px solid black;
+          border-top: 1px solid black;
+          border-bottom: 1px solid black;
+
+        }
+        &:nth-child(1) {
+          .tile-data {
+            border-right: none;
+          }
         }
       }
     }
@@ -106,13 +123,18 @@
       .tile {
         display: inline-block;
         vertical-align: top;
-        width: 100px;
-        height: 150px;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        border-left: 1px solid black;
+
+        .tile-data {
+          width: 100px;
+          height: 150px;
+          border-top: 1px solid black;
+          border-bottom: 1px solid black;
+          border-left: 1px solid black;
+        }
         &:nth-child(2) {
-          border-left: none;
+          .tile-data {
+            border-left: none;
+          }
         }
       }
     }
