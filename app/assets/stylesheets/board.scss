@@ -1,12 +1,12 @@
 .board {
-  width: 1100px;
+  width: 1200px;
   margin: auto;
   padding: 10px;
   .row {
 
     &.top {
       background-color: blue;
-      width: 1100px;
+      width: 1200px;
       .corner {
         display: inline-block;
         width: 150px;
@@ -40,10 +40,10 @@
       }
     }
     &.middle {
-      width: 800px;
+      width: 900px;
       display: inline-block;
       vertical-align: top;
-      height: 800px;
+      height: 900px;
     }
     &.right {
       width: 150px;
@@ -65,7 +65,7 @@
       background-color: orange;
     }
     &.bottom {
-      width: 1100px;
+      width: 1200px;
       background-color: rebeccapurple;
       .corner {
         display: inline-block;
