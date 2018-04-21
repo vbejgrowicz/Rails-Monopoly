@@ -14,6 +14,10 @@
       font-size: 11px;
       text-transform: uppercase;
       text-align: center;
+
+      .title {
+        font-weight: 600;
+      }
     }
 
     .corner {
@@ -28,12 +32,12 @@
 
         .title {
           position: absolute;
+          font-size: 17px;
 
           &.free-parking {
             transform: rotate(135deg);
             top: 105px;
             right: 12px;
-            font-size: 18px;
 
             span {
               position: absolute;
@@ -49,7 +53,6 @@
             transform: rotate(225deg);
             top: 139px;
             left: 49px;
-            font-size: 18px;
 
             span {
               position: absolute;
@@ -62,6 +65,31 @@
                 left: 9px;
               }
             }
+          }
+
+          &.in-jail {
+
+            span {
+              position: absolute;
+
+              &:nth-child(1) {
+                transform: rotate(90deg);
+                top: 45px;
+                left: -2px;
+              }
+              &:nth-child(2) {
+                top: 116px;
+                left: 55px;
+              }
+            }
+          }
+
+          &.go {
+            transform: rotate(315deg);
+            left: -9px;
+            top: 22px;
+            font-size: 12px;
+            width: 100px;
           }
         }
 
