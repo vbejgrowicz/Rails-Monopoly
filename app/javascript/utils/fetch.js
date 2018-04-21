@@ -20,11 +20,15 @@ const destroy = (relPath, params = {}) => fetch(`${baseUrl}${relPath}`, { ...bas
 const apiRequest = async (fetchReq, callBack) => {
   const resp = await fetchReq();
   const json = await resp.json();
+  const status = { success: false, error: false };
   if (resp.status === 500) {
     store.dispatch({ type: 'SERVER_ERROR', error: json.error });
+    status.error = true;
   } else {
     callBack(json);
+    status.success = true;
   }
+  return status;
 };
 
 export { get, post, put, destroy, apiRequest };
