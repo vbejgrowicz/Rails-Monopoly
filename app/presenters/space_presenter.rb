@@ -28,7 +28,11 @@ class SpacePresenter < ApplicationPresenter
   private
 
   def create_category
-    return 'railroad' if @object.tile.name.include?('Railroad')
+    return 'railroad' if is_railroad?
     @object.tile.name.gsub(' ', '-').delete('.&').downcase
+  end
+
+  def is_railroad?
+    @object.tile.name.include?('Railroad') || @object.tile.name == 'Short Line'
   end
 end
