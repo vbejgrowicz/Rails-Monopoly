@@ -29,21 +29,25 @@
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center;
-          height: 50%;
+          height: 100%;
 
           &.go {
             background-image: url('go.png');
           }
 
           &.go-to-jail {
+            background-size: 75%;
             background-image: url('go-to-jail.png');
           }
 
           &.in-jail {
+            height: 75%;
+            background-position: 40px -2px;
             background-image: url('in-jail.png');
           }
 
           &.free-parking {
+            background-size: 70%;
             background-image: url('free-parking.png');
           }
         }
