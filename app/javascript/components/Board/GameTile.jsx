@@ -9,7 +9,7 @@ class GameTile extends React.Component {
         <div className="tile-data">
           <div className={item.color && `color ${item.color}`} />
           <div className="title">{item.title}</div>
-          <div className={`image ${item.color === 'black' ? 'railroad' : ''}`} />
+          <div className={`image ${item.category}`} />
           {item.color && (<div className="price">Price $100</div>)}
         </div>
       </div>
