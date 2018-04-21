@@ -45,6 +45,7 @@
           &.community-chest {
             background: linear-gradient(#a3e7fe, #00aef5);
             .logo {
+              transform: rotate(180deg);
               background-image: url('community-chest.png');
             }
           }
