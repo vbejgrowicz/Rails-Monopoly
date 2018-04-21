@@ -20,11 +20,14 @@ const cornerTitle = {
   ),
 };
 
+const specialDescriptions = ['luxury-tax', 'income-tax', 'community-chest'];
+
 class GameTile extends React.Component {
   constructor() {
     super();
 
     this.renderTitle = this.renderTitle.bind(this);
+    this.renderDescription = this.renderDescription.bind(this);
   }
 
   renderTitle() {
@@ -36,15 +39,27 @@ class GameTile extends React.Component {
       <div className={`title ${item.category}`}>{item.title}</div>
     );
   }
+
+  renderDescription() {
+    const { item } = this.props;
+    if (item.color) {
+      return (<div className="description">Price $100</div>);
+    }
+    if (specialDescriptions.indexOf(item.category) > -1) {
+      return (<div className={`description ${item.category}`}>{item.description}</div>);
+    }
+    return null;
+  }
+
   render() {
     const { item } = this.props;
     return (
       <div className={item.position % 10 === 0 ? 'corner' : 'tile'}>
         <div className="tile-data">
-          <div className={item.color && `color ${item.color}`} />
+          <div className={`color ${item.color || 'no-color'}`} />
           {this.renderTitle()}
           <div className={`image ${item.category}`} />
-          {item.color && (<div className="price">Price $100</div>)}
+          {this.renderDescription()}
         </div>
       </div>
     );
