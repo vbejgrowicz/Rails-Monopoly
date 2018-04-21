@@ -16,7 +16,7 @@ class GameBoard extends React.Component {
     const leftItems = this.props.spaces.filter(space => space.position > 10 && space.position < 20).reverse();
     const rightItems = this.props.spaces.filter(space => space.position > 30 && space.position < 40);
     const bottomItems = this.props.spaces.filter(space => space.position >= 0 && space.position <= 10).reverse();
-    return (
+    return this.props.spaces.length > 0 && (
       <div className="board">
         <GameRow items={topItems} key="top" position="top" />
         <GameRow items={leftItems} key="left" position="left" />
