@@ -33,11 +33,26 @@
           box-sizing: border-box;
           width: 200px;
           height: 125px;
+
+          .logo {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+          }
+
           &.community-chest {
-            background-color: rebeccapurple;
+            background: linear-gradient(#a3e7fe, #00aef5);
+            .logo {
+              background-image: url('community-chest.png');
+            }
           }
           &.chance {
-            background-color: orange;
+            background: linear-gradient(#ff6800, #ff8c00);
+            .logo {
+              background-image: url('chance-white.png');
+            }
           }
         }
       }
