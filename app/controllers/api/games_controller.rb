@@ -14,6 +14,13 @@ class Api::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    validate_player!
     render json: { game: GamePresenter.new(@game) }
+  end
+
+  private
+
+  def validate_player!
+    raise 'You are not part of this game!' unless @game.is_player?(current_user.id)
   end
 end
