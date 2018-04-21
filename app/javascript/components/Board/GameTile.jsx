@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TokenSpaces from './TokenSpaces';
 
 const cornerTitle = {
   'go-to-jail': item => (
@@ -56,6 +57,7 @@ class GameTile extends React.Component {
     return (
       <div className={item.position % 10 === 0 ? 'corner' : 'tile'}>
         <div className="tile-data">
+          <TokenSpaces item={item} />
           <div className={`color ${item.color || 'no-color'}`} />
           {this.renderTitle()}
           <div className={`image ${item.category}`} />
