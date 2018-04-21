@@ -9,120 +9,136 @@
   .row {
     background-color: #a8e2d1;
 
-    .corner, .tile-data {
+    .tile-data {
       box-sizing: border-box;
       font-size: 11px;
       text-transform: uppercase;
       text-align: center;
+    }
 
-      .title {
-        padding: 2px;
-        height: 20%;
-      }
+    .corner {
+      display: inline-block;
+      vertical-align: top;
 
-      .image {
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 50%;
+      .tile-data {
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
 
-        &.railroad {
-          background-image: url('railroad.png');
+        .image {
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 50%;
+
+          &.go {
+            background-image: url('go.png');
+          }
+
+          &.go-to-jail {
+            background-image: url('go-to-jail.png');
+          }
+
+          &.in-jail {
+            background-image: url('in-jail.png');
+          }
+
+          &.free-parking {
+            background-image: url('free-parking.png');
+          }
         }
-
-        &.electric-company {
-          background-image: url('electric-company.png');
-        }
-
-        &.water-works {
-          background-image: url('water-works.png');
-        }
-
-        &.chance {
-          background-image: url('chance.png');
-        }
-
-        &.community-chest {
-          background-image: url('community-chest.png');
-        }
-
-        &.luxury-tax {
-          background-image: url('luxury-tax.png');
-        }
-
-        &.go {
-          background-image: url('go.png');
-        }
-
-        &.go-to-jail {
-          background-image: url('go-to-jail.png');
-        }
-
-        &.in-jail {
-          background-image: url('in-jail.png');
-        }
-
-        &.free-parking {
-          background-image: url('free-parking.png');
-        }
-      }
-
-      .price {
-        height: 10%;
       }
     }
 
-    .color {
-      width: 100%;
-      height: 15%;
-      border-bottom: 1px solid black;
+    .tile {
+      .tile-data {
+        width: 100px;
+        height: 150px;
 
-      &.brown {
-        background-color: $tile-brown;
-      }
-      &.light-blue {
-        background-color: $tile-light-blue;
-      }
-      &.purple {
-        background-color: $tile-purple;
-      }
-      &.orange {
-        background-color: $tile-orange;
-      }
-      &.red {
-        background-color: $tile-red;
-      }
-      &.yellow {
-        background-color: $tile-yellow;
-      }
-      &.green {
-        background-color: $tile-green;
-      }
-      &.dark-blue {
-        background-color: $tile-dark-blue;
-      }
-      &.white, &.black {
-        border-bottom: none;
+        .color {
+          width: 100%;
+          height: 15%;
+          border-bottom: 1px solid black;
+
+          &.brown {
+            background-color: $tile-brown;
+          }
+          &.light-blue {
+            background-color: $tile-light-blue;
+          }
+          &.purple {
+            background-color: $tile-purple;
+          }
+          &.orange {
+            background-color: $tile-orange;
+          }
+          &.red {
+            background-color: $tile-red;
+          }
+          &.yellow {
+            background-color: $tile-yellow;
+          }
+          &.green {
+            background-color: $tile-green;
+          }
+          &.dark-blue {
+            background-color: $tile-dark-blue;
+          }
+          &.white, &.black {
+            border-bottom: none;
+          }
+        }
+
+        .title {
+          padding: 2px;
+          height: 20%;
+        }
+
+        .image {
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 50%;
+
+          &.railroad {
+            background-image: url('railroad.png');
+          }
+
+          &.electric-company {
+            background-image: url('electric-company.png');
+          }
+
+          &.water-works {
+            background-image: url('water-works.png');
+          }
+
+          &.chance {
+            background-image: url('chance.png');
+          }
+
+          &.community-chest {
+            background-image: url('community-chest.png');
+          }
+
+          &.luxury-tax {
+            background-image: url('luxury-tax.png');
+          }
+        }
+
+        .price {
+          height: 10%;
+        }
       }
     }
 
     &.top {
       width: 1200px;
 
-      .corner {
-        display: inline-block;
-        width: 150px;
-        height: 150px;
-        vertical-align: top;
-        border: 1px solid black;
-      }
       .tile {
         display: inline-block;
         vertical-align: top;
 
         .tile-data {
-          width: 100px;
-          height: 150px;
           transform: rotate(180deg);
           border-top: 1px solid black;
           border-bottom: 1px solid black;
@@ -134,8 +150,8 @@
           }
         }
       }
-
     }
+
     &.left {
       width: 150px;
       display: inline-block;
@@ -151,8 +167,6 @@
           left: 25px;
           top: -25px;
           transform: rotate(90deg);
-          width: 100px;
-          height: 150px;
           border-left: 1px solid black;
           border-bottom: 1px solid black;
           border-top: 1px solid black;
@@ -164,12 +178,14 @@
         }
       }
     }
+
     &.middle {
       width: 900px;
       display: inline-block;
       vertical-align: top;
       height: 900px;
     }
+
     &.right {
       width: 150px;
       display: inline-block;
@@ -184,8 +200,6 @@
           left: 25px;
           top: -25px;
           transform: rotate(-90deg);
-          width: 100px;
-          height: 150px;
           border-right: 1px solid black;
           border-top: 1px solid black;
           border-bottom: 1px solid black;
@@ -198,23 +212,15 @@
         }
       }
     }
+
     &.bottom {
       width: 1200px;
 
-      .corner {
-        display: inline-block;
-        vertical-align: top;
-        width: 150px;
-        height: 150px;
-        border: 1px solid black;
-      }
       .tile {
         display: inline-block;
         vertical-align: top;
 
         .tile-data {
-          width: 100px;
-          height: 150px;
           border-top: 1px solid black;
           border-bottom: 1px solid black;
           border-left: 1px solid black;
