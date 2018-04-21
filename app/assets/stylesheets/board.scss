@@ -242,6 +242,10 @@
           border-top: 1px solid black;
           border-bottom: 1px solid black;
           border-right: 1px solid black;
+
+          .image.chance {
+            background-image: url('chance-blue.png'); // need to handle chance specifically for different colors
+          }
         }
         &:nth-child(2) {
           .tile-data {
@@ -296,6 +300,9 @@
           border-top: 1px solid black;
           border-bottom: 1px solid black;
 
+          .image.chance {
+            background-image: url('chance-orange.png'); // need to handle chance specifically for different colors
+          }
         }
         &:nth-child(1) {
           .tile-data {
@@ -316,6 +323,10 @@
           border-top: 1px solid black;
           border-bottom: 1px solid black;
           border-left: 1px solid black;
+
+          .image.chance {
+            background-image: url('chance-pink.png'); // need to handle chance specifically for different colors
+          }
         }
         &:nth-child(2) {
           .tile-data {
