@@ -24,6 +24,27 @@
         width: 150px;
         height: 150px;
         border: 1px solid black;
+        position: relative;
+
+        .title {
+          position: absolute;
+
+          &.free-parking {
+            transform: rotate(135deg);
+            top: 105px;
+            right: 12px;
+            font-size: 18px;
+
+            span {
+              position: absolute;
+
+              &:nth-child(2) {
+                top: 110px;
+                left: -15px;
+              }
+            }
+          }
+        }
 
         .image {
           background-size: contain;
