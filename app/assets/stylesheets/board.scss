@@ -18,6 +18,9 @@
       .title {
         font-weight: 600;
       }
+      .title, .image, .description, .color {
+        box-sizing: border-box;
+      }
     }
 
     .corner {
@@ -156,49 +159,72 @@
           &.dark-blue {
             background-color: $tile-dark-blue;
           }
-          &.white, &.black {
+          &.white, &.black, &.no-color {
             border-bottom: none;
+            height: 5%;
           }
         }
 
         .title {
           padding: 2px;
-          height: 20%;
+          height: 28%;
+
+          &.chance, &.community-chest, &.electric-company, &.water-works, &.railroad {
+            height: 20%;
+          }
+          &.luxury-tax, &.income-tax {
+            font-size: 17px;
+          }
         }
 
         .image {
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center;
-          height: 50%;
+          height: 47%;
 
           &.railroad {
+            height: 65%;
             background-image: url('railroad.png');
           }
 
           &.electric-company {
+            height: 65%;
             background-image: url('electric-company.png');
           }
 
           &.water-works {
+            height: 65%;
             background-image: url('water-works.png');
           }
 
           &.chance {
+            height: 75%;
             background-image: url('chance.png');
           }
 
           &.community-chest {
+            height: 50%;
             background-image: url('community-chest.png');
           }
 
           &.luxury-tax {
+            height: 57%;
             background-image: url('luxury-tax.png');
+          }
+          
+          &.income-tax {
+            height: 57%;
           }
         }
 
-        .price {
+        .description {
           height: 10%;
+
+          &.community-chest {
+            font-size: 10px;
+            height: 25%;
+          }
         }
       }
     }
