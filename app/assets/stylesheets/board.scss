@@ -44,6 +44,25 @@
               }
             }
           }
+
+          &.go-to-jail {
+            transform: rotate(225deg);
+            top: 139px;
+            left: 49px;
+            font-size: 18px;
+
+            span {
+              position: absolute;
+
+              &:nth-child(1) {
+                width: 58px;
+              }
+              &:nth-child(2) {
+                top: 104px;
+                left: 9px;
+              }
+            }
+          }
         }
 
         .image {
