@@ -3,4 +3,8 @@ class Space < ApplicationRecord
 
   belongs_to :property, optional: true
   belongs_to :event, optional: true
+
+  def tile
+    property || event
+  end
 end

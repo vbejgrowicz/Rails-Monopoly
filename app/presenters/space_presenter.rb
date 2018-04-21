@@ -1,8 +1,10 @@
 class SpacePresenter < ApplicationPresenter
   def as_json(*)
     json = {
+      title: @object.tile.name,
       id: @object.id,
-      position: @object.position
+      position: @object.position,
+      category: create_category,
     }
     json.merge!(event_data) if @object.event_id
     json.merge!(property_data) if @object.property_id
@@ -11,7 +13,6 @@ class SpacePresenter < ApplicationPresenter
 
   def event_data
     {
-      title: @object.event.name,
       color: nil,
       description: @object.event.description,
     }
@@ -19,9 +20,15 @@ class SpacePresenter < ApplicationPresenter
 
   def property_data
     {
-      title: @object.property.name,
       color: @object.property.color_set.color,
       description: nil,
     }
+  end
+
+  private
+
+  def create_category
+    return 'railroad' if @object.tile.name.include?('Railroad')
+    @object.tile.name.gsub(' ', '-').delete('.&').downcase
   end
 end
