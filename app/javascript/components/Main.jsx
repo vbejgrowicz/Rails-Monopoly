@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GameTables from './Lobby/GameTables';
-import GameBoard from './Board/GameBoard';
+import Game from './Game/Game';
 import ServerError from './ServerError';
 import { fetchUserRequest, fetchUserReceived } from '../actions';
 import { get, apiRequest } from '../utils/fetch';
@@ -13,7 +13,7 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/lobby" component={GameTables} />
-        <Route exact path="/game/:id" component={GameBoard} />
+        <Route exact path="/game/:id" component={Game} />
         <Redirect from="/" to="/lobby" />
       </Switch>
     </BrowserRouter>
