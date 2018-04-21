@@ -1,0 +1,12 @@
+@import "colors";
+
+.board {
+  .row {
+    &.middle {
+      width: 900px;
+      display: inline-block;
+      vertical-align: top;
+      height: 900px;
+    }
+  }
+}

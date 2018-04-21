@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { get, apiRequest } from '../../utils/fetch';
 import { fetchSpacesRequest, fetchSpacesReceived } from '../../actions';
 import GameRow from './GameRow';
+import GameMiddle from './GameMiddle';
 
 class GameBoard extends React.Component {
   componentWillMount() {
@@ -19,7 +20,7 @@ class GameBoard extends React.Component {
       <div className="board">
         <GameRow items={topItems} key="top" position="top" />
         <GameRow items={leftItems} key="left" position="left" />
-        <GameRow items={[]} key="middle" position="middle" />
+        <GameMiddle key="middle" />
         <GameRow items={rightItems} key="right" position="right" />
         <GameRow items={bottomItems} key="bottom" position="bottom" />
       </div>
