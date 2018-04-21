@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get, apiRequest } from '../../utils/fetch';
-import { fetchSpacesRequest, fetchSpacesReceived } from '../../actions';
+import { fetchSpacesRequest, fetchSpacesReceived, fetchGameRequest, fetchGameReceived } from '../../actions';
 import GameRow from './GameRow';
 import GameMiddle from './GameMiddle';
 
 class GameBoard extends React.Component {
   componentWillMount() {
+    this.props.fetchGame();
     this.props.fetchSpaces();
   }
 
@@ -37,7 +38,18 @@ const mapStateToProps = ({ spaces }) => ({
   spaces: spaces.items,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchGame: async () => {
+    const gameId = ownProps.match.params.id;
+    dispatch(fetchGameRequest(gameId));
+    const getGame = () => get(`/api/games/${gameId}`);
+    const status = await apiRequest(getGame, (json) => {
+      dispatch(fetchGameReceived(json.game));
+    });
+    if (status.error) {
+      ownProps.history.push('/lobby');
+    }
+  },
   fetchSpaces: async () => {
     dispatch(fetchSpacesRequest());
     const getSpaces = () => get('/api/spaces');
