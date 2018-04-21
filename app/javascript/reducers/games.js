@@ -3,6 +3,7 @@ const initialState = {
   isCreating: false,
   isJoining: false,
   items: [],
+  activeGame: {},
 };
 
 const incrementPlayerCount = (player, currentGames) => (
@@ -26,6 +27,17 @@ export default function games(state = initialState, action) {
         ...state,
         items: action.payload.games,
         isFetching: false,
+      };
+    case 'FETCH_GAME_REQUEST':
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case 'FETCH_GAME_RECEIVED':
+      return {
+        ...state,
+        isFetching: false,
+        activeGame: action.payload.game,
       };
     case 'CREATE_GAME_REQUEST':
       return {

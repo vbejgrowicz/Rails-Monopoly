@@ -7,6 +7,16 @@ const fetchGamesReceived = games => ({
   payload: { games },
 });
 
+const fetchGameRequest = id => ({
+  type: 'FETCH_GAME_REQUEST',
+  payload: id,
+});
+
+const fetchGameReceived = game => ({
+  type: 'FETCH_GAME_RECEIVED',
+  payload: { game },
+});
+
 const createGameRequest = () => ({
   type: 'CREATE_GAME_REQUEST',
 });
@@ -28,6 +38,8 @@ const joinGameReceived = player => ({
 export {
   fetchGamesRequest,
   fetchGamesReceived,
+  fetchGameRequest,
+  fetchGameReceived,
   createGameRequest,
   createGameReceived,
   joinGameRequest,

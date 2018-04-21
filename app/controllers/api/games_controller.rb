@@ -11,4 +11,9 @@ class Api::GamesController < ApplicationController
     end
     render json: { game: GamePresenter.new(@game) }
   end
+
+  def show
+    @game = Game.find(params[:id])
+    render json: { game: GamePresenter.new(@game) }
+  end
 end
