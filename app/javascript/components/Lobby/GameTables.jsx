@@ -6,15 +6,24 @@ import { fetchGamesRequest, fetchGamesReceived, joinGameRequest, joinGameReceive
 import GameTable from './GameTable';
 
 class GameTables extends React.Component {
+  constructor() {
+    super();
+
+    this.enterGame = this.enterGame.bind(this);
+  }
   componentWillMount() {
     this.props.fetchGames();
+  }
+
+  enterGame(id) {
+    this.props.history.push(`/game/${id}`);
   }
 
   render() {
     const activeGames = this.props.games.filter(game => this.props.user.active_game_ids.indexOf(game.id) > -1);
     const pendingGames = this.props.games.filter(game => this.props.user.active_game_ids.indexOf(game.id) === -1);
     return [
-      <GameTable games={activeGames} title="Active Games" canCreate key="active" gameItemDisplay="Enter Game" onGameClick={this.props.enterGame} />,
+      <GameTable games={activeGames} title="Active Games" canCreate key="active" gameItemDisplay="Enter Game" onGameClick={this.enterGame} />,
       <GameTable games={pendingGames} title="Pending Games" canCreate={false} key="pending" gameItemDisplay="Join Game" onGameClick={this.props.joinGame} />,
     ];
   }
@@ -25,7 +34,7 @@ GameTables.propTypes = {
   user: PropTypes.object.isRequired,
   fetchGames: PropTypes.func.isRequired,
   joinGame: PropTypes.func.isRequired,
-  enterGame: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 GameTables.defaultProps = {
@@ -52,7 +61,6 @@ const mapDispatchToProps = dispatch => ({
       dispatch(joinGameReceived(json.player));
     });
   },
-  enterGame: () => {},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameTables);
