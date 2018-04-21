@@ -29,8 +29,9 @@
         }
 
         .card {
-          border: 1px dashed black;
+          box-shadow: 1px 1px 5px 0px;
           box-sizing: border-box;
+          border: 5px solid white;
           width: 200px;
           height: 125px;
 
