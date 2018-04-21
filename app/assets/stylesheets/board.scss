@@ -21,13 +21,49 @@
       }
 
       .image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
         height: 50%;
 
         &.railroad {
           background-image: url('railroad.png');
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
+        }
+
+        &.electric-company {
+          background-image: url('electric-company.png');
+        }
+
+        &.water-works {
+          background-image: url('water-works.png');
+        }
+
+        &.chance {
+          background-image: url('chance.png');
+        }
+
+        &.community-chest {
+          background-image: url('community-chest.png');
+        }
+
+        &.luxury-tax {
+          background-image: url('luxury-tax.png');
+        }
+
+        &.go {
+          background-image: url('go.png');
+        }
+
+        &.go-to-jail {
+          background-image: url('go-to-jail.png');
+        }
+
+        &.in-jail {
+          background-image: url('in-jail.png');
+        }
+
+        &.free-parking {
+          background-image: url('free-parking.png');
         }
       }
 
