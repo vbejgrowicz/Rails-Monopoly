@@ -28,7 +28,7 @@ const apiRequest = async (fetchReq, callBack) => {
     callBack(json);
     status.success = true;
   }
-  return status;
+  return { ...status, json };
 };
 
 export { get, post, put, destroy, apiRequest };
