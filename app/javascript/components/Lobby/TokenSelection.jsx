@@ -6,7 +6,9 @@ import { get, apiRequest } from '../../utils/fetch';
 class TokenSelection extends React.Component {
   constructor() {
     super();
-    this.state = { loading: true, game: null };
+    this.state = { loading: true, game: null, token_id: null };
+
+    this.setSelected = this.setSelected.bind(this);
   }
 
   fetchGame = async () => {
@@ -23,15 +25,23 @@ class TokenSelection extends React.Component {
     this.fetchGame();
   }
 
+  setSelected(token) {
+    this.setState({ token_id: token.id });
+  }
+
   render() {
-    return this.state.loading ? (<div>loading...</div>) : (
+    const { token_id, loading, game } = this.state;
+    return loading ? (<div>loading...</div>) : (
       <div className="outer-modal">
-        <div className="modal">
+        <div className="modal token-selection">
           <h2>Tokens</h2>
           <div className="close" onClick={this.props.onClickClose}><span>x</span></div>
-          {this.state.game.available_tokens.map((token) => (
-            <div key={token.id}>{token.name}</div>
-          ))}
+          <div style={{ padding: '5px' }}>
+            {game.available_tokens.map((token) => (
+              <div className={`token ${token.name} ${token.id === token_id ? 'selected' : ''}`} onClick={() => this.setSelected(token)} />
+            ))}
+          </div>
+          <div className="action"><button onClick={this.props.onSubmit}>{this.props.gameId === 'new' ? 'Create Game' : 'Join Game'}</button></div>
         </div>
       </div>
     );

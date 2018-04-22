@@ -1,0 +1,17 @@
+.outer-modal {
+
+  .token-selection {
+    background-color: yellow;
+
+    .token {
+      width: 25%;
+      height: 50px;
+      max-width: none;
+
+      &.selected {
+        background-color: rebeccapurple;
+      }
+    }
+  }
+
+}
