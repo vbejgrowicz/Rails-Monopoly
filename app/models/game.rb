@@ -9,4 +9,8 @@ class Game < ApplicationRecord
   def is_player?(user_id)
     players.map(&:user_id).include?(user_id)
   end
+
+  def available_tokens
+    Token.where.not(id: players.map(&:token_id))
+  end
 end

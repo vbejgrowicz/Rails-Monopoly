@@ -1,4 +1,9 @@
 class Api::GamesController < ApplicationController
+  def new
+    @game = Game.new(host_id: current_user.id)
+    render json: { game: @game.slice(:id, :host_id, :available_tokens) }
+  end
+
   def index
     @games = Game.all
     render json: { games: @games.map { |game| GamePresenter.new(game) } }
