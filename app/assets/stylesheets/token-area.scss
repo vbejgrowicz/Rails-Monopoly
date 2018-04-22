@@ -17,7 +17,7 @@
     .token-group {
       height: 100%;
     }
-    
+
     .left {
       width: 25%;
       height: 100%;
@@ -41,41 +41,5 @@
 
   .token-group {
     height: 33%;
-
-    .token {
-      display: inline-block;
-      width: 50%;
-      height: 100%;
-      max-width: 50px;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center center;
-
-      &.boot {
-        background-image: url('boot.png');
-      }
-      &.car {
-        background-image: url('car.png');
-      }
-      &.cat {
-        background-image: url('cat.png');
-      }
-      &.dog {
-        background-image: url('dog.png');
-      }
-      &.hat {
-        background-image: url('hat.png');
-      }
-      &.ship {
-        background-image: url('ship.png');
-      }
-      &.thimble {
-        background-image: url('thimble.png');
-      }
-      &.wheelbarrow {
-        background-image: url('wheelbarrow.png');
-      }
-
-    }
   }
 }
