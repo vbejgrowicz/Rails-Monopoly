@@ -1,0 +1,51 @@
+@import 'colors';
+
+.outer-modal {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(#D2D2D2,.62);
+
+  .modal {
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    right: 35%;
+    bottom: 25%;
+    color: black;
+    background-color: white;
+    min-width: 400px;
+    min-height: 210px;
+
+    h2 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+      padding: 10px;
+    }
+
+    .action {
+      text-align: center;
+    }
+  }
+
+  .close {
+    background-color: red;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+
+    span {
+      cursor: pointer;
+    }
+  }
+}

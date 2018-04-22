@@ -9,25 +9,14 @@
   right: 0;
   background-color: rgba(#D2D2D2,.62);
 
-  .error-modal {
-    position: absolute;
-    top: 25%;
-    left: 35%;
-    right: 35%;
-    bottom: 25%;
+  .error {
     color: black;
     background: #f3e9e8;
     border: 5px solid #d3080c;
-    min-width: 400px;
-    min-height: 210px;
 
     h2 {
-      text-align: center;
       background: #d3080c;
       color: white;
-      font-weight: bold;
-      font-size: 24px;
-      padding: 10px;
     }
 
     .error-group {
@@ -47,25 +36,8 @@
       text-align: center;
     }
 
-    .error-action {
-      text-align: center;
-    }
-  }
-
-  .error-close {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    width: 25px;
-    height: 25px;
-    background: #f3e9e8;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-
-    span {
-      cursor: pointer;
+    .close {
+      background: #f3e9e8;
     }
   }
 }

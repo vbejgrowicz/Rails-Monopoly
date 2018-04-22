@@ -7,15 +7,15 @@ class ServerError extends React.Component {
   render() {
     return this.props.error.length > 0 && (
       <div className="outer-modal">
-        <div className="error-modal">
+        <div className="modal error">
           <h2>Oops, something went wrong</h2>
-          <div className="error-close" onClick={() => this.props.clearError()}><span>x</span></div>
+          <div className="close" onClick={() => this.props.clearError()}><span>x</span></div>
           <div className="error-group">
             <div>We could not process your request because of:</div>
             <div className="error-message">{this.props.error}</div>
           </div>
           <div className="error-shrug">¯\_(ツ)_/¯</div>
-          <div className="error-action">Please refresh the page and try again!</div>
+          <div className="action">Please refresh the page and try again!</div>
         </div>
       </div>
     );
