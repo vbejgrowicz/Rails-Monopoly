@@ -46,7 +46,7 @@ TokenSelection.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   fetchGame: async (id) => {
-    const fetchGame = () => get(`/api/games/${id}`);
+    const fetchGame = () => get(`/api/games/${id}?join_request=true`);
     return apiRequest(fetchGame, (json) => {
       return json;
     });

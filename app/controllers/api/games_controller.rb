@@ -19,6 +19,9 @@ class Api::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    if params[:join_request] && params[:join_request] == 'true'
+      return render json: { game: @game.slice(:id, :host_id, :available_tokens) }
+    end
     validate_player!
     render json: { game: GamePresenter.new(@game) }
   end

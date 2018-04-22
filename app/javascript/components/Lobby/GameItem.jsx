@@ -1,9 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TokenSelection from './TokenSelection';
 
 class GameItem extends React.Component {
+  constructor() {
+    super();
+    this.state = { showModal: false };
+
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal() {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
   render() {
     const { id, host_id, created_at, players } = this.props.game;
+    const onClickFunction = this.props.gameItemDisplay === 'Join Game' ? this.toggleModal : () => this.props.onGameClick(id);
     return (
       <div className="game-row">
         <div className="game-item id">{id}</div>
@@ -11,8 +24,9 @@ class GameItem extends React.Component {
         <div className="game-item created">{created_at}</div>
         <div className="game-item players">{players}</div>
         <div className="game-item join">
-          <span onClick={() => this.props.onGameClick(id)}>{this.props.gameItemDisplay}</span>
+          <span onClick={onClickFunction}>{this.props.gameItemDisplay}</span>
         </div>
+        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={() => this.props.onGameClick(id)} gameId={id} />}
       </div>
     );
   }
