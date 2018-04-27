@@ -13,4 +13,9 @@ namespace :seed_from_csv do
   task :events => :environment do
     CsvUploads::Events.run
   end
+
+  desc 'Seed Spaces'
+  task :spaces => :environment do
+    CsvUploads::Spaces.run
+  end
 end
