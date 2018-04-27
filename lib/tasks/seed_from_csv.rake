@@ -18,4 +18,9 @@ namespace :seed_from_csv do
   task :spaces => :environment do
     CsvUploads::Spaces.run
   end
+
+  desc 'Seed Tokens'
+  task :tokens => :environment do
+    CsvUploads::Tokens.run
+  end
 end
