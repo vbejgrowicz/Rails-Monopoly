@@ -15,8 +15,9 @@ module CsvUploads
           instance = identifier.classify.constantize.find_or_initialize_by(id: row['id'].to_i)
           instance.attributes = row.to_hash
           if instance.changed?
+            update_text = instance.persisted? ? 'updated' : 'created'
             instance.save!
-            puts "#{instance.send(label)} created!"
+            puts "#{instance.send(label)} #{update_text}!"
           else
             puts "#{instance.send(label)} unchanged"
           end
