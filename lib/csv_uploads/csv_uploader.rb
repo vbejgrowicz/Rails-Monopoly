@@ -8,7 +8,13 @@ module CsvUploads
       :body
     end
 
-    def self.run
+    def self.run(begin_destroy: false)
+      if begin_destroy.to_s == 'true'
+        identifier.classify.constantize.all.each do |record|
+          puts "destroying #{record.send(label)}"
+          record.destroy!
+        end
+      end
       puts "--Uploading #{identifier.pluralize}--"
       seed_ids = []
       CSV.foreach("#{Rails.root}/db/csv_seeds/#{identifier.pluralize.underscore}.csv", headers: true) do |row|
