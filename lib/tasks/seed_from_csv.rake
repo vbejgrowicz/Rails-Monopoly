@@ -24,7 +24,11 @@ namespace :seed_from_csv do
     CsvUploads::Tokens.run(begin_destroy: args.begin_destroy)
   end
 
-  task all: [:color_sets, :properties, :events, :spaces, :tokens]
+  desc 'Seed Users'
+  task :users, [:begin_destroy] => :environment do |_, args|
+    CsvUploads::Users.run(begin_destroy: args.begin_destroy)
+  end
+  task all: [:color_sets, :properties, :events, :spaces, :tokens, :users]
 
   task :all_with_destroy do |_, args|
     Rake::Task["seed_from_csv:color_sets"].invoke(true)
@@ -32,5 +36,6 @@ namespace :seed_from_csv do
     Rake::Task["seed_from_csv:events"].invoke(true)
     Rake::Task["seed_from_csv:spaces"].invoke(true)
     Rake::Task["seed_from_csv:tokens"].invoke(true)
+    Rake::Task["seed_from_csv:users"].invoke(true)
   end
 end
