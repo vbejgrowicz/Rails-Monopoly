@@ -8,4 +8,9 @@ namespace :seed_from_csv do
   task :properties => :environment do
     CsvUploads::Properties.run
   end
+
+  desc 'Seed Events'
+  task :events => :environment do
+    CsvUploads::Events.run
+  end
 end
