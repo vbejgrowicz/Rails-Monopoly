@@ -2,14 +2,18 @@
 
 .outer-modal {
   position: absolute;
-  z-index: 100;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(#D2D2D2,.62);
 
+  &.error {
+    z-index: 1000
+  }
+
   .error {
+    height: 210px;
     color: black;
     background: #f3e9e8;
     border: 5px solid #d3080c;

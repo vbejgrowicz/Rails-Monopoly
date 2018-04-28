@@ -6,7 +6,7 @@ import { clearError } from '../actions';
 class ServerError extends React.Component {
   render() {
     return this.props.error.length > 0 && (
-      <div className="outer-modal">
+      <div className="outer-modal error">
         <div className="modal error">
           <h2>Oops, something went wrong</h2>
           <div className="close" onClick={() => this.props.clearError()}><span>x</span></div>
