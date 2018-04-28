@@ -10,9 +10,9 @@ class Api::GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create!(host_id: current_user.id)
-    if @game
-      Player.create!(game_id: @game.id, user_id: @game.host_id)
+    ActiveRecord::Base.transaction do
+      @game = Game.create!(host_id: current_user.id)
+      Player.create!(game_id: @game.id, token_id: params[:token_id], user_id: @game.host_id)
     end
     render json: { game: GamePresenter.new(@game) }
   end
