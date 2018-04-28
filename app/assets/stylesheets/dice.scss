@@ -1,0 +1,27 @@
+.die {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+
+  &.one {
+    background-image: url('dice-1.png');
+  }
+  &.two {
+    background-image: url('dice-2.png');
+  }
+  &.three {
+    background-image: url('dice-3.png');
+  }
+  &.four {
+    background-image: url('dice-4.png');
+  }
+  &.five {
+    background-image: url('dice-5.png');
+  }
+  &.six {
+    background-image: url('dice-6.png');
+  }
+}
