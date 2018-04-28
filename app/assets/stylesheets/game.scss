@@ -43,6 +43,60 @@
       width: 125px;
       height: 125px;
       max-width: none;
+      position: relative;
+
+      .token-tooltip {
+        visibility: hidden;
+        padding: 5px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: -30px;
+        left: 15px;
+        z-index: 11;
+      }
+
+      &:hover {
+        .token-tooltip {
+          visibility: visible;
+        }
+      }
+
+      &:nth-child(1) {
+        .token-tooltip {
+          background-color: $player-one;
+          color: white;
+        }
+      }
+      &:nth-child(2) {
+        .token-tooltip {
+          background-color: $player-two;
+          color: white;
+        }
+      }
+      &:nth-child(3) {
+        .token-tooltip {
+          background-color: $player-three;
+          color: white;
+        }
+      }
+      &:nth-child(4) {
+        .token-tooltip {
+          background-color: $player-four;
+          color: black;
+        }
+      }
+      &:nth-child(5) {
+        .token-tooltip {
+          background-color: $player-five;
+          color: black;
+        }
+      }
+      &:nth-child(6) {
+        .token-tooltip {
+          background-color: $player-six;
+          color: black;
+        }
+      }
     }
   }
 }

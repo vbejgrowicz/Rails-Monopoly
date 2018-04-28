@@ -15,7 +15,11 @@ class GameSetup extends React.Component {
           <h3 className="wait-text">Waiting on host to start game...</h3>
         )}
         <div>
-          {players.map(player => (<div className={`token ${player.token}`} />))}
+          {players.map(player => (
+            <div className={`token ${player.token}`}>
+              <span className="token-tooltip">User {player.user_id}</span>
+            </div>
+          ))}
         </div>
       </div>
     );
