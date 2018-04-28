@@ -23,7 +23,7 @@ class Api::GamesController < ApplicationController
       return render json: { game: @game.slice(:id, :host_id, :available_tokens) }
     end
     validate_player!
-    render json: { game: GamePresenter.new(@game) }
+    render json: { game: GamePresenter.new(@game, detailed: true) }
   end
 
   private
