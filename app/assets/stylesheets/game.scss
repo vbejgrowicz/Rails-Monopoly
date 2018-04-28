@@ -39,62 +39,100 @@
       margin: 25px;
     }
 
-    .token {
-      width: 125px;
-      height: 125px;
-      max-width: none;
-      position: relative;
+    .player-group {
+      .player-data {
+        display: inline-block;
+        .token {
+          width: 125px;
+          height: 125px;
+          max-width: none;
+          position: relative;
+          display: block;
 
-      .token-tooltip {
-        visibility: hidden;
-        padding: 5px;
-        border-radius: 5px;
-        position: absolute;
-        bottom: -30px;
-        left: 15px;
-        z-index: 11;
-      }
+          .token-tooltip {
+            visibility: hidden;
+            padding: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 11;
+          }
 
-      &:hover {
-        .token-tooltip {
-          visibility: visible;
-        }
-      }
+          &:hover {
+            .token-tooltip {
+              visibility: visible;
+            }
+          }
 
-      &:nth-child(1) {
-        .token-tooltip {
-          background-color: $player-one;
-          color: white;
         }
-      }
-      &:nth-child(2) {
-        .token-tooltip {
-          background-color: $player-two;
-          color: white;
+        &:nth-child(1) {
+          .token-tooltip {
+            background-color: $player-one;
+            color: white;
+          }
         }
-      }
-      &:nth-child(3) {
-        .token-tooltip {
-          background-color: $player-three;
-          color: white;
+        &:nth-child(2) {
+          .token-tooltip {
+            background-color: $player-two;
+            color: white;
+          }
         }
-      }
-      &:nth-child(4) {
-        .token-tooltip {
-          background-color: $player-four;
-          color: black;
+        &:nth-child(3) {
+          .token-tooltip {
+            background-color: $player-three;
+            color: white;
+          }
         }
-      }
-      &:nth-child(5) {
-        .token-tooltip {
-          background-color: $player-five;
-          color: black;
+        &:nth-child(4) {
+          .token-tooltip {
+            background-color: $player-four;
+            color: black;
+          }
         }
-      }
-      &:nth-child(6) {
-        .token-tooltip {
-          background-color: $player-six;
-          color: black;
+        &:nth-child(5) {
+          .token-tooltip {
+            background-color: $player-five;
+            color: black;
+          }
+        }
+        &:nth-child(6) {
+          .token-tooltip {
+            background-color: $player-six;
+            color: black;
+          }
+        }
+
+        .roll-group {
+          height: 56px;
+
+          .action {
+            padding: 5px;
+            &.button {
+              display: block;
+              margin: auto;
+              background-color: $red;
+              color: white;
+              border: 1px solid black;
+              border-radius: 5px;
+              cursor: pointer;
+              font-size: 16px;
+              box-shadow: 1px 1px 9px 1px #636363;
+              width: 50%;
+            }
+
+            &.pending {
+              border: 1px solid transparent;
+            }
+          }
+
+          .dice-group {
+            .die {
+              height: 52px;
+              width: 52px;
+              margin: 0px 2px;
+            }
+          }
         }
       }
     }

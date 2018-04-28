@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { get, apiRequest } from '../../utils/fetch';
 import { fetchGameRequest, fetchGameReceived } from '../../actions';
 import GameBoard from './Board/GameBoard';
-import GameSetup from './GameSetup';
+import GameSetup from './Setup/GameSetup';
 
 class Game extends React.Component {
   componentWillMount() {
@@ -12,10 +12,10 @@ class Game extends React.Component {
   }
 
   render() {
-    const { hasStarted, isFetching } = this.props;
+    const { inSetup, isFetching } = this.props;
     return isFetching ? <div>Loading...</div> : (
-      <div className={`game ${!hasStarted && 'pending'}`}>
-        {!hasStarted && <GameSetup />}
+      <div className={`game ${inSetup && 'pending'}`}>
+        {inSetup && <GameSetup />}
         <GameBoard />
       </div>
     );
@@ -24,13 +24,13 @@ class Game extends React.Component {
 
 Game.propTypes = {
   isFetching: PropTypes.bool.isRequired,
-  hasStarted: PropTypes.bool.isRequired,
+  inSetup: PropTypes.bool.isRequired,
   fetchGame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ games }, ownProps) => ({
   isFetching: games.isFetching || parseInt(ownProps.match.params.id, 10) !== (games.activeGame.id || 0),
-  hasStarted: !!games.activeGame.started_at,
+  inSetup: !!games.activeGame.started_at || !(games.activeGame.players || []).every(player => !!player.roll),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
