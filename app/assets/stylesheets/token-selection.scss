@@ -1,15 +1,45 @@
+@import "colors";
+
 .outer-modal {
 
   .token-selection {
-    background-color: yellow;
+    border: 5px solid $green;
+    background-color: $board-green;
+    height: 210px;
+
+    h2 {
+      color: white;
+      background-color: $green;
+    }
 
     .token {
       width: 25%;
       height: 50px;
       max-width: none;
+      box-sizing: border-box;
+      border-left: 5px solid $board-green;
+      border-right: 5px solid $board-green;
+
+      &:hover {
+        background-color: #71c9f1;
+      }
 
       &.selected {
-        background-color: rebeccapurple;
+        background-color: $lightblue;
+      }
+    }
+
+    .action .submit {
+      padding: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: $lightblue;
+      color: white;
+      cursor: pointer;
+
+      &[disabled] {
+        pointer-events: none;
+        background-color: #03a9f452;
       }
     }
   }

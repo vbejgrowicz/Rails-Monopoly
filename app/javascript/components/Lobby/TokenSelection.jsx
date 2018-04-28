@@ -34,14 +34,18 @@ class TokenSelection extends React.Component {
     return loading ? (<div>loading...</div>) : (
       <div className="outer-modal">
         <div className="modal token-selection">
-          <h2>Tokens</h2>
+          <h2>Select Your Token</h2>
           <div className="close" onClick={this.props.onClickClose}><span>x</span></div>
           <div style={{ padding: '5px' }}>
             {game.available_tokens.map((token) => (
               <div className={`token ${token.name} ${token.id === token_id ? 'selected' : ''}`} onClick={() => this.setSelected(token)} />
             ))}
           </div>
-          <div className="action"><button onClick={this.props.onSubmit}>{this.props.gameId === 'new' ? 'Create Game' : 'Join Game'}</button></div>
+          <div className="action">
+            <button className="submit" onClick={this.props.onSubmit} disabled={!this.state.token_id}>
+              {this.props.gameId === 'new' ? 'Create Game' : 'Join Game'}
+            </button>
+          </div>
         </div>
       </div>
     );

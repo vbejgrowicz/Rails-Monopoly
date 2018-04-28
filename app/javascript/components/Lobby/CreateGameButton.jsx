@@ -26,7 +26,7 @@ class CreateGameButton extends React.Component {
   render() {
     return (
       <div className="header-create">
-        <button onClick={this.toggleModal}>Create New Game</button>
+        <button className="create" onClick={this.toggleModal}>Create New Game</button>
         {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={this.createGame} gameId="new" />}
       </div>
     );
