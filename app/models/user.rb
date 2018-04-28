@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :players
-  has_many :hosted_games, class_name: 'Game', primary_key: :id, foreign_key: :host_id
+  has_many :players, dependent: :destroy
+  has_many :hosted_games, class_name: 'Game', primary_key: :id, foreign_key: :host_id, dependent: :destroy
   has_many :active_games, through: :players, source: :game
 end
