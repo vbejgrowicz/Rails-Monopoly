@@ -26,7 +26,7 @@ class GameItem extends React.Component {
         <div className="game-item join">
           <span onClick={onClickFunction}>{this.props.gameItemDisplay}</span>
         </div>
-        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={() => this.props.onGameClick(id)} gameId={id} />}
+        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={(params) => this.props.onGameClick(id, params)} gameId={id} />}
       </div>
     );
   }

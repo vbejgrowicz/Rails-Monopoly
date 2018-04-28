@@ -38,11 +38,11 @@ class TokenSelection extends React.Component {
           <div className="close" onClick={this.props.onClickClose}><span>x</span></div>
           <div style={{ padding: '5px' }}>
             {game.available_tokens.map((token) => (
-              <div className={`token ${token.name} ${token.id === token_id ? 'selected' : ''}`} onClick={() => this.setSelected(token)} />
+              <div key={token.id} className={`token ${token.name} ${token.id === token_id ? 'selected' : ''}`} onClick={() => this.setSelected(token)} />
             ))}
           </div>
           <div className="action">
-            <button className="submit" onClick={this.props.onSubmit} disabled={!this.state.token_id}>
+            <button className="submit" onClick={() => this.props.onSubmit({ token_id: this.state.token_id })} disabled={!this.state.token_id}>
               {this.props.gameId === 'new' ? 'Create Game' : 'Join Game'}
             </button>
           </div>

@@ -54,9 +54,9 @@ const mapDispatchToProps = dispatch => ({
       dispatch(fetchGamesReceived(json.games));
     });
   },
-  joinGame: async (gameId) => {
+  joinGame: async (gameId, params) => {
     dispatch(joinGameRequest());
-    const joinGame = () => post(`/api/games/${gameId}/players`);
+    const joinGame = () => post(`/api/games/${gameId}/players`, params);
     apiRequest(joinGame, (json) => {
       dispatch(joinGameReceived(json.player));
     });

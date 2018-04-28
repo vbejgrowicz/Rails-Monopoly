@@ -18,8 +18,8 @@ class CreateGameButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
-  createGame() {
-    this.props.createGame();
+  createGame(params) {
+    this.props.createGame(params);
     this.toggleModal();
   }
 
@@ -27,7 +27,7 @@ class CreateGameButton extends React.Component {
     return (
       <div className="header-create">
         <button className="create" onClick={this.toggleModal}>Create New Game</button>
-        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={this.createGame} gameId="new" />}
+        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={(params) => this.createGame(params)} gameId="new" />}
       </div>
     );
   }
@@ -38,9 +38,9 @@ CreateGameButton.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  createGame: async () => {
+  createGame: async (params) => {
     dispatch(createGameRequest());
-    const createGame = () => post('/api/games');
+    const createGame = () => post('/api/games', params);
     apiRequest(createGame, (json) => {
       dispatch(createGameReceived(json.game));
     });
