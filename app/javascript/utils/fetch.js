@@ -2,9 +2,9 @@ import store from '../store';
 
 const baseUrl = 'http://localhost:5000';
 const baseOpts = {
-  'Content-Type': 'application/json',
   credentials: 'same-origin',
   headers: {
+    'Content-Type': 'application/json',
     'X-CSRF-Token': document.getElementsByName('csrf-token')[0].content,
   },
 };
