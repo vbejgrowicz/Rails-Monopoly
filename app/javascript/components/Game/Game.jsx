@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { get, apiRequest } from '../../utils/fetch';
 import { fetchGameRequest, fetchGameReceived } from '../../actions';
 import GameBoard from './Board/GameBoard';
+import GameSetup from './GameSetup';
 
 class Game extends React.Component {
   componentWillMount() {
@@ -11,17 +12,25 @@ class Game extends React.Component {
   }
 
   render() {
-    return this.props.isFetching ? <div>Loading...</div> : <GameBoard />;
+    const { hasStarted, isFetching } = this.props;
+    return isFetching ? <div>Loading...</div> : (
+      <div className={`game ${!hasStarted && 'pending'}`}>
+        {!hasStarted && <GameSetup />}
+        <GameBoard />
+      </div>
+    );
   }
 }
 
 Game.propTypes = {
   isFetching: PropTypes.bool.isRequired,
+  hasStarted: PropTypes.bool.isRequired,
   fetchGame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ games }, ownProps) => ({
   isFetching: games.isFetching || parseInt(ownProps.match.params.id, 10) !== (games.activeGame.id || 0),
+  hasStarted: !!games.activeGame.started_at,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

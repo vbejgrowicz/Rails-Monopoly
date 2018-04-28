@@ -1,0 +1,48 @@
+@import 'colors';
+
+.game {
+  &.pending {
+    .board {
+      opacity: 0.15;
+      pointer-events: none;
+    }
+  }
+
+  .setup {
+    position: absolute;
+    z-index: 10;
+    padding-top: 155px;
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      font-weight: bold;
+      font-size: 50px;
+    }
+
+    .start-button {
+      background-color: $red;
+      padding: 10px;
+      color: white;
+      border: 1px solid black;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 30px;
+      margin: 25px;
+      box-shadow: 1px 1px 9px 1px #636363;
+    }
+
+    .wait-text {
+      color: $red;
+      font-weight: bold;
+      font-size: 30px;
+      margin: 25px;
+    }
+
+    .token {
+      width: 125px;
+      height: 125px;
+      max-width: none;
+    }
+  }
+}
