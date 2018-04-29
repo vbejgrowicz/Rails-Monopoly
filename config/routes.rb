@@ -19,7 +19,13 @@ Rails.application.routes.draw do
       resources :games, only: [:new, :index, :create, :show, :update] do
         resources :players, only: [:create]
       end
+
+      resources :players, only: [] do
+        resources :rolls, only: [:create]
+      end
+
       resources :users, only: [:show]
+
       resources :spaces, only: [:index]
     end
   end
