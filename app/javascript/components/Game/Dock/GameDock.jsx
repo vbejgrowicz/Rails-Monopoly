@@ -1,42 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PlayerCard from './PlayerCard';
 
 class GameDock extends React.Component {
   render() {
     return (
       <div className="dock">
         <div className="players">
-          <div className="player-card">
-            <div className="token hat" />
-            <div className="player-name">Name</div>
-            <div className="player-money">$1500</div>
-          </div>
-          <div className="player-card">
-            <div className="token hat" />
-            <div className="player-name">Name</div>
-            <div className="player-money">$1500</div>
-          </div>
-          <div className="player-card">
-            <div className="token hat" />
-            <div className="player-name">Name</div>
-            <div className="player-money">$1500</div>
-          </div>
-          <div className="player-card">
-            <div className="token hat" />
-            <div className="player-name">Name</div>
-            <div className="player-money">$1500</div>
-          </div>
-          <div className="player-card">
-            <div className="token hat" />
-            <div className="player-name">Name</div>
-            <div className="player-money">$1500</div>
-          </div>
-          <div className="player-card">
-            <div className="token hat" />
-            <div className="player-name">Name</div>
-            <div className="player-money">$1500</div>
-          </div>
+          {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
         </div>
         <div className="player-actions">
           <div className="dice-group">
@@ -52,4 +24,13 @@ class GameDock extends React.Component {
   }
 }
 
-export default connect(null, null)(GameDock);
+GameDock.propTypes = {
+  players: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = ({ activeGame }) => ({
+  players: activeGame.players,
+});
+
+
+export default connect(mapStateToProps, null)(GameDock);
