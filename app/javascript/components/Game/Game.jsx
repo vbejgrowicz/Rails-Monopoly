@@ -5,6 +5,7 @@ import { get, apiRequest } from '../../utils/fetch';
 import { fetchGameRequest, fetchGameReceived } from '../../actions';
 import GameBoard from './Board/GameBoard';
 import GameSetup from './Setup/GameSetup';
+import GameDock from './Dock/GameDock';
 
 class Game extends React.Component {
   componentWillMount() {
@@ -23,6 +24,7 @@ class Game extends React.Component {
       <div className={`game ${inSetup && 'pending'}`}>
         {inSetup && <GameSetup />}
         <GameBoard />
+        <GameDock />
       </div>
     );
   }
