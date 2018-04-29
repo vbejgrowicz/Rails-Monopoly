@@ -12,3 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(document.createElement('div')),
   );
 });
+
+// document.addEventListener("turbolinks:load", () => {})
+// should be able to use this for compatability between react router and rails Router
+// need to look into effect of turbolinks on react router
