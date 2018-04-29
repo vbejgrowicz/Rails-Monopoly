@@ -10,6 +10,7 @@
   z-index: 20;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0px 0px 5px 1px black;
 
   .player-card {
     display: inline-block;
@@ -21,6 +22,7 @@
     margin-left: 10px;
     margin-top: 10px;
     border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px 0px 5px 1px black;
 
     &:nth-child(1) {
       background-color: $player-one;
