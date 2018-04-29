@@ -28,6 +28,7 @@ class GamePresenter < ApplicationPresenter
   def detailed_view
     {
       started_at: @object.started_at,
+      locked_at: @object.locked_at,
       players: @object.players.map { |player| PlayerPresenter.new(player) }
     }
   end

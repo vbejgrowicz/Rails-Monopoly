@@ -36,7 +36,7 @@ class Api::GamesController < ApplicationController
   private
 
   def update_params
-    params.permit(:started_at, :completed_at)
+    params.permit(:started_at, :locked_at, :completed_at)
   end
 
   def validate_player!
