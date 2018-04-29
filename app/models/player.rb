@@ -4,6 +4,8 @@ class Player < ApplicationRecord
   validates :token_id, uniqueness: { scope: :game_id }
   validates :space_id, uniqueness: { scope: [:game_id, :user_id] }
 
+  validate :game_has_six_or_fewer_players
+
   belongs_to :game
   belongs_to :user
   belongs_to :token
@@ -20,5 +22,11 @@ class Player < ApplicationRecord
 
   def first_roll
     Roll.ordered_for_player(id).first || {}
+  end
+
+  def game_has_six_or_fewer_players
+    if game.players.count === 6
+      errors.add(:players, "can't have more than 6")
+    end
   end
 end
