@@ -28,9 +28,22 @@ Game.propTypes = {
   fetchGame: PropTypes.func.isRequired,
 };
 
+function gameInSetup(games) {
+  const gameStarted = games.activeGame.started_at;
+  const everyoneHasRolled = (games.activeGame.players || []).every(player => !!player.roll.id);
+  return !gameStarted || !everyoneHasRolled;
+}
+
+function gameIsFetching(games, ownProps) {
+  const { isFetching } = games;
+  const routeGameId = parseInt(ownProps.match.params.id, 10);
+  const fetchedGameMatchesRoute = routeGameId === (games.activeGame.id || 0);
+  return isFetching || !fetchedGameMatchesRoute;
+}
+
 const mapStateToProps = ({ games }, ownProps) => ({
-  isFetching: games.isFetching || parseInt(ownProps.match.params.id, 10) !== (games.activeGame.id || 0),
-  inSetup: !!games.activeGame.started_at || !(games.activeGame.players || []).every(player => !!player.roll),
+  isFetching: gameIsFetching(games, ownProps),
+  inSetup: gameInSetup(games),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
