@@ -11,6 +11,12 @@ class Game extends React.Component {
     this.props.fetchGame();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.inSetup !== nextProps.inSetup) {
+      this.props.fetchGame();
+    }
+  }
+
   render() {
     const { inSetup, isFetching } = this.props;
     return isFetching ? <div>Loading...</div> : (
