@@ -20,10 +20,10 @@ class GameTables extends React.Component {
   }
 
   render() {
-    const activeGames = this.props.games.filter(game => this.props.user.active_game_ids.indexOf(game.id) > -1);
+    const enteredGames = this.props.games.filter(game => this.props.user.active_game_ids.indexOf(game.id) > -1);
     const pendingGames = this.props.games.filter(game => this.props.user.active_game_ids.indexOf(game.id) === -1);
     return [
-      <GameTable games={activeGames} title="Active Games" canCreate key="active" gameItemDisplay="Enter Game" onGameClick={this.enterGame} />,
+      <GameTable games={enteredGames} title="Active Games" canCreate key="active" gameItemDisplay="Enter Game" onGameClick={this.enterGame} />,
       <GameTable games={pendingGames} title="Pending Games" canCreate={false} key="pending" gameItemDisplay="Join Game" onGameClick={this.props.joinGame} />,
     ];
   }

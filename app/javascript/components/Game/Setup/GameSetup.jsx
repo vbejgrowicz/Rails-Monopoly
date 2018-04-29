@@ -68,8 +68,8 @@ GameSetup.propTypes = {
   game: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ games, currentUser }) => ({
-  game: games.activeGame,
+const mapStateToProps = ({ activeGame, currentUser }) => ({
+  game: activeGame,
   currentUserId: currentUser.id,
 });
 
