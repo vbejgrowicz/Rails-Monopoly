@@ -5,4 +5,6 @@ class Player < ApplicationRecord
   belongs_to :game
   belongs_to :user
   belongs_to :token
+
+  has_many :rolls, dependent: :destroy
 end
