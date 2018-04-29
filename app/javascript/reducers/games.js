@@ -3,6 +3,7 @@ const initialState = {
   isCreating: false,
   isJoining: false,
   isUpdating: false,
+  isRolling: false,
   items: [],
   activeGame: {},
 };
@@ -72,6 +73,25 @@ export default function games(state = initialState, action) {
         ...state,
         isUpdating: false,
         activeGame: action.payload.game,
+      };
+    case 'CREATE_ROLL_REQUEST':
+      return {
+        ...state,
+        isRolling: true,
+      };
+    case 'CREATE_ROLL_RECEIVED':
+      return {
+        ...state,
+        isRolling: false,
+        activeGame: {
+          ...state.activeGame,
+          players: state.activeGame.players.map((player) => {
+            if (player.id === action.payload.roll.player_id) {
+              return { ...player, roll: action.payload.roll };
+            }
+            return player;
+          }),
+        },
       };
     default:
       return state;

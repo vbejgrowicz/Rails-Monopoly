@@ -44,6 +44,15 @@ const updateGameReceived = game => ({
   payload: { game },
 });
 
+const createRollRequest = () => ({
+  type: 'CREATE_ROLL_REQUEST',
+});
+
+const createRollReceived = roll => ({
+  type: 'CREATE_ROLL_RECEIVED',
+  payload: { roll },
+});
+
 export {
   fetchGamesRequest,
   fetchGamesReceived,
@@ -55,4 +64,6 @@ export {
   joinGameReceived,
   updateGameRequest,
   updateGameReceived,
+  createRollRequest,
+  createRollReceived,
 };
