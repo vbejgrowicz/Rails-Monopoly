@@ -46,6 +46,11 @@ class TokenSelection extends React.Component {
               {this.props.gameId === 'new' ? 'Create Game' : 'Join Game'}
             </button>
           </div>
+          {game.available_tokens.length <= 2 && (
+            <div className="warning">
+              Warning: Looks like this game might be full! Try refreshing the page to get the latest open games.
+            </div> 
+          )}
         </div>
       </div>
     );

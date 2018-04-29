@@ -5,7 +5,8 @@
   .token-selection {
     border: 5px solid $green;
     background-color: $board-green;
-    height: 210px;
+    max-height: 225px;
+    min-height: 150px;
 
     h2 {
       color: white;
@@ -36,11 +37,22 @@
       background-color: $lightblue;
       color: white;
       cursor: pointer;
+      margin-bottom: 10px;
 
       &[disabled] {
         pointer-events: none;
         background-color: #03a9f452;
       }
+    }
+
+    .warning {
+      width: 95%;
+      margin: auto;
+      margin-bottom: 10px;
+      margin-top: 0px;
+      color: #ff7e3d;
+      font-weight: bold;
+      font-size: 13px;
     }
   }
 
