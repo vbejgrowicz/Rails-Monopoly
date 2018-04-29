@@ -1,6 +1,8 @@
 class Game < ApplicationRecord
   validates :host_id, presence: true
 
+  validate :locked_game_must_have_more_than_one_player
+
   belongs_to :host, class_name: 'User', primary_key: :id, foreign_key: :host_id
 
   has_many :players, dependent: :destroy
@@ -21,5 +23,13 @@ class Game < ApplicationRecord
   def ordered_players
     return Player.ordered_by_first_roll(id) if started_at
     players.order(created_at: :asc)
+  end
+
+  private
+
+  def locked_game_must_have_more_than_one_player
+    if locked_at.present? && players.count <= 1
+      errors[:base] << 'Game must have more than 1 player'
+    end
   end
 end
