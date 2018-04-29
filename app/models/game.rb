@@ -10,6 +10,10 @@ class Game < ApplicationRecord
     players.map(&:user_id).include?(user_id)
   end
 
+  def is_host?(user_id)
+    host_id == user_id
+  end
+
   def available_tokens
     Token.where.not(id: players.map(&:token_id))
   end

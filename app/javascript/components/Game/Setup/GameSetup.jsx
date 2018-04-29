@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Player from './Player';
+import { updateGameRequest, updateGameReceived } from '../../../actions';
+import { put, apiRequest } from '../../../utils/fetch';
 
 class GameSetup extends React.Component {
   constructor() {
@@ -25,7 +28,7 @@ class GameSetup extends React.Component {
     const { currentUserId } = this.props;
     const { host_id } = this.props.game;
     return currentUserId === host_id ? (
-      <button className="start-button">Start Game</button>
+      <button className="start-button" onClick={this.props.startGame}>Start Game</button>
     ) : (
       <h3 className="wait-text">Waiting on host to start game...</h3>
     );
@@ -70,4 +73,15 @@ const mapStateToProps = ({ games, currentUser }) => ({
   currentUserId: currentUser.id,
 });
 
-export default connect(mapStateToProps, null)(GameSetup);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  startGame: async () => {
+    const gameId = ownProps.match.params.id;
+    dispatch(updateGameRequest(gameId));
+    const updateGame = () => put(`/api/games/${gameId}`, { started_at: new Date() });
+    apiRequest(updateGame, (json) => {
+      dispatch(updateGameReceived(json.game));
+    });
+  },
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GameSetup));

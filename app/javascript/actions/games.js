@@ -35,6 +35,15 @@ const joinGameReceived = player => ({
   payload: { player },
 });
 
+const updateGameRequest = () => ({
+  type: 'UPDATE_GAME_REQUEST',
+});
+
+const updateGameReceived = game => ({
+  type: 'UPDATE_GAME_RECEIVED',
+  payload: { game },
+});
+
 export {
   fetchGamesRequest,
   fetchGamesReceived,
@@ -44,4 +53,6 @@ export {
   createGameReceived,
   joinGameRequest,
   joinGameReceived,
+  updateGameRequest,
+  updateGameReceived,
 };

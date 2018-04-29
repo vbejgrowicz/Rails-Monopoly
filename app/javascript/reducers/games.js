@@ -2,6 +2,7 @@ const initialState = {
   isFetching: false,
   isCreating: false,
   isJoining: false,
+  isUpdating: false,
   items: [],
   activeGame: {},
 };
@@ -60,6 +61,17 @@ export default function games(state = initialState, action) {
         ...state,
         isJoining: false,
         items: incrementPlayerCount(action.payload.player, state.items),
+      };
+    case 'UPDATE_GAME_REQUEST':
+      return {
+        ...state,
+        isUpdating: true,
+      };
+    case 'UPDATE_GAME_RECEIVED':
+      return {
+        ...state,
+        isUpdating: false,
+        activeGame: action.payload.game,
       };
     default:
       return state;
