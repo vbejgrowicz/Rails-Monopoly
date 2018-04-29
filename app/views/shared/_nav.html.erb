@@ -1,6 +1,6 @@
 <div class="nav-group">
   <div class="nav-item">
-    Welcome <%= @current_user.email %>!
+    Welcome <%= @current_user.username %>!
   </div>
   <%= render 'shared/nav_logo' %>
   <form class="nav-item" method='POST' action='<%= destroy_user_session_path %>'>
