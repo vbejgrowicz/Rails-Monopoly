@@ -20,13 +20,13 @@ class GameSetup extends React.Component {
   }
 
   renderUnlocked() {
-    const { locked_at, id, host_id } = this.props.game;
+    const { locked_at, id, host_id, players } = this.props.game;
     const { currentUserId } = this.props;
     return !locked_at && (
       <div>
         <h2>Game {id} is waiting for players to join.</h2>
         {host_id === currentUserId ? (
-          <button className="start-button" onClick={this.props.lockGame}>Lock Game</button>
+          <button className="start-button" onClick={this.props.lockGame} disabled={players.length <= 1}>Lock Game</button>
         ) : (<h3 className="wait-text">Game will be locked momentarily.</h3>)}
       </div>
     );

@@ -32,6 +32,11 @@
       font-size: 30px;
       margin: 25px;
       box-shadow: 1px 1px 9px 1px #636363;
+
+      &[disabled] {
+        pointer-events: none;
+        opacity: 0.35;
+      }
     }
 
     .wait-text {
