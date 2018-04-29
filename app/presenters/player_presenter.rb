@@ -2,7 +2,7 @@ class PlayerPresenter < ApplicationPresenter
   def as_json(*)
     {
       id: @object.id,
-      email: @object.user.email,
+      username: @object.user.username,
       game_id: @object.game_id,
       user_id: @object.user_id,
       token: @object.token.name,
