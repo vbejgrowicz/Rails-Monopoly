@@ -6,55 +6,78 @@ import Player from './Player';
 import { updateGameRequest, updateGameReceived } from '../../../actions';
 import { put, apiRequest } from '../../../utils/fetch';
 
+const allPlayersHaveRolled = game => (
+  (game.players || []).every(player => !!player.roll.id)
+);
+
 class GameSetup extends React.Component {
   constructor() {
     super();
 
-    this.renderTitle = this.renderTitle.bind(this);
-    this.renderSubtitle = this.renderSubtitle.bind(this);
-    this.renderStartComponent = this.renderStartComponent.bind(this);
+    this.renderUnlocked = this.renderUnlocked.bind(this);
+    this.renderLockedWithoutRolls = this.renderLockedWithoutRolls.bind(this);
+    this.renderLockedWithRolls = this.renderLockedWithRolls.bind(this);
   }
 
-  renderTitle() {
-    const { started_at, id } = this.props.game;
-    return started_at ? (
-      <h2>Game {id} has started.</h2>
-    ) : (
-      <h2>Game {id} has not started yet.</h2>
-    );
-  }
-
-  renderStartComponent() {
+  renderUnlocked() {
+    const { locked_at, id, host_id } = this.props.game;
     const { currentUserId } = this.props;
-    const { host_id } = this.props.game;
-    return currentUserId === host_id ? (
-      <button className="start-button" onClick={this.props.startGame}>Start Game</button>
-    ) : (
-      <h3 className="wait-text">Waiting on host to start game...</h3>
+    return !locked_at && (
+      <div>
+        <h2>Game {id} is waiting for players to join.</h2>
+        {host_id === currentUserId ? (
+          <button className="start-button" onClick={this.props.lockGame}>Lock Game</button>
+        ) : (<h3 className="wait-text">Game will be locked momentarily.</h3>)}
+      </div>
     );
   }
 
-  renderSubtitle() {
-    const { started_at } = this.props.game;
-    return started_at ? (
-      <h3 className="wait-text">Waiting on players to roll...</h3>
-    ) : this.renderStartComponent();
+  renderLockedWithoutRolls() {
+    const { game } = this.props;
+    const { id } = this.props.game;
+    return !allPlayersHaveRolled(game) && (
+      <div>
+        <h2>Game {id} has been locked.</h2>
+        <h3 className="wait-text">Waiting on players to roll...</h3>
+      </div>
+    );
+  }
+
+  renderLockedWithRolls() {
+    const { id, host_id } = this.props.game;
+    const { currentUserId, game } = this.props;
+    return allPlayersHaveRolled(game) && (
+      <div>
+        {host_id === currentUserId ? (
+          <div>
+            <h2>Game {id} is waiting for you to begin.</h2>
+            <button className="start-button" onClick={this.props.startGame}>Start Game</button>
+          </div>
+        ) : (
+          <div>
+            <h2>Game {id} is waiting for host to begin.</h2>
+            <h3 className="wait-text">Game will begin momentarily.</h3>
+          </div>
+        )}
+      </div>
+    );
   }
 
   render() {
     const { currentUserId } = this.props;
-    const { players, started_at } = this.props.game;
+    const { players, locked_at } = this.props.game;
     return (
       <div className="setup">
-        {this.renderTitle()}
-        {this.renderSubtitle()}
+        {this.renderUnlocked()}
+        {locked_at && this.renderLockedWithoutRolls()}
+        {locked_at && this.renderLockedWithRolls()}
         <div className="player-group">
           {players.map(player => (
             <Player
               key={player.user_id}
               player={player}
               currentUserId={currentUserId}
-              gameStarted={!!started_at}
+              gameLocked={!!locked_at}
             />
           ))}
         </div>
@@ -66,6 +89,8 @@ class GameSetup extends React.Component {
 GameSetup.propTypes = {
   currentUserId: PropTypes.number.isRequired,
   game: PropTypes.object.isRequired,
+  lockGame: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ activeGame, currentUser }) => ({
@@ -74,6 +99,14 @@ const mapStateToProps = ({ activeGame, currentUser }) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  lockGame: async () => {
+    const gameId = ownProps.match.params.id;
+    dispatch(updateGameRequest(gameId));
+    const updateGame = () => put(`/api/games/${gameId}`, { locked_at: new Date() });
+    apiRequest(updateGame, (json) => {
+      dispatch(updateGameReceived(json.game));
+    });
+  },
   startGame: async () => {
     const gameId = ownProps.match.params.id;
     dispatch(updateGameRequest(gameId));

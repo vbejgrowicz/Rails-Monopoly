@@ -40,14 +40,15 @@ class Player extends React.Component {
       </div>
     );
   }
+
   render() {
-    const { player, gameStarted } = this.props;
+    const { player, gameLocked } = this.props;
     return (
       <div className="player-data" key={player.user_id}>
         <div className={`token ${player.token}`}>
           <span className="token-tooltip">User {player.user_id}</span>
         </div>
-        {gameStarted && (
+        {gameLocked && (
           <div className="roll-group">
             {player.roll.id ? this.diceRender() : this.actionRender()}
           </div>
@@ -60,7 +61,7 @@ class Player extends React.Component {
 Player.propTypes = {
   currentUserId: PropTypes.number.isRequired,
   player: PropTypes.object.isRequired,
-  gameStarted: PropTypes.bool.isRequired,
+  gameLocked: PropTypes.bool.isRequired,
   roll: PropTypes.func.isRequired,
 };
 
