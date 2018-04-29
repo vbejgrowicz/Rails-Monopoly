@@ -7,4 +7,8 @@ class Player < ApplicationRecord
   belongs_to :token
 
   has_many :rolls, dependent: :destroy
+
+  def first_roll
+    Roll.ordered_for_player(id).first || {}
+  end
 end
