@@ -17,4 +17,9 @@ class Game < ApplicationRecord
   def available_tokens
     Token.where.not(id: players.map(&:token_id))
   end
+
+  def ordered_players
+    return Player.ordered_by_first_roll(id) if started_at
+    players.order(created_at: :asc)
+  end
 end

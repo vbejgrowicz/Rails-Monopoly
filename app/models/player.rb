@@ -11,6 +11,13 @@ class Player < ApplicationRecord
 
   has_many :rolls, dependent: :destroy
 
+  scope :ordered_by_first_roll, ->(game_id) {
+    select('players.*, coalesce(rolls.die_one, 0) + coalesce(rolls.die_two, 0) as die_total')
+      .joins(:rolls)
+      .where(game_id: game_id)
+      .order('die_total desc, players.created_at asc')
+  }
+
   def first_roll
     Roll.ordered_for_player(id).first || {}
   end

@@ -29,7 +29,7 @@ class GamePresenter < ApplicationPresenter
     {
       started_at: @object.started_at,
       locked_at: @object.locked_at,
-      players: @object.players.map { |player| PlayerPresenter.new(player) }
+      players: @object.ordered_players.map { |player| PlayerPresenter.new(player) }
     }
   end
 end
