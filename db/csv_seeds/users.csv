@@ -1,7 +1,7 @@
-id,email,password
-1,admin@monopoly.com,password
-2,john.rockefeller@monopoly.com,password
-3,andrew.carnegie@monopoly.com,password
-4,jp.morgan@monopoly.com,password
-5,estee.lauder@monopoly.com,password
-6,jeff.bezos@monopoly.com,password
+id,email,username,password
+1,admin@monopoly.com,admin,password
+2,john.rockefeller@monopoly.com,john.rockefeller,password
+3,andrew.carnegie@monopoly.com,andrew.carnegie,password
+4,jp.morgan@monopoly.com,jp.morgan,password
+5,estee.lauder@monopoly.com,estee.lauder,password
+6,jeff.bezos@monopoly.com,jeff.bezos,password
