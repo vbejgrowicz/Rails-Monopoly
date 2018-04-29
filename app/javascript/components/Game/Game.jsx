@@ -24,7 +24,7 @@ class Game extends React.Component {
       <div className={`game ${inSetup && 'pending'}`}>
         {inSetup && <GameSetup />}
         <GameBoard />
-        <GameDock />
+        {!inSetup && <GameDock />}
       </div>
     );
   }
