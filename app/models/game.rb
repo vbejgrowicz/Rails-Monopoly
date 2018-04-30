@@ -7,6 +7,8 @@ class Game < ApplicationRecord
 
   has_many :players, dependent: :destroy
   has_many :tokens, through: :players
+  has_many :chance_games
+  has_many :chance_cards, through: :chance_games
 
   def is_player?(user_id)
     players.map(&:user_id).include?(user_id)
