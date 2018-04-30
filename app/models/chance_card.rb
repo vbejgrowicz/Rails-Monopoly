@@ -9,4 +9,11 @@ class ChanceCard < ApplicationRecord
       ChanceGame.create!(chance_card_id: card.id, game_id: game_id)
     end
   end
+
+  def self.get_top_card_for_game(game_id)
+    joins(:chance_games)
+      .where('chance_games.game_id = ?', game_id)
+      .order('chance_games.times_used asc, chance_games.id asc')
+      .first
+  end
 end
