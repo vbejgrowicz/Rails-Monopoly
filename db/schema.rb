@@ -16,9 +16,7 @@ ActiveRecord::Schema.define(version: 20180430192024) do
   enable_extension "plpgsql"
 
   create_table "chance_cards", force: :cascade do |t|
-    t.string "description_one", default: "", null: false
-    t.string "description_two", default: "", null: false
-    t.string "description_three", default: "", null: false
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
