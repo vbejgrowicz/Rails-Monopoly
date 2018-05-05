@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     defaults format: :json do
       resources :games, only: [:new, :index, :create, :show, :update] do
         resources :players, only: [:create]
-        resources :turns, only: [:index]
+        resources :turns, only: [:index, :update]
       end
 
       resources :players, only: [] do
