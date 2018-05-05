@@ -4,6 +4,7 @@ import activeGame from './activeGame';
 import serverErrors from './serverErrors';
 import currentUser from './currentUser';
 import spaces from './spaces';
+import turns from './turns';
 
 export default combineReducers({
   games,
@@ -11,4 +12,5 @@ export default combineReducers({
   serverErrors,
   currentUser,
   spaces,
+  turns,
 });
