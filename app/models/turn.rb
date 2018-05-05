@@ -1,5 +1,6 @@
 class Turn < ApplicationRecord
-  validates :player_id, :game_id, :completed, presence: true
+  validates :player_id, :game_id, presence: true
+  validates :completed, inclusion: { in: [true, false] }
 
   belongs_to :player
   belongs_to :game
