@@ -18,11 +18,12 @@ class Player < ApplicationRecord
     select('players.*, coalesce(rolls.die_one, 0) + coalesce(rolls.die_two, 0) as die_total')
       .joins(:rolls)
       .where(game_id: game_id)
+      .where('rolls.first_roll = true')
       .order('die_total desc, players.created_at asc')
   }
 
   def first_roll
-    Roll.ordered_for_player(id).first || {}
+    Roll.find_by(player_id: id, first_roll: true) || {}
   end
 
   private
