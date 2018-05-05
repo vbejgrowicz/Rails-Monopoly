@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505160037) do
+ActiveRecord::Schema.define(version: 20180505164137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180505160037) do
     t.integer "die_two", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "first_roll", default: false, null: false
     t.index ["player_id"], name: "index_rolls_on_player_id"
   end
 
