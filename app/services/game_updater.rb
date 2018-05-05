@@ -25,6 +25,7 @@ class GameUpdater
   end
 
   def generate_first_turn!
-    Turn.create!(game_id: @game.id, player_id: Player.ordered_by_first_roll(@game.id).first.id)
+    player = Player.ordered_by_first_roll(@game.id).first
+    Turn.create!(game_id: @game.id, player_id: player.id, start_space_id: player.space.id)
   end
 end
