@@ -68,7 +68,7 @@ Player.propTypes = {
 const mapDispatchToProps = dispatch => ({
   roll: async (playerId) => {
     dispatch(createRollRequest());
-    const createRoll = () => post(`/api/players/${playerId}/rolls`);
+    const createRoll = () => post(`/api/players/${playerId}/rolls`, { first_roll: true });
     apiRequest(createRoll, (json) => {
       dispatch(createRollReceived(json.roll));
     });
