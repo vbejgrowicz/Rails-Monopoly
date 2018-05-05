@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { dieMapper } from '../../../utils/helpers';
 
 class PlayerActions extends React.Component {
   render() {
-    const { isActivePlayer } = this.props;
+    const { isActivePlayer, currentTurn } = this.props;
+    const { roll } = currentTurn;
     return (
       <div className={`player-actions ${isActivePlayer ? 'active' : ''}`}>
         <div className="dice-group">
-          <div className="die one" />
-          <div className="die one" />
+          <div className={`die ${roll.id ? dieMapper[roll.die_one] : 'one'}`} />
+          <div className={`die ${roll.id ? dieMapper[roll.die_two] : 'one'}`} />
         </div>
         <button className="roll">Roll</button>
         <div>It's Your Turn!</div>
