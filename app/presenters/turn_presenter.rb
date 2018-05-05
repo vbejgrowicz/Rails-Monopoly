@@ -3,7 +3,9 @@ class TurnPresenter < ApplicationPresenter
     {
       id: @object.id,
       player: PlayerPresenter.new(@object.player, limited: true),
-      roll: @object.roll ? RollPresenter.new(@object.roll) : {}
+      roll: @object.roll ? RollPresenter.new(@object.roll) : {},
+      start_space_id: @object.start_space_id,
+      end_space_id: @object.end_space_id,
     }
   end
 end
