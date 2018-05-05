@@ -3,15 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createRollRequest, createRollReceived } from '../../../actions';
 import { post, apiRequest } from '../../../utils/fetch';
-
-const dieMapper = {
-  1: 'one',
-  2: 'two',
-  3: 'three',
-  4: 'four',
-  5: 'five',
-  6: 'six',
-};
+import { dieMapper } from '../../../utils/helpers';
 
 class Player extends React.Component {
   constructor() {
