@@ -11,6 +11,7 @@ class Game < ApplicationRecord
   has_many :chance_cards, through: :chance_games
   has_many :community_chest_games, dependent: :destroy
   has_many :community_chest_cards, through: :community_chest_games
+  has_many :turns, dependent: :destroy
 
   def is_player?(user_id)
     players.map(&:user_id).include?(user_id)

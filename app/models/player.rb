@@ -12,6 +12,7 @@ class Player < ApplicationRecord
   belongs_to :space
 
   has_many :rolls, dependent: :destroy
+  has_many :turns
 
   scope :ordered_by_first_roll, ->(game_id) {
     select('players.*, coalesce(rolls.die_one, 0) + coalesce(rolls.die_two, 0) as die_total')
