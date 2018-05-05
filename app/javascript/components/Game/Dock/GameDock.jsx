@@ -8,12 +8,27 @@ import { get, apiRequest } from '../../../utils/fetch';
 import { fetchTurnsRequest, fetchTurnsReceived } from '../../../actions';
 
 class GameDock extends React.Component {
+  constructor() {
+    super();
+
+    this.state = { loading: true };
+
+    this.fetchTurns = this.fetchTurns.bind(this);
+  }
+
   componentWillMount() {
-    this.props.fetchTurns();
+    this.fetchTurns();
+  }
+
+  fetchTurns = async () => {
+    const { json } = await this.props.fetchTurns();
+    if (json.turns) {
+      this.setState({ loading: false })
+    }
   }
 
   render() {
-    return (
+    return !this.state.loading && (
       <div className="dock">
         <div className="players">
           {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
@@ -38,7 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const gameId = ownProps.match.params.id;
     dispatch(fetchTurnsRequest());
     const getTurns = () => get(`/api/games/${gameId}/turns`);
-    apiRequest(getTurns, (json) => {
+    return apiRequest(getTurns, (json) => {
       dispatch(fetchTurnsReceived(json.turns));
     });
   },
