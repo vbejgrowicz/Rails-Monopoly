@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import TokenSpaces from './TokenSpaces';
 
 const cornerTitle = {
@@ -53,10 +54,11 @@ class GameTile extends React.Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, currentTurn } = this.props;
+    const isEndSpace = (currentTurn.end_space_id || 0) === item.id;
     return (
       <div className={item.position % 10 === 0 ? 'corner' : 'tile'}>
-        <div className="tile-data">
+        <div className={`tile-data ${isEndSpace ? 'end-space' : ''}`}>
           <TokenSpaces item={item} />
           <div className={`color ${item.color || 'no-color'}`} />
           {this.renderTitle()}
@@ -70,6 +72,11 @@ class GameTile extends React.Component {
 
 GameTile.propTypes = {
   item: PropTypes.object.isRequired,
+  currentTurn: PropTypes.object.isRequired,
 };
 
-export default GameTile;
+const mapStateToProps = ({ turns }) => ({
+  currentTurn: turns.items[0] || {},
+});
+
+export default connect(mapStateToProps, null)(GameTile);
