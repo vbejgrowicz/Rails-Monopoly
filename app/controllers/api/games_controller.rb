@@ -10,10 +10,7 @@ class Api::GamesController < ApplicationController
   end
 
   def create
-    ActiveRecord::Base.transaction do
-      @game = Game.create!(host_id: current_user.id)
-      Player.create!(game_id: @game.id, token_id: params[:token_id], user_id: @game.host_id)
-    end
+    @game = GameUpdater.run_create(current_user, params)
     render json: { game: GamePresenter.new(@game) }
   end
 
@@ -29,7 +26,7 @@ class Api::GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     validate_host!
-    @game.update!(update_params)
+    @game = GameUpdater.run_update(@game, update_params)
     render json: { game: GamePresenter.new(@game, detailed: true) }
   end
 
