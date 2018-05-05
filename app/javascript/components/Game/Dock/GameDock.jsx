@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PlayerCard from './PlayerCard';
+import PlayerActions from './PlayerActions';
 import { get, apiRequest } from '../../../utils/fetch';
 import { fetchTurnsRequest, fetchTurnsReceived } from '../../../actions';
 
@@ -17,15 +18,7 @@ class GameDock extends React.Component {
         <div className="players">
           {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
         </div>
-        <div className="player-actions">
-          <div className="dice-group">
-            <div className="die one" />
-            <div className="die one" />
-          </div>
-          <button className="roll">Roll</button>
-          <div>It's Your Turn!</div>
-          <div className="turn-disabled" />
-        </div>
+        <PlayerActions />
       </div>
     );
   }
