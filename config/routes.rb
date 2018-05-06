@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         resources :turns, only: [:index, :update]
       end
 
-      resources :players, only: [] do
+      resources :players, only: [:show] do
         resources :rolls, only: [:create]
       end
 
