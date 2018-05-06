@@ -12,6 +12,7 @@ class TurnUpdater
     ActiveRecord::Base.transaction do
       roll if @params[:turn_action] == 'roll'
       move if @params[:turn_action] == 'move'
+      end_turn if @params[:turn_action] == 'end'
       @turn.save! if @turn.changed?
     end
     @turn
@@ -28,7 +29,17 @@ class TurnUpdater
     @turn.player.move_to(@turn.end_space_id)
   end
 
+  def end_turn
+    validate_turn_is_over!
+    @turn.completed = true
+    GenerateTurn.run(@turn)
+  end
+
   private
+
+  def validate_turn_is_over!
+    raise 'Your turn is not over!' if (@turn.end_space_id || 0) != @turn.player.space_id
+  end
 
   def validate_valid_move!
     raise 'Hmm, you did not roll yet!' if !@turn.roll_id
