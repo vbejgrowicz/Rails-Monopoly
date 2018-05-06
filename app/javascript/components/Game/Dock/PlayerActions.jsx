@@ -11,6 +11,7 @@ class PlayerActions extends React.Component {
     super();
 
     this.movePlayer = this.movePlayer.bind(this);
+    this.renderActionButton = this.renderActionButton.bind(this);
   }
 
   movePlayer = async () => {
@@ -18,6 +19,23 @@ class PlayerActions extends React.Component {
     const { json } = await this.props.updateTurn('move', currentTurn.id);
     if (json.turn) {
       this.props.fetchPlayer(json.turn.player.id);
+    }
+  }
+
+  renderActionButton() {
+    const { currentTurn, activePlayer } = this.props;
+    if (!currentTurn.roll.id) {
+      return (
+        <button className="action-btn roll" onClick={() => this.props.updateTurn('roll', currentTurn.id)}>Roll</button>
+      );
+    } else if (currentTurn.end_space_id !== activePlayer.space_id) {
+      return (
+        <button className="action-btn move" onClick={this.movePlayer}>Move Token</button>
+      );
+    } else {
+      return (
+        <button className="action-btn end-turn" onClick={() => {}}>End Turn</button>
+      );
     }
   }
 
@@ -30,11 +48,7 @@ class PlayerActions extends React.Component {
           <div className={`die ${roll.id ? dieMapper[roll.die_one] : 'one'}`} />
           <div className={`die ${roll.id ? dieMapper[roll.die_two] : 'one'}`} />
         </div>
-        {roll.id ? (
-          <button className="action-btn move" onClick={this.movePlayer}>Move Token</button>
-        ) : (
-          <button className="action-btn roll" onClick={() => this.props.updateTurn('roll', currentTurn.id)}>Roll</button>
-        )}
+        {this.renderActionButton()}
         <div>It's Your Turn!</div>
       </div>
     );
@@ -45,10 +59,12 @@ PlayerActions.propTypes = {
   isActivePlayer: PropTypes.bool.isRequired,
   currentTurn: PropTypes.object.isRequired,
   updateTurn: PropTypes.func.isRequired,
+  activePlayer: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ currentUser, turns }) => ({
+const mapStateToProps = ({ currentUser, turns, activeGame }) => ({
   isActivePlayer: currentUser.id === turns.items[0].player.user_id,
+  activePlayer: activeGame.players.find(player => player.id === turns.items[0].player.id),
   currentTurn: turns.items[0],
 });
 

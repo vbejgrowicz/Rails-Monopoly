@@ -14,6 +14,7 @@ class PlayerPresenter < ApplicationPresenter
       token: @object.token.name,
       roll: @object.first_roll.slice(:id, :player_id, :die_one, :die_two),
       position: @object.space.position,
+      space_id: @object.space_id,
     }
   end
 
