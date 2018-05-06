@@ -19,13 +19,8 @@ class GameUpdater
   def update!
     ActiveRecord::Base.transaction do
       @game.update!(@params)
-      generate_first_turn! if @params[:started_at].present?
+      GenerateTurn.run_first(@game) if @params[:started_at].present?
       @game
     end
-  end
-
-  def generate_first_turn!
-    player = Player.ordered_by_first_roll(@game.id).first
-    Turn.create!(game_id: @game.id, player_id: player.id, start_space_id: player.space.id)
   end
 end
