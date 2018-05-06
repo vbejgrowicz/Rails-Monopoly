@@ -15,6 +15,7 @@ class SpacePresenter < ApplicationPresenter
     {
       color: nil,
       description: @object.event.description,
+      buy_price: nil,
     }
   end
 
@@ -22,6 +23,7 @@ class SpacePresenter < ApplicationPresenter
     {
       color: @object.property.color_set.color,
       description: nil,
+      buy_price: @object.property.buy_price,
     }
   end
 

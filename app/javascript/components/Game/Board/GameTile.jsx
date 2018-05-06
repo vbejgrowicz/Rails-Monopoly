@@ -45,7 +45,7 @@ class GameTile extends React.Component {
   renderDescription() {
     const { item } = this.props;
     if (item.color) {
-      return (<div className="description">Price $100</div>);
+      return (<div className="description">${item.buy_price}</div>);
     }
     if (specialDescriptions.indexOf(item.category) > -1) {
       return (<div className={`description ${item.category}`}>{item.description}</div>);
