@@ -21,7 +21,7 @@ class TurnUpdater
   def roll
     validate_valid_roll!
     @turn.roll = Roll.create!(GenerateRoll.run(@turn.player_id))
-    @turn.end_space = Space.find_by(position: @turn.start_space.position + @turn.roll.total)
+    @turn.end_space = Space.find_by(position: (@turn.start_space.position + @turn.roll.total) % 40)
   end
 
   def move
