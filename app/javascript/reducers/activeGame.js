@@ -64,6 +64,11 @@ export default function activeGame(state = initialState, action) {
         isUpdating: false,
         players: state.players.map(updatePlayer),
       };
+    case 'RECEIVE_BROADCASTED_PLAYER_DATA':
+      if (action.payload.player) {
+        return { ...state, players: state.players.map(updatePlayer) };
+      }
+      return state;
     default:
       return state;
   }
