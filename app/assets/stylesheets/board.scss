@@ -187,20 +187,20 @@
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center;
-          height: 47%;
+          height: 45%;
 
           &.railroad {
-            height: 65%;
+            height: 63%;
             background-image: url('railroad.png');
           }
 
           &.electric-company {
-            height: 65%;
+            height: 63%;
             background-image: url('electric-company.png');
           }
 
           &.water-works {
-            height: 65%;
+            height: 63%;
             background-image: url('water-works.png');
           }
 
@@ -215,18 +215,19 @@
           }
 
           &.luxury-tax {
-            height: 57%;
+            height: 55%;
             background-image: url('luxury-tax.png');
           }
 
           &.income-tax {
-            height: 57%;
+            height: 55%;
             background-image: url('income-tax.png');
           }
         }
 
         .description {
-          height: 10%;
+          height: 12%;
+          font-size: 14px;
 
           &.community-chest {
             font-size: 10px;
