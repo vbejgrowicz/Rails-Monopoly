@@ -4,7 +4,14 @@ const initialState = {
   isRolling: false,
 };
 
-export default function games(state = initialState, action) {
+export default function activeGame(state = initialState, action) {
+  const updatePlayer = (player) => {
+    if (player.id === action.payload.player.id) {
+      return action.payload.player;
+    }
+    return player;
+  };
+
   const updatePlayerRoll = (player) => {
     if (player.id === action.payload.roll.player_id) {
       return { ...player, roll: action.payload.roll };
@@ -45,6 +52,17 @@ export default function games(state = initialState, action) {
         ...state,
         isRolling: false,
         players: state.players.map(updatePlayerRoll),
+      };
+    case 'FETCH_PLAYER_REQUEST':
+      return {
+        ...state,
+        isUpdating: true,
+      };
+    case 'FETCH_PLAYER_RECEIVED':
+      return {
+        ...state,
+        isUpdating: false,
+        players: state.players.map(updatePlayer),
       };
     default:
       return state;
