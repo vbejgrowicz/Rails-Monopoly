@@ -26,6 +26,10 @@ class Player < ApplicationRecord
     Roll.find_by(player_id: id, first_roll: true) || {}
   end
 
+  def move_to(end_space_id)
+    update!(space_id: end_space_id)
+  end
+
   private
 
   def game_has_six_or_fewer_players
