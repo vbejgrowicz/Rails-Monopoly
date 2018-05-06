@@ -33,7 +33,7 @@ class GameDock extends React.Component {
         <div className="players">
           {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
         </div>
-        <PlayerActions turnSub={this.turnSub} playerSub={this.playerSub} />
+        <PlayerActions />
       </div>
     );
   }
