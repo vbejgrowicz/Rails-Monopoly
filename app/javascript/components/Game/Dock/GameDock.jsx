@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import ActionCable from 'actioncable';
 import PlayerCard from './PlayerCard';
 import PlayerActions from './PlayerActions';
 import { get, apiRequest } from '../../../utils/fetch';
-import { fetchTurnsRequest, fetchTurnsReceived } from '../../../actions';
+import { fetchTurnsRequest, fetchTurnsReceived, updateTurnReceived, fetchPlayerReceived } from '../../../actions';
 
 class GameDock extends React.Component {
   constructor() {
@@ -18,6 +19,25 @@ class GameDock extends React.Component {
 
   componentWillMount() {
     this.fetchTurns();
+  }
+
+  componentDidMount() {
+    const cable = ActionCable.createConsumer('ws://localhost:5000/cable')
+    this.turnSub = cable.subscriptions.create('TurnsChannel', {
+      received: (data) => {
+        data.turns ? this.props.receiveTurns(data.turns) : this.props.updateTurn(data)
+      }
+    })
+    this.playerSub = cable.subscriptions.create('PlayersChannel', {
+      received: (data) => {
+        this.props.receivePlayer(data)
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.turnSub.consumer.disconnect();
+    this.playerSub.consumer.disconnect();
   }
 
   fetchTurns = async () => {
@@ -33,7 +53,7 @@ class GameDock extends React.Component {
         <div className="players">
           {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
         </div>
-        <PlayerActions />
+        <PlayerActions turnSub={this.turnSub} playerSub={this.playerSub} />
       </div>
     );
   }
@@ -57,6 +77,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(fetchTurnsReceived(json.turns));
     });
   },
+  updateTurn: (turn) => dispatch(updateTurnReceived(turn)),
+  receiveTurns: (turns) => dispatch(fetchTurnsReceived(turns)),
+  receivePlayer: (player) => dispatch(fetchPlayerReceived(player)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GameDock));

@@ -86,6 +86,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const updateTurn = () => put(`/api/games/${gameId}/turns/${turnId}`, { turn_action });
     return apiRequest(updateTurn, (json) => {
       dispatch(updateTurnReceived(json.turn));
+      ownProps.turnSub.send(json.turn)
     });
   },
   fetchPlayer: async (playerId) => {
@@ -93,6 +94,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const fetchPlayer = () => get(`/api/players/${playerId}`);
     return apiRequest(fetchPlayer, (json) => {
       dispatch(fetchPlayerReceived(json.player));
+      ownProps.playerSub.send(json.player)
     });
   },
   fetchTurns: async () => {
@@ -101,6 +103,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const getTurns = () => get(`/api/games/${gameId}/turns`);
     return apiRequest(getTurns, (json) => {
       dispatch(fetchTurnsReceived(json.turns));
+      ownProps.turnSub.send({ turns: json.turns })
     });
   },
 });
