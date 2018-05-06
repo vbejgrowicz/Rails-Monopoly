@@ -1,4 +1,10 @@
 export default function turns(state = { isFetching: true, items: [] }, action) {
+  const updateHandler = (turn) => {
+    if (turn.id === action.payload.turn.id) {
+      return { ...turn, ...action.payload.turn };
+    }
+    return turn;
+  }
   switch (action.type) {
     case 'FETCH_TURNS_REQUEST':
       return {
@@ -19,12 +25,7 @@ export default function turns(state = { isFetching: true, items: [] }, action) {
     case 'UPDATE_TURN_RECEIVED':
       return {
         ...state,
-        items: state.items.map((turn) => {
-          if (turn.id === action.payload.turn.id) {
-            return { ...turn, ...action.payload.turn };
-          }
-          return turn;
-        }),
+        items: state.items.map(updateHandler),
         isUpdating: false,
       };
     default:
