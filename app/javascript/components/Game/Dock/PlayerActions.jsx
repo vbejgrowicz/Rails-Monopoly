@@ -97,6 +97,8 @@ PlayerActions.propTypes = {
   updateTurn: PropTypes.func.isRequired,
   fetchPlayer: PropTypes.func.isRequired,
   fetchTurns: PropTypes.func.isRequired,
+  handleTurnsBroadcast: PropTypes.func.isRequired,
+  handlePlayersBroadcast: PropTypes.func.isRequired,
   activePlayer: PropTypes.object.isRequired,
 };
 
