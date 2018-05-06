@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { dieMapper } from '../../../utils/helpers';
 import { get, put, apiRequest } from '../../../utils/fetch';
-import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest, fetchPlayerReceived } from '../../../actions';
+import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest, fetchPlayerReceived,
+ fetchTurnsRequest, fetchTurnsReceived } from '../../../actions';
 
 class PlayerActions extends React.Component {
   constructor() {
     super();
 
     this.movePlayer = this.movePlayer.bind(this);
+    this.endTurn = this.endTurn.bind(this);
     this.renderActionButton = this.renderActionButton.bind(this);
   }
 
@@ -19,6 +21,14 @@ class PlayerActions extends React.Component {
     const { json } = await this.props.updateTurn('move', currentTurn.id);
     if (json.turn) {
       this.props.fetchPlayer(json.turn.player.id);
+    }
+  }
+
+  endTurn = async () => {
+    const { currentTurn } = this.props;
+    const { json } = await this.props.updateTurn('end', currentTurn.id);
+    if (json.turn) {
+      this.props.fetchTurns();
     }
   }
 
@@ -32,11 +42,10 @@ class PlayerActions extends React.Component {
       return (
         <button className="action-btn move" onClick={this.movePlayer}>Move Token</button>
       );
-    } else {
-      return (
-        <button className="action-btn end-turn" onClick={() => {}}>End Turn</button>
-      );
     }
+    return (
+      <button className="action-btn end-turn" onClick={this.endTurn}>End Turn</button>
+    );
   }
 
   render() {
@@ -59,6 +68,8 @@ PlayerActions.propTypes = {
   isActivePlayer: PropTypes.bool.isRequired,
   currentTurn: PropTypes.object.isRequired,
   updateTurn: PropTypes.func.isRequired,
+  fetchPlayer: PropTypes.func.isRequired,
+  fetchTurns: PropTypes.func.isRequired,
   activePlayer: PropTypes.object.isRequired,
 };
 
@@ -82,6 +93,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const fetchPlayer = () => get(`/api/players/${playerId}`);
     return apiRequest(fetchPlayer, (json) => {
       dispatch(fetchPlayerReceived(json.player));
+    });
+  },
+  fetchTurns: async () => {
+    const gameId = ownProps.match.params.id;
+    dispatch(fetchTurnsRequest());
+    const getTurns = () => get(`/api/games/${gameId}/turns`);
+    return apiRequest(getTurns, (json) => {
+      dispatch(fetchTurnsReceived(json.turns));
     });
   },
 });
