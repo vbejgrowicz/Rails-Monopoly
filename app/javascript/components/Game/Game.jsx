@@ -6,6 +6,7 @@ import { fetchGameRequest, fetchGameReceived } from '../../actions';
 import GameBoard from './Board/GameBoard';
 import GameSetup from './Setup/GameSetup';
 import GameDock from './Dock/GameDock';
+import ActionModal from './Action/ActionModal';
 
 class Game extends React.Component {
   componentWillMount() {
@@ -24,7 +25,12 @@ class Game extends React.Component {
       <div className={`game ${inSetup && 'pending'}`}>
         {inSetup && <GameSetup />}
         <GameBoard />
-        {!inSetup && <GameDock />}
+        {!inSetup &&
+          [
+            <GameDock key="game dock" />,
+            <ActionModal key="action modal" />,
+          ]
+        }
       </div>
     );
   }
