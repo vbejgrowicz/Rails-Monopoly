@@ -27,6 +27,7 @@ class TurnUpdater
   def move
     validate_valid_move!
     @turn.player.move_to(@turn.end_space_id)
+    GenerateAction.run(@turn)
   end
 
   def end_turn
