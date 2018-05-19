@@ -3,5 +3,4 @@ class Property < ApplicationRecord
 
   belongs_to :color_set
 
-  # has_many :spaces
 end
