@@ -10,4 +10,12 @@ class Deed < ApplicationRecord
   def self.generate_for_game!(game_id)
     Property.find_each { |prop| create!(property_id: prop.id, game_id: game_id) }
   end
+
+  def is_unowned?
+    owner_id.nil?
+  end
+
+  def is_owned_by_player?(player)
+    owner_id == player.id
+  end
 end
