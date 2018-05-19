@@ -54,12 +54,12 @@ class GameTile extends React.Component {
   }
 
   render() {
-    const { item, currentTurn } = this.props;
+    const { item, currentTurn, shouldShowTokens } = this.props;
     const isEndSpace = (currentTurn.end_space_id || 0) === item.id;
     return (
       <div className={item.position % 10 === 0 ? 'corner' : 'tile'}>
         <div className={`tile-data ${isEndSpace ? 'end-space' : ''}`}>
-          <TokenSpaces item={item} />
+          {shouldShowTokens && <TokenSpaces item={item} />}
           <div className={`color ${item.color || 'no-color'}`} />
           {this.renderTitle()}
           <div className={`image ${item.category}`} />
@@ -73,6 +73,11 @@ class GameTile extends React.Component {
 GameTile.propTypes = {
   item: PropTypes.object.isRequired,
   currentTurn: PropTypes.object.isRequired,
+  shouldShowTokens: PropTypes.bool,
+};
+
+GameTile.defaultProps = {
+  shouldShowTokens: true,
 };
 
 const mapStateToProps = ({ turns }) => ({
