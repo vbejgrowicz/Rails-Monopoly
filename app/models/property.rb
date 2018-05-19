@@ -3,4 +3,7 @@ class Property < ApplicationRecord
 
   belongs_to :color_set
 
+  def is_property?
+    true
+  end
 end
