@@ -1,0 +1,229 @@
+@import "colors";
+
+.contents {
+  .tile-data {
+    box-sizing: border-box;
+    font-size: 22px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: $board-green;
+    margin: auto;
+
+    .title {
+      font-weight: 600;
+    }
+    .title, .image, .description, .color {
+      box-sizing: border-box;
+    }
+  }
+
+  .corner {
+    display: block;
+    vertical-align: top;
+
+    .tile-data {
+      width: 300px;
+      height: 300px;
+      border: 1px solid black;
+      position: relative;
+
+      .title {
+        position: absolute;
+        font-size: 34px;
+
+        &.free-parking {
+          top: 25px;
+          right: 187px;
+
+          span {
+            position: absolute;
+
+            &:nth-child(2) {
+              top: 220px;
+              left: -30px;
+            }
+          }
+        }
+
+        &.go-to-jail {
+          top: 25px;
+          left: 98px;
+
+          span {
+            position: absolute;
+
+            &:nth-child(1) {
+              width: 116px;
+            }
+            &:nth-child(2) {
+              top: 208px;
+              left: 18px;
+            }
+          }
+        }
+
+        &.in-jail {
+
+          span {
+            position: absolute;
+
+            &:nth-child(1) {
+              transform: rotate(90deg);
+              top: 90px;
+              left: -4px;
+            }
+            &:nth-child(2) {
+              top: 232px;
+              left: 110px;
+            }
+          }
+        }
+
+        &.go {
+          transform: rotate(315deg);
+          left: -18px;
+          top: 44px;
+          font-size: 22px;
+          width: 200px;
+        }
+      }
+
+      .image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+
+        &.go {
+          background-image: url('go.png');
+        }
+
+        &.go-to-jail {
+          background-size: 75%;
+          transform: rotate(135deg);
+          background-image: url('go-to-jail.png');
+        }
+
+        &.in-jail {
+          height: 75%;
+          background-position: 80px -4px;
+          background-image: url('in-jail.png');
+        }
+
+        &.free-parking {
+          background-size: 70%;
+          transform: rotate(225deg);
+          background-image: url('free-parking.png');
+        }
+      }
+    }
+  }
+
+  .tile {
+    position: relative;
+
+    .tile-data {
+      width: 200px;
+      height: 300px;
+
+      .color {
+        width: 100%;
+        height: 15%;
+        border-bottom: 1px solid black;
+
+        &.brown {
+          background-color: $tile-brown;
+        }
+        &.light-blue {
+          background-color: $tile-light-blue;
+        }
+        &.purple {
+          background-color: $tile-purple;
+        }
+        &.orange {
+          background-color: $tile-orange;
+        }
+        &.red {
+          background-color: $tile-red;
+        }
+        &.yellow {
+          background-color: $tile-yellow;
+        }
+        &.green {
+          background-color: $tile-green;
+        }
+        &.dark-blue {
+          background-color: $tile-dark-blue;
+        }
+        &.white, &.black, &.no-color {
+          border-bottom: none;
+          height: 5%;
+        }
+      }
+
+      .title {
+        padding: 2px;
+        height: 28%;
+
+        &.chance, &.community-chest, &.electric-company, &.water-works, &.railroad {
+          height: 20%;
+        }
+        &.luxury-tax, &.income-tax {
+          font-size: 17px;
+        }
+      }
+
+      .image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 45%;
+
+        &.railroad {
+          height: 63%;
+          background-image: url('railroad.png');
+        }
+
+        &.electric-company {
+          height: 63%;
+          background-image: url('electric-company.png');
+        }
+
+        &.water-works {
+          height: 63%;
+          background-image: url('water-works.png');
+        }
+
+        &.chance {
+          height: 75%;
+          background-image: url('chance-blue.png');
+        }
+
+        &.community-chest {
+          height: 50%;
+          background-image: url('community-chest.png');
+        }
+
+        &.luxury-tax {
+          height: 55%;
+          background-image: url('luxury-tax.png');
+        }
+
+        &.income-tax {
+          height: 55%;
+          background-image: url('income-tax.png');
+        }
+      }
+
+      .description {
+        height: 12%;
+        font-size: 28px;
+
+        &.community-chest {
+          font-size: 20px;
+          height: 25%;
+        }
+      }
+    }
+  }
+}

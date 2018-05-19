@@ -1,0 +1,33 @@
+.outer-modal {
+  &.action {
+    bottom: 151px;
+
+    .modal {
+      top: initial;
+      left: initial;
+      right: initial;
+      bottom: 5%;
+      min-width: 100%;
+      min-height: none;
+      background-color: transparent;
+      
+      .contents {
+        width: max-content;
+        margin: auto;
+        background-color: #f6f6f6;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding: 20px 20px 0 20px;
+
+        button {
+          background-color: blue;
+          color: white;
+          padding: 5px;
+          margin: 10px 0 20px 0;
+        }
+      }
+    }
+  }
+}
