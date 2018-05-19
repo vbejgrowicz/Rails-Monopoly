@@ -3,6 +3,7 @@ class GameUpdater
     ActiveRecord::Base.transaction do
       game = Game.create!(host_id: current_user.id)
       Player.create!(game_id: game.id, token_id: params[:token_id], user_id: game.host_id)
+      Deed.generate_for_game!(game.id)
       game
     end
   end
