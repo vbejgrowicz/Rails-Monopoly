@@ -6,4 +6,8 @@ class Property < ApplicationRecord
   def is_property?
     true
   end
+
+  def deed_for(game)
+    game.deeds.find_by(property_id: id)
+  end
 end
