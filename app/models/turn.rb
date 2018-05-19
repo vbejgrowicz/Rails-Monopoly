@@ -7,4 +7,6 @@ class Turn < ApplicationRecord
   belongs_to :roll, optional: true
   belongs_to :start_space, class_name: 'Space', primary_key: :id, foreign_key: :start_space_id, optional: true
   belongs_to :end_space, class_name: 'Space', primary_key: :id, foreign_key: :end_space_id, optional: true
+
+  has_many :turn_actions
 end
