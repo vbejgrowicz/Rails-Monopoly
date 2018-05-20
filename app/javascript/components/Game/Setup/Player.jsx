@@ -17,7 +17,7 @@ class Player extends React.Component {
     const { currentUserId } = this.props;
     const { id, user_id } = this.props.player;
     return currentUserId === user_id ? (
-      <button className="action button" onClick={() => this.props.roll(id)}>Roll</button>
+      <button className="action button" onClick={this.props.roll(id)}>Roll</button>
     ) : (
       <div className="action pending">Awaiting Roll...</div>
     );
@@ -58,7 +58,7 @@ Player.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  roll: async (playerId) => {
+  roll: playerId => async () => {
     dispatch(createRollRequest());
     const createRoll = () => post(`/api/players/${playerId}/rolls`, { first_roll: true });
     apiRequest(createRoll, (json) => {
