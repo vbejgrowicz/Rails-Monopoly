@@ -27,6 +27,8 @@
           color: white;
           cursor: pointer;
           margin: 10px 0 10px 0;
+          position: relative;
+          z-index: 1;
         }
       }
     }
