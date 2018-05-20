@@ -4,7 +4,21 @@ export default function turns(state = { isFetching: true, items: [] }, action) {
       return { ...turn, ...action.payload.turn };
     }
     return turn;
-  }
+  };
+  const updateNestedHandler = (turn) => {
+    if (turn.id === action.payload.turn_action.turn_id) {
+      return {
+        ...turn,
+        actions: turn.actions.map((turn_act) => {
+          if (turn_act.id === action.payload.turn_action.id) {
+            return action.payload.turn_action;
+          }
+          return turn_act;
+        }),
+      };
+    }
+    return turn;
+  };
   switch (action.type) {
     case 'FETCH_TURNS_REQUEST':
       return {
@@ -26,6 +40,17 @@ export default function turns(state = { isFetching: true, items: [] }, action) {
       return {
         ...state,
         items: state.items.map(updateHandler),
+        isUpdating: false,
+      };
+    case 'UPDATE_TURN_ACTION_REQUEST':
+      return {
+        ...state,
+        isUpdating: true,
+      };
+    case 'UPDATE_TURN_ACTION_RECEIVED':
+      return {
+        ...state,
+        items: state.items.map(updateNestedHandler),
         isUpdating: false,
       };
     case 'RECEIVE_BROADCASTED_TURN_DATA':
