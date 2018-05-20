@@ -1,6 +1,6 @@
 class Deed < ApplicationRecord
   validates :property_id, :game_id, presence: true
-  validates :property_id, uniqueness: { scope: :owner_id }
+  validates :property_id, uniqueness: { scope: :owner_id }, unless: ->(x) { x.owner_id.nil? }
   validates :property_id, uniqueness: { scope: :game_id }
 
   belongs_to :property
