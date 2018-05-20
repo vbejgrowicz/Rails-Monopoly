@@ -2,18 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GameTile from '../Board/GameTile';
-import { put, apiRequest } from '../../../utils/fetch';
-import { updateTurnActionRequest, updateTurnActionReceived } from '../../../actions';
+import ActionButton from './ActionButton';
 
 class ActionModal extends React.Component {
   render() {
-    const { actionSpace, action, shouldShow, turnId, turnActionId } = this.props;
+    const { actionSpace, shouldShow } = this.props;
     return shouldShow && (
       <div className="outer-modal action">
         <div className="modal">
           <div className="contents">
             <GameTile item={actionSpace} shouldShowTokens={false} />
-            <button onClick={this.props.updateTurnAction(turnId, turnActionId)}>{action}</button>
+            <ActionButton />
           </div>
         </div>
       </div>
@@ -24,10 +23,6 @@ class ActionModal extends React.Component {
 ActionModal.propTypes = {
   shouldShow: PropTypes.bool.isRequired,
   actionSpace: PropTypes.object.isRequired,
-  action: PropTypes.string.isRequired,
-  turnId: PropTypes.number.isRequired,
-  turnActionId: PropTypes.number.isRequired,
-  updateTurnAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ turns, activeGame, spaces, currentUser }) => {
@@ -41,29 +36,13 @@ const mapStateToProps = ({ turns, activeGame, spaces, currentUser }) => {
     return {
       shouldShow: false,
       actionSpace: {},
-      action: '',
-      turnId: 0,
-      turnActionId: 0,
     };
   }
 
   return {
     shouldShow: true,
     actionSpace: spaces.items.find(space => space.id === currentTurn.end_space_id),
-    action: currentTurn.actions[0].action,
-    turnId: currentTurn.id,
-    turnActionId: currentTurn.actions[0].id,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateTurnAction: (turnId, turnActionId) => async () => {
-    dispatch(updateTurnActionRequest());
-    const updateTurnAction = () => put(`/api/turns/${turnId}/turn_actions/${turnActionId}`);
-    return apiRequest(updateTurnAction, (json) => {
-      dispatch(updateTurnActionReceived(json.turn_action));
-    });
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActionModal);
+export default connect(mapStateToProps, null)(ActionModal);
