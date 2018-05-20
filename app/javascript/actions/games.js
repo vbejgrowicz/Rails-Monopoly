@@ -62,6 +62,10 @@ const fetchPlayerReceived = (player) => ({
   payload: { player },
 });
 
+const setReloadTurns = () => ({
+  type: 'SET_RELOAD_TURNS',
+});
+
 export {
   fetchGamesRequest,
   fetchGamesReceived,
@@ -77,4 +81,5 @@ export {
   createRollReceived,
   fetchPlayerRequest,
   fetchPlayerReceived,
+  setReloadTurns,
 };

@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { get, apiRequest } from '../../../utils/fetch';
-import { fetchSpacesRequest, fetchSpacesReceived } from '../../../actions';
 import GameRow from './GameRow';
 import GameMiddle from './GameMiddle';
 
 class GameBoard extends React.Component {
-  componentWillMount() {
-    this.props.fetchSpaces();
-  }
-
   render() {
     const topItems = this.props.spaces.filter(space => space.position >= 20 && space.position <= 30);
     const leftItems = this.props.spaces.filter(space => space.position > 10 && space.position < 20).reverse();
@@ -29,7 +23,6 @@ class GameBoard extends React.Component {
 }
 
 GameBoard.propTypes = {
-  fetchSpaces: PropTypes.func.isRequired,
   spaces: PropTypes.array.isRequired,
 };
 
@@ -37,14 +30,4 @@ const mapStateToProps = ({ spaces }) => ({
   spaces: spaces.items,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchSpaces: async () => {
-    dispatch(fetchSpacesRequest());
-    const getSpaces = () => get('/api/spaces');
-    apiRequest(getSpaces, (json) => {
-      dispatch(fetchSpacesReceived(json.spaces));
-    });
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);
+export default connect(mapStateToProps, null)(GameBoard);

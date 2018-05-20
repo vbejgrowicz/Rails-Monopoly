@@ -5,13 +5,13 @@ import GameTile from '../Board/GameTile';
 
 class ActionModal extends React.Component {
   render() {
-    const { spaces, item } = this.props;
-    return spaces.items.length > 0 && (
+    const { actionSpace, action, shouldShow } = this.props;
+    return shouldShow && (
       <div className="outer-modal action">
         <div className="modal">
           <div className="contents">
-            <GameTile item={item} shouldShowTokens={false} />
-            <button>Action</button>
+            <GameTile item={actionSpace} shouldShowTokens={false} />
+            <button>{action}</button>
           </div>
         </div>
       </div>
@@ -20,18 +20,32 @@ class ActionModal extends React.Component {
 }
 
 ActionModal.propTypes = {
-  item: PropTypes.object,
-  spaces: PropTypes.object.isRequired,
+  shouldShow: PropTypes.bool.isRequired,
+  actionSpace: PropTypes.object.isRequired,
+  action: PropTypes.string.isRequired,
 };
 
-ActionModal.defaultProps = {
-  item: {},
-};
+const mapStateToProps = ({ turns, activeGame, spaces, currentUser }) => {
+  const currentTurn = turns.items[0];
+  const currentPlayer = activeGame.players.find(player => player.user_id === currentUser.id);
+  const isNotYourTurn = currentTurn.player.id !== currentPlayer.id;
+  const noAction = !currentTurn.actions[0];
+  const actionIsCompleted = (currentTurn.actions[0] || {}).completed;
 
-const mapStateToProps = ({ spaces, turns }) => ({
-  spaces,
-  item: spaces.items.find(space => space.id === turns.items[0].end_space_id),
-});
+  if (isNotYourTurn || noAction || actionIsCompleted) {
+    return {
+      shouldShow: false,
+      actionSpace: {},
+      action: '',
+    };
+  }
+
+  return {
+    shouldShow: true,
+    actionSpace: spaces.items.find(space => space.id === currentTurn.end_space_id),
+    action: currentTurn.actions[0].action,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
 

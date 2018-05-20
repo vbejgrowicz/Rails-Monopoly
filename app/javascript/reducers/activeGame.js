@@ -2,6 +2,7 @@ const initialState = {
   isFetching: false,
   isUpdating: false,
   isRolling: false,
+  shouldReloadTurns: false,
 };
 
 export default function activeGame(state = initialState, action) {
@@ -69,6 +70,8 @@ export default function activeGame(state = initialState, action) {
         return { ...state, players: state.players.map(updatePlayer) };
       }
       return state;
+    case 'SET_RELOAD_TURNS':
+      return { ...state, shouldReloadTurns: true };
     default:
       return state;
   }

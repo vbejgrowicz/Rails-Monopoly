@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Player from './Player';
-import { updateGameRequest, updateGameReceived } from '../../../actions';
+import { updateGameRequest, updateGameReceived, setReloadTurns } from '../../../actions';
 import { put, apiRequest } from '../../../utils/fetch';
 
 const allPlayersHaveRolled = game => (
@@ -112,6 +112,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(updateGameRequest(gameId));
     const updateGame = () => put(`/api/games/${gameId}`, { started_at: new Date() });
     apiRequest(updateGame, (json) => {
+      dispatch(setReloadTurns());
       dispatch(updateGameReceived(json.game));
     });
   },
