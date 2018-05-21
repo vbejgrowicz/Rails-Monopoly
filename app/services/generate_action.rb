@@ -10,7 +10,8 @@ class GenerateAction
   end
 
   def run
-    TurnAction.create!(turn_id: @turn.id, action_id: find_action_from_tile.id)
+    turn_action = TurnAction.create!(turn_id: @turn.id, action_id: find_action_from_tile.id)
+    GenerateGameTransaction.run(turn_action, deed) if turn_action.buy?
   end
 
   private
