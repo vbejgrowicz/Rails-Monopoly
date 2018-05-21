@@ -17,12 +17,15 @@ class GenerateAction
 
   def find_action_from_tile
     if @tile.is_property?
-      deed = @tile.deed_for(@turn.game)
       return Action.buy if deed.is_unowned?
       return Action.none if deed.is_owned_by_player?(@player)
       Action.pay
     else
       Event.get_action_for(@tile)
     end
+  end
+
+  def deed
+    @deed ||= @tile.deed_for(@turn.game)
   end
 end
