@@ -6,4 +6,8 @@ class TurnAction < ApplicationRecord
   belongs_to :action
 
   has_one :game_transaction
+
+  def buy?
+    action.name == 'buy'
+  end
 end
