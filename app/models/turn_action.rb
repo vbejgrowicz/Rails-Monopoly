@@ -4,4 +4,6 @@ class TurnAction < ApplicationRecord
 
   belongs_to :turn
   belongs_to :action
+
+  has_one :game_transaction
 end
