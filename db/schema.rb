@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180519135721) do
+ActiveRecord::Schema.define(version: 20180520234006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,23 @@ ActiveRecord::Schema.define(version: 20180519135721) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "game_transactions", force: :cascade do |t|
+    t.integer "turn_action_id", null: false
+    t.integer "deed_id"
+    t.string "transaction_type", null: false
+    t.integer "sender_id", null: false
+    t.integer "receiver_id"
+    t.integer "amount", null: false
+    t.boolean "canceled", default: false, null: false
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deed_id"], name: "index_game_transactions_on_deed_id"
+    t.index ["receiver_id"], name: "index_game_transactions_on_receiver_id"
+    t.index ["sender_id"], name: "index_game_transactions_on_sender_id"
+    t.index ["turn_action_id"], name: "index_game_transactions_on_turn_action_id"
   end
 
   create_table "games", force: :cascade do |t|
