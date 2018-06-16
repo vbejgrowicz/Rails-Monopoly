@@ -1,0 +1,93 @@
+@import 'colors';
+@import url('https://fonts.googleapis.com/css?family=Tajawal:400,700');
+
+.property-card {
+  font-family: 'Tajawal', sans-serif;
+  border: 1px solid #E0E0E0;
+  width: 300px;
+  height: 450px;
+  box-sizing: border-box;
+  padding: 10px;
+
+  .property-data {
+    height: 100%;
+    box-sizing: border-box;
+    border: 2px solid black;
+    padding: 10px;
+
+    .title-group {
+      height: 20%;
+      box-sizing: border-box;
+      border: 1px solid black;
+      background-color: $tile-green;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 10px 0px;
+
+      .title-deed {
+        font-size: 13px;
+      }
+
+      .title-name {
+        font-size: 22px;
+      }
+    }
+
+    .rent-group {
+      height: 60%;
+      box-sizing: border-box;
+      padding: 10px 0px;
+
+      .rent {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0px;
+        font-size: 18px;
+
+        .rent-label {
+          .house {
+            color: $house;
+          }
+
+          .hotel {
+            color: $hotel;
+          }
+        }
+
+        .rent-price {
+
+        }
+      }
+    }
+
+    .cost-group {
+      height: 20%;
+      box-sizing: border-box;
+      border-top: 1px solid black;
+      padding: 10px 0px;
+
+      .cost {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0px;
+        font-size: 18px;
+
+        .cost-label {
+
+        }
+
+        .cost-price {
+          position: relative;
+
+          span {
+            position: absolute;
+            font-size: 10px;
+            top: 19px;
+            right: 0px;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
