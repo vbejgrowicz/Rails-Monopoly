@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GameTile from '../Board/GameTile';
 import ActionButton from './ActionButton';
+import PropertyCard from '../Property/PropertyCard';
 
 class ActionModal extends React.Component {
   render() {
@@ -11,7 +12,11 @@ class ActionModal extends React.Component {
       <div className="outer-modal action">
         <div className="modal">
           <div className="contents">
-            <GameTile item={actionSpace} shouldShowTokens={false} />
+            {actionSpace.is_property ? (
+              <PropertyCard />
+            ) : (
+              <GameTile item={actionSpace} shouldShowTokens={false} />
+            )}
             <ActionButton />
           </div>
         </div>
