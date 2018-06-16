@@ -10,4 +10,8 @@ class TurnAction < ApplicationRecord
   def buy?
     action.name == 'buy'
   end
+
+  def pay?
+    action.name == 'pay'
+  end
 end
