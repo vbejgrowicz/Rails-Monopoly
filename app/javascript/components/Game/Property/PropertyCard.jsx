@@ -53,6 +53,33 @@ class PropertyCard extends React.Component {
     );
   }
 
+  railroadCard(item) {
+    return (
+      <div className="property-data">
+        <div className={`property-image ${item.category}`} />
+        <div className="railroad-name">{item.title}</div>
+        <div className="rent-group railroad">
+          <div className="rent">
+            <div className="rent-label">RENT</div>
+            <div className="rent-price">$25</div>
+          </div>
+          <div className="rent">
+            <div className="rent-label">If 2 Railroads are owned</div>
+            <div className="rent-price">$50</div>
+          </div>
+          <div className="rent">
+            <div className="rent-label">If 3 Railroads are owned</div>
+            <div className="rent-price">$100</div>
+          </div>
+          <div className="rent">
+            <div className="rent-label">If 4 Railroads are owned</div>
+            <div className="rent-price">$200</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { item } = this.props;
     return (
