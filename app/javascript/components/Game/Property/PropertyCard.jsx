@@ -80,6 +80,19 @@ class PropertyCard extends React.Component {
     );
   }
 
+  utilityCard(item) {
+    return (
+      <div className="property-data">
+        <div className={`property-image ${item.category}`} />
+        <div className="utility-name">{item.title}</div>
+        <div className="rent-description">
+          <div>If one Utility is owned, rent is 4 times amount shown on dice.</div>
+          <div>If both Utilities are owned, rent is 10 times amount shown on dice.</div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { item } = this.props;
     return (
