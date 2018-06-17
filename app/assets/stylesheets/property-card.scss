@@ -131,5 +131,36 @@
         }
       }
     }
+
+    .back-title-group {
+      text-transform: uppercase;
+      font-size: 22px;
+      height: 30%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .mortgage-group {
+      text-transform: uppercase;
+      font-size: 22px;
+      height: 60%;
+      padding: 0px 25px;
+
+      .unmortgage-value {
+        margin-top: 20px;
+      }
+    }
+
+    .back-information {
+      height: 10%;
+      font-size: 14px;
+    }
+  }
+}
+
+.back {
+  .property-data {
+    background-color: #505050;
+    color: lightgray;
   }
 }
