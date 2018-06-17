@@ -1,29 +1,29 @@
-id,name,color_set_id,buy_price
-1,Mediterranean Avenue,1,60
-2,Baltic Avenue,1,60
-3,Oriental Avenue,2,100
-4,Vermont Avenue,2,100
-5,Connecticut Avenue,2,120
-6,St. Charles Place,3,140
-7,States Avenue,3,140
-8,Virginia Avenue,3,160
-9,St. James Place,4,180
-10,Tennessee Avenue,4,180
-11,New York Avenue,4,200
-12,Kentucky Avenue,5,220
-13,Indiana Avenue,5,220
-14,Illinois Avenue,5,240
-15,Atlantic Avenue,6,260
-16,Ventnor Avenue,6,260
-17,Marvin Gardens,6,280
-18,Pacific Avenue,7,300
-19,North Carolina Avenue,7,300
-20,Pennsylvania Avenue,7,320
-21,Park Place,8,350
-22,Boardwalk,8,400
-23,Reading Railroad,9,200
-24,Pennsylvania Railroad,9,200
-25,B. & O. Railroad,9,200
-26,Short Line,9,200
-27,Electric Company,10,150
-28,Water Works,10,150
+id,name,color_set_id,buy_price,mortgage_value,mortgage_payoff,rent,rent_with_set,rent_with_one,rent_with_two,rent_with_three,rent_with_four,rent_with_hotel,build_cost
+1,Mediterranean Avenue,1,60,30,33,2,4,10,30,90,160,250,50
+2,Baltic Avenue,1,60,30,33,4,8,20,60,180,320,450,50
+3,Oriental Avenue,2,100,50,55,6,12,30,90,270,400,550,50
+4,Vermont Avenue,2,100,50,55,6,12,30,90,270,400,550,50
+5,Connecticut Avenue,2,120,60,66,8,16,40,100,300,450,600,50
+6,St. Charles Place,3,140,70,77,10,20,50,150,450,625,750,100
+7,States Avenue,3,140,70,77,10,20,50,150,450,625,750,100
+8,Virginia Avenue,3,160,80,88,12,24,60,180,500,700,900,100
+9,St. James Place,4,180,90,99,14,28,70,200,550,750,950,100
+10,Tennessee Avenue,4,180,90,99,14,28,70,200,550,750,950,100
+11,New York Avenue,4,200,100,110,16,32,80,220,600,800,1000,100
+12,Kentucky Avenue,5,220,110,121,18,36,90,250,700,875,1050,150
+13,Indiana Avenue,5,220,110,121,18,36,90,250,700,875,1050,150
+14,Illinois Avenue,5,240,120,132,20,40,100,300,750,925,1100,150
+15,Atlantic Avenue,6,260,130,143,22,44,110,330,800,975,1150,150
+16,Ventnor Avenue,6,260,130,143,22,44,110,330,800,975,1150,150
+17,Marvin Gardens,6,280,140,154,24,48,120,360,850,1025,1200,150
+18,Pacific Avenue,7,300,150,165,26,52,130,390,900,1100,1275,200
+19,North Carolina Avenue,7,300,150,165,26,52,130,390,900,1100,1275,200
+20,Pennsylvania Avenue,7,320,160,176,28,56,150,450,1000,1200,1400,200
+21,Park Place,8,350,175,193,35,70,175,500,1100,1300,1500,200
+22,Boardwalk,8,400,200,220,50,100,200,600,1400,1700,2000,200
+23,Reading Railroad,9,200,100,110,,,,,,,,
+24,Pennsylvania Railroad,9,200,100,110,,,,,,,,
+25,B. & O. Railroad,9,200,100,110,,,,,,,,
+26,Short Line,9,200,100,110,,,,,,,,
+27,Electric Company,10,150,75,83,,,,,,,,
+28,Water Works,10,150,75,83,,,,,,,,
