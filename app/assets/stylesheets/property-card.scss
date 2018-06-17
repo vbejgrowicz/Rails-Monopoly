@@ -15,6 +15,34 @@
     border: 2px solid black;
     padding: 10px;
 
+    .property-image {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 40%;
+
+      &.railroad {
+        background-image: url('railroad.png');
+      }
+
+      &.electric-company {
+        background-image: url('electric-company.png');
+      }
+
+      &.water-works {
+        background-image: url('water-works.png');
+      }
+    }
+
+    .railroad-name, .utility-name {
+      font-size: 30px;
+      text-transform: uppercase;
+      font-weight: bold;
+      height: 20%;
+      padding: 20px 0px;
+      box-sizing: border-box;
+    }
+
     .title-group {
       height: 20%;
       box-sizing: border-box;
@@ -37,6 +65,10 @@
       box-sizing: border-box;
       padding: 10px 0px;
 
+      &.railroad {
+        height: 40%;
+      }
+
       .rent {
         display: flex;
         justify-content: space-between;
@@ -56,6 +88,17 @@
         .rent-price {
 
         }
+      }
+    }
+
+    .rent-description {
+      font-size: 18px;
+      height: 40%;
+
+      div {
+        height: 50%;
+        box-sizing: border-box;
+        padding: 10px;
       }
     }
 
