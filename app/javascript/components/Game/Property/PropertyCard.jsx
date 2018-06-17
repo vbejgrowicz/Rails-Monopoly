@@ -129,7 +129,14 @@ class PropertyCard extends React.Component {
               {this.renderCard(item)}
             </div>
             <div className="back">
-              back!
+              <div className="property-data">
+                <div className="back-title-group">{item.title}</div>
+                <div className="mortgage-group">
+                  <div>mortgage value ${item.price_data.mortgage_value}</div>
+                  <div className="unmortgage-value">to unmortgage, pay ${item.price_data.mortgage_payoff}</div>
+                </div>
+                <div className="back-information">Card must be turned this side up if property is mortgaged.</div>
+              </div>
             </div>
           </div>
         </div>
