@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520234006) do
+ActiveRecord::Schema.define(version: 20180617154213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,16 @@ ActiveRecord::Schema.define(version: 20180520234006) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "buy_price", null: false
+    t.integer "mortgage_value", null: false
+    t.integer "mortgage_payoff", null: false
+    t.integer "rent"
+    t.integer "rent_with_set"
+    t.integer "rent_with_one"
+    t.integer "rent_with_two"
+    t.integer "rent_with_three"
+    t.integer "rent_with_four"
+    t.integer "rent_with_hotel"
+    t.integer "build_cost"
     t.index ["color_set_id"], name: "index_properties_on_color_set_id"
   end
 
