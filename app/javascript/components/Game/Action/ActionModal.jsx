@@ -13,7 +13,7 @@ class ActionModal extends React.Component {
         <div className="modal">
           <div className="contents">
             {actionSpace.is_property ? (
-              <PropertyCard />
+              <PropertyCard item={actionSpace} />
             ) : (
               <GameTile item={actionSpace} shouldShowTokens={false} />
             )}

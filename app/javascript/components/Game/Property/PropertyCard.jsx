@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 class PropertyCard extends React.Component {
   render() {
+    const { item } = this.props;
     return (
       <div className="property-card">
         <div className="property-data">
-          <div className="title-group">
+          <div className={`title-group property-color ${item.color}`}>
             <div className="title-deed">title deed</div>
-            <div className="title-name">north carolina avenue</div>
+            <div className="title-name">{item.title}</div>
           </div>
           <div className="rent-group">
             <div className="rent">
