@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class PropertyCard extends React.Component {
+  constructor() {
+    super();
+
+    this.renderCard = this.renderCard.bind(this);
+  }
+
   standardCard(item) {
     return (
       <div className="property-data">
@@ -93,11 +99,20 @@ class PropertyCard extends React.Component {
     );
   }
 
+  renderCard(item) {
+    if (item.color === 'black') {
+      return this.railroadCard(item);
+    } else if (item.color === 'white') {
+      return this.utilityCard(item);
+    }
+    return this.standardCard(item);
+  }
+
   render() {
     const { item } = this.props;
     return (
       <div className="property-card">
-        {this.standardCard(item)}
+        {this.renderCard(item)}
       </div>
     );
   }
