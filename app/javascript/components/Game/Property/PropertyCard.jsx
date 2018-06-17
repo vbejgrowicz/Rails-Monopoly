@@ -5,7 +5,10 @@ class PropertyCard extends React.Component {
   constructor() {
     super();
 
+    this.state = { flip: false };
+
     this.renderCard = this.renderCard.bind(this);
+    this.flip = this.flip.bind(this);
   }
 
   standardCard(item) {
@@ -103,6 +106,10 @@ class PropertyCard extends React.Component {
     );
   }
 
+  flip() {
+    this.setState({ flip: !this.state.flip });
+  }
+
   renderCard(item) {
     if (item.color === 'black') {
       return this.railroadCard(item);
@@ -115,8 +122,20 @@ class PropertyCard extends React.Component {
   render() {
     const { item } = this.props;
     return (
-      <div className="property-card">
-        {this.renderCard(item)}
+      <div>
+        <div className={`property-card flip-container ${this.state.flip ? 'flip' : ''}`}>
+          <div className="flipper">
+            <div className="front">
+              {this.renderCard(item)}
+            </div>
+            <div className="back">
+              back!
+            </div>
+          </div>
+        </div>
+        <div className="flip-link">
+          <span onClick={this.flip}>See Back</span>
+        </div>
       </div>
     );
   }
