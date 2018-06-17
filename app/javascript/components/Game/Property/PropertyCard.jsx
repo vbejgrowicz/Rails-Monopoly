@@ -9,6 +9,10 @@ class PropertyCard extends React.Component {
   }
 
   standardCard(item) {
+    const { rent, rent_with_set, rent_with_one, rent_with_two,
+      rent_with_three, rent_with_four, rent_with_hotel, build_cost,
+    } = item.price_data;
+
     return (
       <div className="property-data">
         <div className={`title-group property-color ${item.color}`}>
@@ -18,41 +22,41 @@ class PropertyCard extends React.Component {
         <div className="rent-group">
           <div className="rent">
             <div className="rent-label">Rent</div>
-            <div className="rent-price">$26</div>
+            <div className="rent-price">${rent}</div>
           </div>
           <div className="rent">
             <div className="rent-label">Rent with color set</div>
-            <div className="rent-price">$52</div>
+            <div className="rent-price">${rent_with_set}</div>
           </div>
           <div className="rent">
             <div className="rent-label">Rent with <i className="fa fa-home house" /></div>
-            <div className="rent-price">$130</div>
+            <div className="rent-price">${rent_with_one}</div>
           </div>
           <div className="rent">
             <div className="rent-label">Rent with <i className="fa fa-home house" /><i className="fa fa-home house" /></div>
-            <div className="rent-price">$390</div>
+            <div className="rent-price">${rent_with_two}</div>
           </div>
           <div className="rent">
             <div className="rent-label">Rent with <i className="fa fa-home house" /><i className="fa fa-home house" /><i className="fa fa-home house" /></div>
-            <div className="rent-price">$900</div>
+            <div className="rent-price">${rent_with_three}</div>
           </div>
           <div className="rent">
             <div className="rent-label">Rent with <i className="fa fa-home house" /><i className="fa fa-home house" /><i className="fa fa-home house" /><i className="fa fa-home house" /></div>
-            <div className="rent-price">$1100</div>
+            <div className="rent-price">${rent_with_four}</div>
           </div>
           <div className="rent">
             <div className="rent-label">Rent with <i className="fa fa-home hotel" /></div>
-            <div className="rent-price">$1275</div>
+            <div className="rent-price">${rent_with_hotel}</div>
           </div>
         </div>
         <div className="cost-group">
           <div className="cost">
             <div className="cost-label">Houses cost</div>
-            <div className="cost-price">$200 each</div>
+            <div className="cost-price">${build_cost} each</div>
           </div>
           <div className="cost">
             <div className="cost-label">Hotels cost</div>
-            <div className="cost-price">$200 each <span>(plus 4 houses)</span></div>
+            <div className="cost-price">${build_cost} each <span>(plus 4 houses)</span></div>
           </div>
         </div>
       </div>
