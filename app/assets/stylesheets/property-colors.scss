@@ -1,0 +1,28 @@
+@import 'colors';
+
+.property-color {
+  &.brown {
+    background-color: $tile-brown;
+  }
+  &.light-blue {
+    background-color: $tile-light-blue;
+  }
+  &.purple {
+    background-color: $tile-purple;
+  }
+  &.orange {
+    background-color: $tile-orange;
+  }
+  &.red {
+    background-color: $tile-red;
+  }
+  &.yellow {
+    background-color: $tile-yellow;
+  }
+  &.green {
+    background-color: $tile-green;
+  }
+  &.dark-blue {
+    background-color: $tile-dark-blue;
+  }
+}

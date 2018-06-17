@@ -136,35 +136,11 @@
         width: 100px;
         height: 150px;
 
-        .color {
+        .property-color {
           width: 100%;
           height: 15%;
           border-bottom: 1px solid black;
 
-          &.brown {
-            background-color: $tile-brown;
-          }
-          &.light-blue {
-            background-color: $tile-light-blue;
-          }
-          &.purple {
-            background-color: $tile-purple;
-          }
-          &.orange {
-            background-color: $tile-orange;
-          }
-          &.red {
-            background-color: $tile-red;
-          }
-          &.yellow {
-            background-color: $tile-yellow;
-          }
-          &.green {
-            background-color: $tile-green;
-          }
-          &.dark-blue {
-            background-color: $tile-dark-blue;
-          }
           &.white, &.black, &.no-color {
             border-bottom: none;
             height: 5%;

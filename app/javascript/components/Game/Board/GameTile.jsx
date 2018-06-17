@@ -60,7 +60,7 @@ class GameTile extends React.Component {
       <div className={item.position % 10 === 0 ? 'corner' : 'tile'}>
         <div className={`tile-data ${isEndSpace ? 'end-space' : ''}`}>
           {shouldShowTokens && <TokenSpaces item={item} />}
-          <div className={`color ${item.color || 'no-color'}`} />
+          <div className={`property-color ${item.color || 'no-color'}`} />
           {this.renderTitle()}
           <div className={`image ${item.category}`} />
           {this.renderDescription()}
