@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlayerCard from './PlayerCard';
 import PlayerActions from './PlayerActions';
+import GameActions from './GameActions';
 
 class GameDock extends React.Component {
   render() {
@@ -11,10 +12,8 @@ class GameDock extends React.Component {
         <div className="players">
           {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
         </div>
-          <div className="game-actions">
-            <button className="action-btn">Game Details</button>
-          </div>
         <div className="actions-group">
+          <GameActions />
           <PlayerActions />
         </div>
       </div>
