@@ -75,6 +75,24 @@
 
   .player-actions {
     display: inline-block;
+
+    .action-btn {
+      background-color: $red;
+    }
+  }
+
+  .game-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .action-btn {
+      margin: 10px;
+      background-color: rebeccapurple;
+    }
+  }
+
+  .player-actions, .game-actions {
     height: 130px;
     width: 170px;
     background-color: #B0E5FB;
@@ -100,9 +118,7 @@
       font-size: 18px;
       padding: 5px;
       border-radius: 5px;
-      background-color: $red;
       color: white;
-      margin-bottom: 5px;
       cursor: pointer;
     }
 
@@ -112,6 +128,10 @@
 
     .move {
       width: 120px;
+    }
+
+    .action-text {
+      margin: 5px;
     }
   }
 }
