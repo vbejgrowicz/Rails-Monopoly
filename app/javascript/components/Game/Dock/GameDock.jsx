@@ -11,7 +11,12 @@ class GameDock extends React.Component {
         <div className="players">
           {this.props.players.map(player => <PlayerCard key={player.id} player={player} />)}
         </div>
-        <PlayerActions />
+        <div style={{ display: 'flex' }}>
+          <div className="game-actions">
+            <button className="action-btn">Game Details</button>
+          </div>
+          <PlayerActions />
+        </div>
       </div>
     );
   }
