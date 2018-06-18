@@ -85,11 +85,6 @@
     color: $red;
     position: relative;
     border-radius: 5px;
-    visibility: hidden;
-
-    &.active {
-      visibility: visible;
-    }
 
     .dice-group {
       text-align: center;

@@ -78,14 +78,18 @@ class PlayerActions extends React.Component {
   render() {
     const { isActivePlayer, currentTurn } = this.props;
     const { roll } = currentTurn;
-    return (
-      <div className={`player-actions ${isActivePlayer ? 'active' : ''}`}>
+    return isActivePlayer ? (
+      <div className="player-actions">
         <div className="dice-group">
           <div className={`die ${roll.id ? dieMapper[roll.die_one] : 'one'}`} />
           <div className={`die ${roll.id ? dieMapper[roll.die_two] : 'one'}`} />
         </div>
         {this.renderActionButton()}
-        <div>It's Your Turn!</div>
+        <div className="action-text">It's Your Turn!</div>
+      </div>
+    ) : (
+      <div className="player-actions">
+        <div className="action-text">It's Not Your Turn!</div>
       </div>
     );
   }
