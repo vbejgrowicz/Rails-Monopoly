@@ -20,7 +20,8 @@ class Api::GamesController < ApplicationController
       return render json: { game: @game.slice(:id, :host_id, :available_tokens) }
     end
     validate_player!
-    render json: { game: GamePresenter.new(@game, detailed: true) }
+    @players = @game.ordered_players.includes(:user, :token, :space, :rolls)
+    render json: { game: GamePresenter.new(@game, detailed: true, players: @players) }
   end
 
   def update
