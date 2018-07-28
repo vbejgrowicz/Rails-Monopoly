@@ -5,6 +5,8 @@ class SpacePresenter < ApplicationPresenter
       id: @object.id,
       position: @object.position,
       category: create_category,
+      event_id: @object.event_id,
+      property_id: @object.property_id,
       is_event: false,
       is_property: false,
     }
