@@ -20,7 +20,7 @@ class PropertyCard extends React.Component {
       <div className="property-data">
         <div className={`title-group property-color ${item.color}`}>
           <div className="title-deed">title deed</div>
-          <div className="title-name">{item.title}</div>
+          <div className="title-name">{item.name}</div>
         </div>
         <div className="rent-group">
           <div className="rent">
@@ -70,7 +70,7 @@ class PropertyCard extends React.Component {
     return (
       <div className="property-data">
         <div className={`property-image ${item.category}`} />
-        <div className="railroad-name">{item.title}</div>
+        <div className="railroad-name">{item.name}</div>
         <div className="rent-group railroad">
           <div className="rent">
             <div className="rent-label">RENT</div>
@@ -97,7 +97,7 @@ class PropertyCard extends React.Component {
     return (
       <div className="property-data">
         <div className={`property-image ${item.category}`} />
-        <div className="utility-name">{item.title}</div>
+        <div className="utility-name">{item.name}</div>
         <div className="rent-description">
           <div>If one Utility is owned, rent is 4 times amount shown on dice.</div>
           <div>If both Utilities are owned, rent is 10 times amount shown on dice.</div>
@@ -130,7 +130,7 @@ class PropertyCard extends React.Component {
             </div>
             <div className="back">
               <div className="property-data">
-                <div className="back-title-group">{item.title}</div>
+                <div className="back-title-group">{item.name}</div>
                 <div className="mortgage-group">
                   <div>mortgage value ${item.price_data.mortgage_value}</div>
                   <div className="unmortgage-value">to unmortgage, pay ${item.price_data.mortgage_payoff}</div>

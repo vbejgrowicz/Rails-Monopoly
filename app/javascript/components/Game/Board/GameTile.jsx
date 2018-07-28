@@ -43,9 +43,9 @@ class GameTile extends React.Component {
   }
 
   renderDescription() {
-    const { item } = this.props;
-    if (item.color) {
-      return (<div className="description">${item.price_data.buy_price}</div>);
+    const { item, priceData } = this.props;
+    if (item.is_property) {
+      return (<div className="description">${priceData.buy_price}</div>);
     }
     if (specialDescriptions.indexOf(item.category) > -1) {
       return (<div className={`description ${item.category}`}>{item.description}</div>);
@@ -73,6 +73,7 @@ class GameTile extends React.Component {
 GameTile.propTypes = {
   item: PropTypes.object.isRequired,
   currentTurn: PropTypes.object.isRequired,
+  priceData: PropTypes.object.isRequired,
   shouldShowTokens: PropTypes.bool,
 };
 
@@ -80,8 +81,16 @@ GameTile.defaultProps = {
   shouldShowTokens: true,
 };
 
-const mapStateToProps = ({ turns }) => ({
+const getPriceData = (properties, item) => {
+  if (item.is_property) {
+    return properties.find(prop => item.property_id === prop.id).price_data;
+  }
+  return {};
+};
+
+const mapStateToProps = ({ turns, properties }, ownProps) => ({
   currentTurn: turns.items[0] || {},
+  priceData: getPriceData(properties.items, ownProps.item),
 });
 
 export default connect(mapStateToProps, null)(GameTile);

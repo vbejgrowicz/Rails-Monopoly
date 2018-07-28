@@ -7,13 +7,13 @@ import PropertyCard from '../Property/PropertyCard';
 
 class ActionModal extends React.Component {
   render() {
-    const { actionSpace, shouldShow } = this.props;
+    const { actionSpace, shouldShow, properties } = this.props;
     return shouldShow && (
       <div className="outer-modal action">
         <div className="modal">
           <div className="contents">
             {actionSpace.is_property ? (
-              <PropertyCard item={actionSpace} />
+              <PropertyCard item={properties.find(prop => prop.id === actionSpace.property_id)} />
             ) : (
               <GameTile item={actionSpace} shouldShowTokens={false} />
             )}
@@ -28,9 +28,10 @@ class ActionModal extends React.Component {
 ActionModal.propTypes = {
   shouldShow: PropTypes.bool.isRequired,
   actionSpace: PropTypes.object.isRequired,
+  properties: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ turns, activeGame, spaces, currentUser }) => {
+const mapStateToProps = ({ turns, activeGame, spaces, properties, currentUser }) => {
   const currentTurn = turns.items[0];
   const currentPlayer = activeGame.players.find(player => player.user_id === currentUser.id);
   const isNotYourTurn = currentTurn.player.id !== currentPlayer.id;
@@ -41,12 +42,14 @@ const mapStateToProps = ({ turns, activeGame, spaces, currentUser }) => {
     return {
       shouldShow: false,
       actionSpace: {},
+      properties: [],
     };
   }
 
   return {
     shouldShow: true,
     actionSpace: spaces.items.find(space => space.id === currentTurn.end_space_id),
+    properties: properties.items,
   };
 };
 
