@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { get, apiRequest } from '../../utils/fetch';
 import { fetchGameRequest, fetchGameReceived, fetchSpacesRequest,
-  fetchSpacesReceived, fetchTurnsRequest, fetchTurnsReceived,
+  fetchSpacesReceived, fetchTurnsRequest, fetchTurnsReceived, fetchPropertiesRequest,
+  fetchPropertiesReceived,
 } from '../../actions';
 
 class GameLoader extends React.Component {
@@ -15,6 +16,7 @@ class GameLoader extends React.Component {
       loadingSpaces: true,
       loadingGame: true,
       loadingTurns: true,
+      loadingProperties: true,
     };
   }
 
@@ -41,14 +43,17 @@ class GameLoader extends React.Component {
         this.props.fetchTurns().then(({ success: turnSuccess }) => {
           this.setState({ loadingTurns: !turnSuccess });
         });
+        this.props.fetchProperties().then(({ success: propertySuccess }) => {
+          this.setState({ loadingProperties: !propertySuccess });
+        });
       }
     });
   }
 
   render() {
     const { children } = this.props;
-    const { loadingSpaces, loadingGame, loadingTurns } = this.state;
-    const loading = loadingGame || loadingSpaces || loadingTurns;
+    const { loadingSpaces, loadingGame, loadingTurns, loadingProperties } = this.state;
+    const loading = loadingGame || loadingSpaces || loadingTurns || loadingProperties;
     return loading ? <div>Loading...</div> : <div>{children}</div>;
   }
 }
@@ -59,6 +64,7 @@ GameLoader.propTypes = {
   fetchGame: PropTypes.func.isRequired,
   fetchSpaces: PropTypes.func.isRequired,
   fetchTurns: PropTypes.func.isRequired,
+  fetchProperties: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ activeGame }) => ({
@@ -91,6 +97,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const getTurns = () => get(`/api/games/${gameId}/turns`);
     return apiRequest(getTurns, (json) => {
       dispatch(fetchTurnsReceived(json.turns));
+    });
+  },
+  fetchProperties: async () => {
+    const gameId = ownProps.match.params.id;
+    dispatch(fetchPropertiesRequest());
+    const getProperties = () => get(`/api/games/${gameId}/properties`);
+    return apiRequest(getProperties, (json) => {
+      dispatch(fetchPropertiesReceived(json.properties));
     });
   },
 });
