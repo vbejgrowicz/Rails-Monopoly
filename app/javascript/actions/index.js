@@ -4,3 +4,4 @@ export * from './currentUser';
 export * from './spaces';
 export * from './turns';
 export * from './broadcasts';
+export * from './properties';
