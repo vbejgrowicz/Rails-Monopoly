@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :games, only: [:new, :index, :create, :show, :update] do
         resources :players, only: [:create]
         resources :turns, only: [:index, :update]
+        resources :properties, only: [:index]
       end
 
       resources :turns, only: [] do
