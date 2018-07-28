@@ -8,6 +8,8 @@ class PropertyPresenter < ApplicationPresenter
     {
       id: @property.id,
       name: @property.name,
+      color: @property.color_set.color,
+      category: create_category,
       price_data: price_data,
       owner_id: @property.deed_for(@game).owner_id
     }
@@ -27,5 +29,14 @@ class PropertyPresenter < ApplicationPresenter
       rent_with_hotel: @property.rent_with_hotel,
       build_cost: @property.build_cost,
     }
+  end
+
+  def create_category
+    return 'railroad' if is_railroad?
+    @property.name.gsub(' ', '-').delete('.&').downcase
+  end
+
+  def is_railroad?
+    @property.name.include?('Railroad') || @property.name == 'Short Line'
   end
 end
