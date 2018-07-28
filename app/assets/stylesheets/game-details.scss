@@ -1,17 +1,40 @@
 .game-details {
+
   .outer-modal {
+
     .modal {
       left: 10%;
       right: 10%;
       top: 10%;
       bottom: 10%;
-      background-color: rebeccapurple;
+      background-color: white;
       display: flex;
 
       .game-details-left {
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         width: 75%;
+
+        .property-color {
+
+          &.black {
+            background-color: black;
+            color: white;
+          }
+
+          &.white {
+            background-color: white;
+          }
+
+          &.owned {
+
+          }
+          
+          &.unowned {
+            opacity: 0.5;
+          }
+        }
       }
 
       .game-details-right {

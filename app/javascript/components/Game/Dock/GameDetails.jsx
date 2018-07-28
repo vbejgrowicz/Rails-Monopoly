@@ -12,7 +12,7 @@ class GameDetails extends React.Component {
             <div className="game-details-left">
               {properties.map((prop) => {
                 return (
-                  <div key={prop.id}>{prop.name}</div>
+                  <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'}`} key={prop.id}>{prop.name}</div>
                 );
               })}
             </div>
