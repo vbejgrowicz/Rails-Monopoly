@@ -18,7 +18,10 @@ class PurchaseProperty
   private
 
   def commit_purchase(deed)
-    deed.update!(owner_id: @turn_action.turn.player_id)
+    ActiveRecord::Base.transaction do
+      deed.update!(owner_id: @turn_action.turn.player_id)
+      @turn_action.game_transaction.update!(completed: true)
+    end
   end
 
   def validate_deed_is_not_owned!
