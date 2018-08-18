@@ -4,8 +4,6 @@ class Player < ApplicationRecord
   validates :token_id, uniqueness: { scope: :game_id }
   validates :space_id, uniqueness: { scope: [:game_id, :user_id] }
 
-  validate :game_has_six_or_fewer_players
-
   belongs_to :game
   belongs_to :user
   belongs_to :token
@@ -28,13 +26,5 @@ class Player < ApplicationRecord
 
   def move_to(end_space_id)
     update!(space_id: end_space_id)
-  end
-
-  private
-
-  def game_has_six_or_fewer_players
-    if game.players.count === 6
-      errors[:base] << "Game can't have more than 6 players"
-    end
   end
 end

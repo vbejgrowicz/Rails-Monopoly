@@ -5,7 +5,7 @@ class Api::PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.create!(game_id: params[:game_id], token_id: params[:token_id], user_id: current_user.id)
+    @player = CreatePlayer.run(params[:game_id], params[:token_id], current_user.id)
     render json: { player: PlayerPresenter.new(@player) }
   end
 end
