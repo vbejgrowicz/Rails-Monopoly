@@ -3,23 +3,50 @@
   .outer-modal {
 
     .modal {
-      left: 10%;
-      right: 10%;
-      top: 10%;
-      bottom: 10%;
-      background-color: white;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #4da6ec;
+      box-shadow: 1px 1px 7px 3px #545454;
       display: flex;
+      width: 1000px;
+      height: 500px;
+      padding: 10px;
 
       .game-details-left {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         width: 75%;
+        height: 75%;
 
+        .details-color-set {
+          width: 20%;
+
+          &:nth-child(even) {
+            height: 42%;
+          }
+
+          &:nth-child(odd) {
+            height: 58%;
+          }
+        }
         .property-color {
+          margin-bottom: 10px;
+          padding: 10px 0px;
+          border-radius: 3px;
+          width: 95%;
+
+          &:last-child {
+            margin-bottom: 0px;
+          }
 
           &.black {
             background-color: black;
+            color: white;
+          }
+
+          &.brown, &.dark-blue {
             color: white;
           }
 
@@ -30,9 +57,9 @@
           &.owned {
 
           }
-          
+
           &.unowned {
-            opacity: 0.5;
+            // opacity: 0.5;
           }
         }
       }
