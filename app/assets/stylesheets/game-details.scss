@@ -76,9 +76,9 @@
           margin: 0 auto;
           justify-content: center;
           margin-bottom: 10px;
-          background: rebeccapurple;
           font-size: 12px;
-          color: white;
+          box-shadow: 1px 1px 1px 1px #3a3a3a;
+          border-radius: 5px;
 
           .detail-data {
             align-self: center;
