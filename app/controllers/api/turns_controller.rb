@@ -1,6 +1,6 @@
 class Api::TurnsController < ApplicationController
   def index
-    @turns = Turn.where(game_id: params[:game_id]).order(id: :desc).limit(10)
+    @turns = Turn.includes(:player, :roll).where(game_id: params[:game_id]).order(id: :desc).limit(10)
     render json: { turns: @turns.map { |turn| TurnPresenter.new(turn) } }
   end
 

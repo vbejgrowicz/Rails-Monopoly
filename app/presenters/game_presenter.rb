@@ -1,7 +1,8 @@
 class GamePresenter < ApplicationPresenter
-  def initialize(object, detailed: false)
+  def initialize(object, detailed: false, players: nil)
     @object = object
     @detailed = detailed
+    @players = players
   end
 
   def as_json(*)
@@ -29,7 +30,7 @@ class GamePresenter < ApplicationPresenter
     {
       started_at: @object.started_at,
       locked_at: @object.locked_at,
-      players: @object.ordered_players.map { |player| PlayerPresenter.new(player) }
+      players: @players.map { |player| PlayerPresenter.new(player) }
     }
   end
 end

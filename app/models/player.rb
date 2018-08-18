@@ -23,7 +23,7 @@ class Player < ApplicationRecord
   }
 
   def first_roll
-    Roll.find_by(player_id: id, first_roll: true) || {}
+    rolls.find { |roll| roll.first_roll == true } || {}
   end
 
   def move_to(end_space_id)
