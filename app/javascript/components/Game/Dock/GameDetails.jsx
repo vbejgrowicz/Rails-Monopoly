@@ -11,21 +11,34 @@ class GameDetails extends React.Component {
     }, {});
     return (
       <div className="game-details">
-        <div className="outer-modal">
-          <div className="modal">
+        <div className="outer-modal" onClick={this.props.onClose}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="game-details-left">
-              {Object.keys(colorMapper).map(color => (
-                <div className="details-color-set">
-                  {colorMapper[color].map(prop => (
-                    <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'}`} key={prop.id}>{prop.name}</div>
-                  ))}
+              <div className="property-details">
+                {Object.keys(colorMapper).map(color => (
+                  <div className="details-color-set" key={color}>
+                    {colorMapper[color].map(prop => (
+                      <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'}`} key={prop.id}>{prop.name}</div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <div className="detail-all">
+                <div className="detail-buttons">
+                  <button>Trade</button>
+                  <button>Mortgage</button>
                 </div>
-              ))}
+                <div className="detail-info">
+                  <div>Houses Left</div>
+                  <div>Hotels Left</div>
+                  <div>Game Time: 28734293742</div>
+                </div>
+              </div>
             </div>
             <div className="game-details-right">
               {players.map(player => (
                 <div className={`player-detail player-color ${player.token}`} key={player.id}>
-                  <div className={`token ${player.token}`}></div>
+                  <div className={`token ${player.token}`} />
                   <div className="detail-data">
                     <div>{player.username}</div>
                     <div>$$MONEY$$</div>
@@ -43,6 +56,7 @@ class GameDetails extends React.Component {
 GameDetails.propTypes = {
   properties: PropTypes.array.isRequired,
   players: PropTypes.array.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ properties, activeGame }) => ({
