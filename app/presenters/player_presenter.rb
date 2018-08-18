@@ -15,6 +15,7 @@ class PlayerPresenter < ApplicationPresenter
       roll: @object.first_roll.slice(:id, :player_id, :die_one, :die_two),
       position: @object.space.position,
       space_id: @object.space_id,
+      money: @object.money,
     }
   end
 

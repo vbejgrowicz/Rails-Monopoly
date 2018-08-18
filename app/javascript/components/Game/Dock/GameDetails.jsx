@@ -41,7 +41,7 @@ class GameDetails extends React.Component {
                   <div className={`token ${player.token}`} />
                   <div className="detail-data">
                     <div>{player.username}</div>
-                    <div>$$MONEY$$</div>
+                    <div>${player.money}</div>
                   </div>
                 </div>
               ))}
