@@ -5,23 +5,27 @@ import { connect } from 'react-redux';
 class GameDetails extends React.Component {
   render() {
     const { properties, players } = this.props;
+    const colorMapper = properties.reduce((acc, el) => {
+      acc[el.color] = (acc[el.color] || []).concat(el);
+      return acc;
+    }, {});
     return (
       <div className="game-details">
         <div className="outer-modal">
           <div className="modal">
             <div className="game-details-left">
-              {properties.map((prop) => {
-                return (
-                  <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'}`} key={prop.id}>{prop.name}</div>
-                );
-              })}
+              {Object.keys(colorMapper).map(color => (
+                <div className="details-color-set">
+                  {colorMapper[color].map(prop => (
+                    <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'}`} key={prop.id}>{prop.name}</div>
+                  ))}
+                </div>
+              ))}
             </div>
             <div className="game-details-right">
-              {players.map((player) => {
-                return (
-                  <div key={player.id}>{player.username}</div>
-                );
-              })}
+              {players.map(player => (
+                <div key={player.id}>{player.username}</div>
+              ))}
             </div>
           </div>
         </div>
