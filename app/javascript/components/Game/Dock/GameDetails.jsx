@@ -24,7 +24,7 @@ class GameDetails extends React.Component {
             </div>
             <div className="game-details-right">
               {players.map(player => (
-                <div className="player-detail" key={player.id}>
+                <div className={`player-detail player-color ${player.token}`} key={player.id}>
                   <div className={`token ${player.token}`}></div>
                   <div className="detail-data">
                     <div>{player.username}</div>
