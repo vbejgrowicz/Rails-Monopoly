@@ -38,7 +38,7 @@ class Player extends React.Component {
     return (
       <div className="player-data" key={player.user_id}>
         <div className={`token ${player.token}`}>
-          <span className="token-tooltip">{player.username}</span>
+          <span className={`token-tooltip player-color ${player.token}`}>{player.username}</span>
         </div>
         {gameLocked && (
           <div className="roll-group">

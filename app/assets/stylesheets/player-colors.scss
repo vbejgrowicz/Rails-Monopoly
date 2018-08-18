@@ -1,0 +1,43 @@
+@import 'colors';
+
+.player-color {
+  &.boot {
+    background-color: $player-boot;
+    color: black;
+  }
+
+  &.car {
+    background-color: $player-car;
+    color: black;
+  }
+
+  &.cat {
+    background-color: $player-cat;
+    color: black;
+  }
+
+  &.dog {
+    background-color: $player-dog;
+    color: black;
+  }
+
+  &.hat {
+    background-color: $player-hat;
+    color: black;
+  }
+
+  &.ship {
+    background-color: $player-ship;
+    color: black;
+  }
+
+  &.thimble {
+    background-color: $player-thimble;
+    color: black;
+  }
+
+  &.wheelbarrow {
+    background-color: $player-wheelbarrow;
+    color: black;
+  }
+}

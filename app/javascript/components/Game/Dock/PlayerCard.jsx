@@ -7,7 +7,7 @@ class PlayerCard extends React.Component {
     const { token, username, id } = this.props.player;
     const { activePlayerId } = this.props;
     return (
-      <div className={`player-card ${activePlayerId === id ? 'active' : ''}`}>
+      <div className={`player-card player-color ${token} ${activePlayerId === id ? 'active' : ''}`}>
         <div className={`token ${token}`} />
         <div className="player-name">{username}</div>
         <div className="player-money">$1500</div>

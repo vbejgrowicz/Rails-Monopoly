@@ -30,31 +30,6 @@
       border-bottom: none;
     }
 
-    &:nth-child(1) {
-      background-color: $player-one;
-      color: white;
-    }
-    &:nth-child(2) {
-      background-color: $player-two;
-      color: white;
-    }
-    &:nth-child(3) {
-      background-color: $player-three;
-      color: white;
-    }
-    &:nth-child(4) {
-      background-color: $player-four;
-      color: black;
-    }
-    &:nth-child(5) {
-      background-color: $player-five;
-      color: black;
-    }
-    &:nth-child(6) {
-      background-color: $player-six;
-      color: black;
-    }
-
     .token {
       width: 75px;
       height: 75px;
