@@ -41,3 +41,39 @@
     color: black;
   }
 }
+
+.player-border-color {
+  border: 3px solid transparent;
+
+  &.boot {
+    border-color: $player-boot;
+  }
+
+  &.car {
+    border-color: $player-car;
+  }
+
+  &.cat {
+    border-color: $player-cat;
+  }
+
+  &.dog {
+    border-color: $player-dog;
+  }
+
+  &.hat {
+    border-color: $player-hat;
+  }
+
+  &.ship {
+    border-color: $player-ship;
+  }
+
+  &.thimble {
+    border-color: $player-thimble;
+  }
+
+  &.wheelbarrow {
+    border-color: $player-wheelbarrow;
+  }
+}

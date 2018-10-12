@@ -18,7 +18,7 @@ class GameDetails extends React.Component {
                 {Object.keys(colorMapper).map(color => (
                   <div className="details-color-set" key={color}>
                     {colorMapper[color].map(prop => (
-                      <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'}`} key={prop.id}>{prop.name}</div>
+                      <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'} ${'player-border-color ' + (players.find(player => player.id === prop.owner_id) || {}).token}`} key={prop.id}>{prop.name}</div>
                     ))}
                   </div>
                 ))}
