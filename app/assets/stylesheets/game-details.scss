@@ -60,6 +60,10 @@
             &.unowned {
               opacity: 0.3;
             }
+
+            &.invisible {
+              visibility: hidden;
+            }
           }
         }
 

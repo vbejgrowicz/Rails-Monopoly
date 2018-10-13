@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 class PropertyTile extends React.Component {
   render() {
-    const { color, owner, name } = this.props;
+    const { color, owner, name, visible } = this.props;
     const propColor = `property-color ${color}`;
     const ownerClass = owner.id ? `player-border-color ${owner.token}` : 'unowned';
     return (
-      <div className={`${propColor} ${ownerClass}`}>
+      <div className={`${propColor} ${ownerClass} ${!visible ? 'invisible' : ''}`}>
         {name}
       </div>
     );
@@ -16,12 +16,9 @@ class PropertyTile extends React.Component {
 
 PropertyTile.propTypes = {
   color: PropTypes.string.isRequired,
-  owner: PropTypes.object,
   name: PropTypes.string.isRequired,
-};
-
-PropertyTile.defaultProps = {
-  owner: {},
+  owner: PropTypes.object.isRequired,
+  visible: PropTypes.bool.isRequired,
 };
 
 export default PropertyTile;

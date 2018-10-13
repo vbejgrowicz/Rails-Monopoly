@@ -38,8 +38,9 @@ class GameDetails extends React.Component {
                 {Object.keys(colorMapper).map(color => (
                   <div className="details-color-set" key={color}>
                     {colorMapper[color].map((prop) => {
-                      const owner = players.find(player => player.id === prop.owner_id);
-                      return <PropertyTile key={prop.id} name={prop.name} color={prop.color} owner={owner} />
+                      const owner = players.find(player => player.id === prop.owner_id) || {};
+                      const shouldDisplay = !!(Object.values(this.state.activePlayers).every(val => val === false) || this.state.activePlayers[owner.id]);
+                      return <PropertyTile visible={shouldDisplay} key={prop.id} name={prop.name} color={prop.color} owner={owner} />
                     })}
                   </div>
                 ))}
