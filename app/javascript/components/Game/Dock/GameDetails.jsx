@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropertyTile from './PropertyTile';
 
 class GameDetails extends React.Component {
   render() {
@@ -17,9 +18,10 @@ class GameDetails extends React.Component {
               <div className="property-details">
                 {Object.keys(colorMapper).map(color => (
                   <div className="details-color-set" key={color}>
-                    {colorMapper[color].map(prop => (
-                      <div className={`property-color ${prop.color} ${prop.owner_id ? 'owned' : 'unowned'} ${'player-border-color ' + (players.find(player => player.id === prop.owner_id) || {}).token}`} key={prop.id}>{prop.name}</div>
-                    ))}
+                    {colorMapper[color].map((prop) => {
+                      const owner = players.find(player => player.id === prop.owner_id);
+                      return <PropertyTile key={prop.id} name={prop.name} color={prop.color} owner={owner} />
+                    })}
                   </div>
                 ))}
               </div>
