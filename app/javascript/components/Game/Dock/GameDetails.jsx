@@ -4,6 +4,25 @@ import { connect } from 'react-redux';
 import PropertyTile from './PropertyTile';
 
 class GameDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    const activePlayers = props.players.reduce((acc, el) => {
+      acc[el.id] = false;
+      return acc;
+    }, {});
+
+    this.state = { activePlayers };
+  }
+
+  setActive(playerId) {
+    this.setState({
+      activePlayers: {
+        ...this.state.activePlayers,
+        [playerId]: !this.state.activePlayers[playerId],
+      },
+    });
+  }
+
   render() {
     const { properties, players } = this.props;
     const colorMapper = properties.reduce((acc, el) => {
@@ -39,7 +58,11 @@ class GameDetails extends React.Component {
             </div>
             <div className="game-details-right">
               {players.map(player => (
-                <div className={`player-detail player-color ${player.token}`} key={player.id}>
+                <div
+                  className={`player-detail player-color ${player.token} ${this.state.activePlayers[player.id] && 'selected'}`}
+                  key={player.id}
+                  onClick={() => this.setActive(player.id)}
+                >
                   <div className={`token ${player.token}`} />
                   <div className="detail-data">
                     <div>{player.username}</div>
