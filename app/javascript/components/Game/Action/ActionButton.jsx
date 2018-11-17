@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { put, apiRequest } from '../../../utils/fetch';
-import { updateTurnActionRequest, updateTurnActionReceived } from '../../../actions';
+import { updateTurnActionRequest, updateTurnActionReceived, updatePropertyOwner, updatePlayerMoney } from '../../../actions';
 
 class ActionButton extends React.Component {
   render() {
@@ -38,6 +38,11 @@ const mapDispatchToProps = dispatch => ({
     const updateTurnAction = () => put(`/api/turns/${turn_id}/turn_actions/${id}`);
     return apiRequest(updateTurnAction, (json) => {
       dispatch(updateTurnActionReceived(json.turn_action));
+      if (json.buy_data) {
+        const { player_id, money, property_id } = json.buy_data;
+        dispatch(updatePropertyOwner(player_id, property_id));
+        dispatch(updatePlayerMoney(player_id, money));
+      }
     });
   },
 });
