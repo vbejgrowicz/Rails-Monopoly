@@ -20,6 +20,13 @@ export default function activeGame(state = initialState, action) {
     return player;
   };
 
+  const updatePlayerMoney = (player) => {
+    if (player.id === action.payload.player_id) {
+      return { ...player, money: action.payload.money };
+    }
+    return player;
+  };
+
   switch (action.type) {
     case 'FETCH_GAME_REQUEST':
       return {
@@ -70,6 +77,11 @@ export default function activeGame(state = initialState, action) {
         return { ...state, players: state.players.map(updatePlayer) };
       }
       return state;
+    case 'UPDATE_PLAYER_MONEY':
+      return {
+        ...state,
+        players: state.players.map(updatePlayerMoney),
+      };
     case 'SET_RELOAD_TURNS':
       return { ...state, shouldReloadTurns: true };
     default:

@@ -66,6 +66,11 @@ const setReloadTurns = () => ({
   type: 'SET_RELOAD_TURNS',
 });
 
+const updatePlayerMoney = (player_id, money) => ({
+  type: 'UPDATE_PLAYER_MONEY',
+  payload: { player_id, money },
+});
+
 export {
   fetchGamesRequest,
   fetchGamesReceived,
@@ -82,4 +87,5 @@ export {
   fetchPlayerRequest,
   fetchPlayerReceived,
   setReloadTurns,
+  updatePlayerMoney,
 };
