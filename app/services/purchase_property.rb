@@ -1,4 +1,6 @@
 class PurchaseProperty
+  attr_reader :player, :property
+
   def self.run(turn_action)
     new(turn_action).run
   end
@@ -14,6 +16,7 @@ class PurchaseProperty
     validate_deed_is_not_owned!
     validate_purchase_power!
     commit_purchase!
+    self
   end
 
   private
