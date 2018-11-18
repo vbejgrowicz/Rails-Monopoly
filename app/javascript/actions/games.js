@@ -57,7 +57,7 @@ const fetchPlayerRequest = () => ({
   type: 'FETCH_PLAYER_REQUEST',
 });
 
-const fetchPlayerReceived = (player) => ({
+const fetchPlayerReceived = player => ({
   type: 'FETCH_PLAYER_RECEIVED',
   payload: { player },
 });

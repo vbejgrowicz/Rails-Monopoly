@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { dieMapper } from '../../../utils/helpers';
 import { get, put, apiRequest } from '../../../utils/fetch';
-import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest, fetchPlayerReceived,
- fetchTurnsRequest, fetchTurnsReceived, receiveBroadcastedTurnData, receiveBroadcastedPlayerData,
 import { getSubscription } from '../../../utils/cable';
+import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest,
+  fetchPlayerReceived, fetchTurnsRequest, fetchTurnsReceived,
 } from '../../../actions';
 
 class PlayerActions extends React.Component {
@@ -24,7 +24,7 @@ class PlayerActions extends React.Component {
 
   rollDice = async () => {
     const { currentTurn } = this.props;
-    const updateTurn = await this.props.updateTurn('roll', currentTurn.id)
+    const updateTurn = await this.props.updateTurn('roll', currentTurn.id);
     if (updateTurn.success) {
       this.turnsChannel.send(updateTurn.json);
     }
@@ -58,7 +58,8 @@ class PlayerActions extends React.Component {
       return (
         <button className="action-btn roll" onClick={this.rollDice}>Roll</button>
       );
-    } else if (currentTurn.end_space_id !== activePlayer.space_id) {
+    }
+    if (currentTurn.end_space_id !== activePlayer.space_id) {
       return (
         <button className="action-btn move" onClick={this.movePlayer}>Move Token</button>
       );
@@ -95,13 +96,14 @@ PlayerActions.propTypes = {
   fetchPlayer: PropTypes.func.isRequired,
   fetchTurns: PropTypes.func.isRequired,
   activePlayer: PropTypes.object.isRequired,
+  cable: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ cable, currentUser, turns, activeGame }) => ({
   isActivePlayer: currentUser.id === turns.items[0].player.user_id,
   activePlayer: activeGame.players.find(player => player.id === turns.items[0].player.id),
   currentTurn: turns.items[0],
-  cable: cable,
+  cable,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

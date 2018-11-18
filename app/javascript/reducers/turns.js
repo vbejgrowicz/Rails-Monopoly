@@ -56,7 +56,8 @@ export default function turns(state = { isFetching: true, items: [] }, action) {
     case 'RECEIVE_BROADCASTED_TURN_DATA':
       if (action.payload.turn) {
         return { ...state, items: state.items.map(updateHandler) };
-      } else if (action.payload.turns) {
+      }
+      if (action.payload.turns) {
         return { ...state, items: action.payload.turns };
       }
       return state;

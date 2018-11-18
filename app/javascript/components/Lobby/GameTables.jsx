@@ -11,6 +11,7 @@ class GameTables extends React.Component {
 
     this.enterGame = this.enterGame.bind(this);
   }
+
   componentWillMount() {
     this.props.fetchGames();
   }

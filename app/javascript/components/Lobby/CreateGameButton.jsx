@@ -15,7 +15,7 @@ class CreateGameButton extends React.Component {
   }
 
   toggleModal() {
-    this.setState({ showModal: !this.state.showModal });
+    this.setState(prevState => ({ showModal: !prevState.showModal }));
   }
 
   createGame(params) {
@@ -27,7 +27,7 @@ class CreateGameButton extends React.Component {
     return (
       <div className="header-create">
         <button className="create" onClick={this.toggleModal}>Create New Game</button>
-        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={(params) => this.createGame(params)} gameId="new" />}
+        {this.state.showModal && <TokenSelection onClickClose={this.toggleModal} onSubmit={params => this.createGame(params)} gameId="new" />}
       </div>
     );
   }

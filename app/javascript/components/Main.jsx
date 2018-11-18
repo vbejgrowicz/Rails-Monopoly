@@ -8,17 +8,15 @@ import ServerError from './ServerError';
 import { fetchUserRequest, fetchUserReceived } from '../actions';
 import { get, apiRequest } from '../utils/fetch';
 
-const Router = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/lobby" component={GameTables} />
-        <Route exact path="/game/:id" component={Game} />
-        <Redirect from="/" to="/lobby" />
-      </Switch>
-    </BrowserRouter>
-  );
-};
+const Router = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/lobby" component={GameTables} />
+      <Route exact path="/game/:id" component={Game} />
+      <Redirect from="/" to="/lobby" />
+    </Switch>
+  </BrowserRouter>
+);
 
 class Main extends React.Component {
   componentWillMount() {

@@ -12,7 +12,7 @@ class GameActions extends React.Component {
   }
 
   toggleGameDetails() {
-    this.setState({ gameDetailsModal: !this.state.gameDetailsModal });
+    this.setState(prevState => ({ gameDetailsModal: !prevState.gameDetailsModal }));
   }
 
   render() {

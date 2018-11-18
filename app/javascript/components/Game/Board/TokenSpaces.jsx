@@ -69,13 +69,14 @@ class TokenSpaces extends React.Component {
 
   render() {
     const { item, players } = this.props;
-    const playersOnSpace = players.filter(player => player.position === item.position)
+    const playersOnSpace = players.filter(player => player.position === item.position);
     return item.category === 'in-jail' ? this.renderJail(playersOnSpace) : this.renderDefault(playersOnSpace);
   }
 }
 
 TokenSpaces.propTypes = {
   item: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = ({ activeGame }) => ({

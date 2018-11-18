@@ -11,7 +11,7 @@ class GameItem extends React.Component {
   }
 
   toggleModal() {
-    this.setState({ showModal: !this.state.showModal });
+    this.setState(prevState => ({ showModal: !prevState.showModal }));
   }
 
   render() {

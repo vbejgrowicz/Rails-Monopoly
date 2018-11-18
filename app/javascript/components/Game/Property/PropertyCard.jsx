@@ -107,13 +107,14 @@ class PropertyCard extends React.Component {
   }
 
   flip() {
-    this.setState({ flip: !this.state.flip });
+    this.setState(prevState => ({ flip: !prevState.flip }));
   }
 
   renderCard(item) {
     if (item.color === 'black') {
       return this.railroadCard(item);
-    } else if (item.color === 'white') {
+    }
+    if (item.color === 'white') {
       return this.utilityCard(item);
     }
     return this.standardCard(item);

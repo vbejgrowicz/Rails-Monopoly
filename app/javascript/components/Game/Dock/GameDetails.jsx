@@ -15,12 +15,12 @@ class GameDetails extends React.Component {
   }
 
   setActive(playerId) {
-    this.setState({
+    this.setState(prevState => ({
       activePlayers: {
-        ...this.state.activePlayers,
-        [playerId]: !this.state.activePlayers[playerId],
+        ...prevState.activePlayers,
+        [playerId]: !prevState.activePlayers[playerId],
       },
-    });
+    }));
   }
 
   render() {

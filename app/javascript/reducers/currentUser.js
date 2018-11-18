@@ -1,4 +1,3 @@
-
 export default function currentUser(state = { isFetching: true }, action) {
   switch (action.type) {
     case 'FETCH_USER_REQUEST':

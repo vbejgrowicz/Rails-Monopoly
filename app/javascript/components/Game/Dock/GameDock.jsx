@@ -36,6 +36,11 @@ class GameDock extends React.Component {
 
 GameDock.propTypes = {
   players: PropTypes.array.isRequired,
+  cable: PropTypes.object.isRequired,
+  handleTurnsBroadcast: PropTypes.func.isRequired,
+  handlePlayerBroadcast: PropTypes.func.isRequired,
+  handlePlayerMoneyBroadcast: PropTypes.func.isRequired,
+  handlePropertyOwnerBroadcast: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ activeGame, cable }) => ({
@@ -48,6 +53,6 @@ const mapDispatchToProps = dispatch => ({
   handlePlayerBroadcast: data => dispatch(receiveBroadcastedPlayerData(data)),
   handlePlayerMoneyBroadcast: data => dispatch(updatePlayerMoney(data.player_id, data.money)),
   handlePropertyOwnerBroadcast: data => dispatch(updatePropertyOwner(data.player_id, data.property_id)),
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDock);
