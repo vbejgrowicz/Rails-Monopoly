@@ -11,6 +11,8 @@ class GameDock extends React.Component {
   componentWillMount() {
     subscribe(this.props.cable, 'TurnsChannel', this.props.handleTurnsBroadcast, 'turns');
     subscribe(this.props.cable, 'PlayersChannel', this.props.handlePlayerBroadcast, 'player');
+    subscribe(this.props.cable, 'PlayersChannel', this.props.handlePlayerMoneyBroadcast, 'playerMoney');
+    subscribe(this.props.cable, 'PropertiesChannel', this.props.handlePropertyOwnerBroadcast, 'property');
   }
 
   componentWillUnmount() {
@@ -44,6 +46,8 @@ const mapStateToProps = ({ activeGame, cable }) => ({
 const mapDispatchToProps = dispatch => ({
   handleTurnsBroadcast: data => dispatch(receiveBroadcastedTurnData(data)),
   handlePlayerBroadcast: data => dispatch(receiveBroadcastedPlayerData(data)),
+  handlePlayerMoneyBroadcast: data => dispatch(updatePlayerMoney(data.player_id, data.money)),
+  handlePropertyOwnerBroadcast: data => dispatch(updatePropertyOwner(data.player_id, data.property_id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDock);
