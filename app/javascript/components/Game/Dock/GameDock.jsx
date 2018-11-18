@@ -4,8 +4,19 @@ import { connect } from 'react-redux';
 import PlayerCard from './PlayerCard';
 import PlayerActions from './PlayerActions';
 import GameActions from './GameActions';
+import { subscribe } from '../../../utils/cable';
+import { receiveBroadcastedPlayerData, receiveBroadcastedTurnData, updatePlayerMoney, updatePropertyOwner } from '../../../actions';
 
 class GameDock extends React.Component {
+  componentWillMount() {
+    subscribe(this.props.cable, 'TurnsChannel', this.props.handleTurnsBroadcast, 'turns');
+    subscribe(this.props.cable, 'PlayersChannel', this.props.handlePlayerBroadcast, 'player');
+  }
+
+  componentWillUnmount() {
+    this.props.cable.disconnect();
+  }
+
   render() {
     return (
       <div className="dock">
@@ -25,8 +36,14 @@ GameDock.propTypes = {
   players: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ activeGame }) => ({
+const mapStateToProps = ({ activeGame, cable }) => ({
   players: activeGame.players,
+  cable,
 });
 
-export default connect(mapStateToProps, null)(GameDock);
+const mapDispatchToProps = dispatch => ({
+  handleTurnsBroadcast: data => dispatch(receiveBroadcastedTurnData(data)),
+  handlePlayerBroadcast: data => dispatch(receiveBroadcastedPlayerData(data)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameDock);

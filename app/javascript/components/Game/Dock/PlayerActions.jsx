@@ -4,29 +4,22 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { dieMapper } from '../../../utils/helpers';
 import { get, put, apiRequest } from '../../../utils/fetch';
-import { connectCable, subscribe } from '../../../utils/cable';
+import { subscribe } from '../../../utils/cable';
 import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest, fetchPlayerReceived,
  fetchTurnsRequest, fetchTurnsReceived, receiveBroadcastedTurnData, receiveBroadcastedPlayerData,
 } from '../../../actions';
 
 class PlayerActions extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.rollDice = this.rollDice.bind(this);
     this.movePlayer = this.movePlayer.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.renderActionButton = this.renderActionButton.bind(this);
-  }
 
-  componentWillMount() {
-    this.cable = connectCable();
-    this.turnsChannel = subscribe(this.cable, 'TurnsChannel', this.props.handleTurnsBroadcast);
-    this.playersChannel = subscribe(this.cable, 'PlayersChannel', this.props.handlePlayersBroadcast);
-  }
-
-  componentWillUnmount() {
-    this.cable.disconnect();
+    this.turnsChannel = props.cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === 'turns')
+    this.playerChannel = props.cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === 'player')
   }
 
   rollDice = async () => {
@@ -43,7 +36,7 @@ class PlayerActions extends React.Component {
     if (updateTurn.success) {
       const fetchPlayer = await this.props.fetchPlayer(updateTurn.json.turn.player.id);
       if (fetchPlayer.success) {
-        this.playersChannel.send(fetchPlayer.json);
+        this.playerChannel.send(fetchPlayer.json);
       }
     }
   }
@@ -101,15 +94,14 @@ PlayerActions.propTypes = {
   updateTurn: PropTypes.func.isRequired,
   fetchPlayer: PropTypes.func.isRequired,
   fetchTurns: PropTypes.func.isRequired,
-  handleTurnsBroadcast: PropTypes.func.isRequired,
-  handlePlayersBroadcast: PropTypes.func.isRequired,
   activePlayer: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ currentUser, turns, activeGame }) => ({
+const mapStateToProps = ({ cable, currentUser, turns, activeGame }) => ({
   isActivePlayer: currentUser.id === turns.items[0].player.user_id,
   activePlayer: activeGame.players.find(player => player.id === turns.items[0].player.id),
   currentTurn: turns.items[0],
+  cable: cable,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -136,8 +128,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(fetchTurnsReceived(json.turns));
     });
   },
-  handleTurnsBroadcast: data => dispatch(receiveBroadcastedTurnData(data)),
-  handlePlayersBroadcast: data => dispatch(receiveBroadcastedPlayerData(data))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PlayerActions));
