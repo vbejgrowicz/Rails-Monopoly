@@ -8,7 +8,12 @@ const subscribe = (cable, channel, received, altIdentifier) => (
   })
 );
 
+const getSubscription = (cable, altIdentifier) => (
+  cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === altIdentifier)
+);
+
 export {
   connectCable,
   subscribe,
+  getSubscription,
 };

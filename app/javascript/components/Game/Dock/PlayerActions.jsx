@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { dieMapper } from '../../../utils/helpers';
 import { get, put, apiRequest } from '../../../utils/fetch';
-import { subscribe } from '../../../utils/cable';
 import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest, fetchPlayerReceived,
  fetchTurnsRequest, fetchTurnsReceived, receiveBroadcastedTurnData, receiveBroadcastedPlayerData,
+import { getSubscription } from '../../../utils/cable';
 } from '../../../actions';
 
 class PlayerActions extends React.Component {
@@ -18,8 +18,8 @@ class PlayerActions extends React.Component {
     this.endTurn = this.endTurn.bind(this);
     this.renderActionButton = this.renderActionButton.bind(this);
 
-    this.turnsChannel = props.cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === 'turns')
-    this.playerChannel = props.cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === 'player')
+    this.turnsChannel = getSubscription(props.cable, 'turns');
+    this.playerChannel = getSubscription(props.cable, 'player');
   }
 
   rollDice = async () => {
