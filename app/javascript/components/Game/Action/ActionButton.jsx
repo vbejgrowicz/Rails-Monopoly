@@ -6,10 +6,10 @@ import { updateTurnActionRequest, updateTurnActionReceived, updatePropertyOwner,
 
 class ActionButton extends React.Component {
   render() {
-    const { turnAction } = this.props;
+    const { turnAction, cable } = this.props;
     if (turnAction.action === 'buy') {
       return (
-        <button onClick={this.props.updateTurnAction(turnAction)}>
+        <button onClick={this.props.updateTurnAction(turnAction, cable)}>
           Purchase {turnAction.transaction.property_name} for ${turnAction.transaction.amount}
         </button>
       );
@@ -25,15 +25,16 @@ ActionButton.propTypes = {
   updateTurnAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ turns }) => {
+const mapStateToProps = ({ turns, cable }) => {
   const currentTurn = turns.items[0];
   return {
     turnAction: currentTurn.actions[0],
+    cable,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateTurnAction: ({ id, turn_id }) => async () => {
+  updateTurnAction: ({ id, turn_id }, cable) => async () => {
     dispatch(updateTurnActionRequest());
     const updateTurnAction = () => put(`/api/turns/${turn_id}/turn_actions/${id}`);
     return apiRequest(updateTurnAction, (json) => {
@@ -42,6 +43,10 @@ const mapDispatchToProps = dispatch => ({
         const { player_id, money, property_id } = json.buy_data;
         dispatch(updatePropertyOwner(player_id, property_id));
         dispatch(updatePlayerMoney(player_id, money));
+        const playerMoneySub = cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === 'playerMoney');
+        const propertySub = cable.subscriptions.subscriptions.find(sub => sub.altIdentifier === 'property');
+        playerMoneySub.send(json.buy_data);
+        propertySub.send(json.buy_data);
       }
     });
   },
