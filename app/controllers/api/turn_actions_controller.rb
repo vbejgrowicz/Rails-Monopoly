@@ -14,6 +14,19 @@ class Api::TurnActionsController < ApplicationController
         ]
       }
     end
+    if @turn_action.pay?
+      pay_rent = PayRent.run(@turn_action)
+      presenter[:data] = {
+        players: [
+          {
+            player_id: pay_rent.sender.id,
+            money: pay_rent.sender.money,
+          },
+          {
+            player_id: pay_rent.receiver.id,
+            money: pay_rent.receiver.money,
+          },
+        ]
       }
     end
     @turn_action.update!(completed: true)
