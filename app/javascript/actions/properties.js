@@ -7,13 +7,13 @@ const fetchPropertiesReceived = properties => ({
   payload: { properties },
 });
 
-const updatePropertyOwner = (player_id, property_id) => ({
-  type: 'UPDATE_PROPERTY_OWNER',
-  payload: { player_id, property_id },
+const updatePropertiesOwner = players => ({
+  type: 'UPDATE_PROPERTIES_OWNER',
+  payload: { players },
 });
 
 export {
   fetchPropertiesRequest,
   fetchPropertiesReceived,
-  updatePropertyOwner,
+  updatePropertiesOwner,
 };

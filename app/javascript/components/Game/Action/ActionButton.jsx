@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { put, apiRequest } from '../../../utils/fetch';
-import { updateTurnActionRequest, updateTurnActionReceived, updatePropertyOwner, updatePlayerMoney } from '../../../actions';
+import { updateTurnActionRequest, updateTurnActionReceived, updatePropertiesOwner, updatePlayersMoney } from '../../../actions';
 import { getSubscription } from '../../../utils/cable';
 
 class ActionButton extends React.Component {
@@ -46,14 +46,14 @@ const mapStateToProps = ({ turns, cable, activeGame }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  const updatePurchaseProperty = (buy_data, cable) => {
-    const { player_id, money, property_id } = buy_data;
-    dispatch(updatePropertyOwner(player_id, property_id));
-    dispatch(updatePlayerMoney(player_id, money));
+  const updatePlayers = (data, cable) => {
     const playerMoneySub = getSubscription(cable, 'playerMoney');
     const propertySub = getSubscription(cable, 'property');
-    playerMoneySub.send(buy_data);
-    propertySub.send(buy_data);
+
+    dispatch(updatePlayersMoney(data.players));
+    dispatch(updatePropertiesOwner(data.players));
+    playerMoneySub.send(data);
+    propertySub.send(data);
   };
 
   return {
@@ -62,8 +62,8 @@ const mapDispatchToProps = (dispatch) => {
       const updateTurnAction = () => put(`/api/turns/${turn_id}/turn_actions/${id}`);
       return apiRequest(updateTurnAction, (json) => {
         dispatch(updateTurnActionReceived(json.turn_action));
-        if (json.buy_data) {
-          updatePurchaseProperty(json.buy_data, cable);
+        if (json.data && json.data.players) {
+          updatePlayers(json.data, cable);
         }
       });
     },

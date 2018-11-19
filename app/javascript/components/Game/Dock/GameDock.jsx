@@ -5,7 +5,7 @@ import PlayerCard from './PlayerCard';
 import PlayerActions from './PlayerActions';
 import GameActions from './GameActions';
 import { subscribe } from '../../../utils/cable';
-import { receiveBroadcastedPlayerData, receiveBroadcastedTurnData, updatePlayerMoney, updatePropertyOwner } from '../../../actions';
+import { receiveBroadcastedPlayerData, receiveBroadcastedTurnData, updatePlayersMoney, updatePropertiesOwner } from '../../../actions';
 
 class GameDock extends React.Component {
   componentWillMount() {
@@ -51,8 +51,8 @@ const mapStateToProps = ({ activeGame, cable }) => ({
 const mapDispatchToProps = dispatch => ({
   handleTurnsBroadcast: data => dispatch(receiveBroadcastedTurnData(data)),
   handlePlayerBroadcast: data => dispatch(receiveBroadcastedPlayerData(data)),
-  handlePlayerMoneyBroadcast: data => dispatch(updatePlayerMoney(data.player_id, data.money)),
-  handlePropertyOwnerBroadcast: data => dispatch(updatePropertyOwner(data.player_id, data.property_id)),
+  handlePlayerMoneyBroadcast: data => dispatch(updatePlayersMoney(data.players)),
+  handlePropertyOwnerBroadcast: data => dispatch(updatePropertiesOwner(data.players)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDock);

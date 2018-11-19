@@ -20,9 +20,10 @@ export default function activeGame(state = initialState, action) {
     return player;
   };
 
-  const updatePlayerMoney = (player) => {
-    if (player.id === action.payload.player_id) {
-      return { ...player, money: action.payload.money };
+  const updatePlayersMoney = (player) => {
+    const playerToUpdate = action.payload.players.find(p => p.player_id === player.id);
+    if (playerToUpdate) {
+      return { ...player, money: playerToUpdate.money };
     }
     return player;
   };
@@ -77,10 +78,10 @@ export default function activeGame(state = initialState, action) {
         return { ...state, players: state.players.map(updatePlayer) };
       }
       return state;
-    case 'UPDATE_PLAYER_MONEY':
+    case 'UPDATE_PLAYERS_MONEY':
       return {
         ...state,
-        players: state.players.map(updatePlayerMoney),
+        players: state.players.map(updatePlayersMoney),
       };
     case 'SET_RELOAD_TURNS':
       return { ...state, shouldReloadTurns: true };
