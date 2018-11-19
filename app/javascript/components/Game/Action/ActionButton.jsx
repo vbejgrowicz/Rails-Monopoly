@@ -15,6 +15,14 @@ class ActionButton extends React.Component {
         </button>
       );
     }
+    if (turnAction.action === 'pay') {
+      const receiver = this.props.players.find(player => player.id === turnAction.transaction.receiver_id);
+      return (
+        <button onClick={this.props.updateTurnAction(turnAction, cable)}>
+          Pay ${turnAction.transaction.amount} to {receiver.username}
+        </button>
+      );
+    }
     return (
       <button onClick={this.props.updateTurnAction(turnAction)}>{turnAction.action}</button>
     );
@@ -25,11 +33,13 @@ ActionButton.propTypes = {
   turnAction: PropTypes.object.isRequired,
   updateTurnAction: PropTypes.func.isRequired,
   cable: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ turns, cable }) => {
+const mapStateToProps = ({ turns, cable, activeGame }) => {
   const currentTurn = turns.items[0];
   return {
+    players: activeGame.players,
     turnAction: currentTurn.actions[0],
     cable,
   };
