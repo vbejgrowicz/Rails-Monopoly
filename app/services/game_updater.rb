@@ -4,6 +4,7 @@ class GameUpdater
       game = Game.create!(host_id: current_user.id)
       Player.create!(game_id: game.id, token_id: params[:token_id], user_id: game.host_id)
       Deed.generate_for_game!(game.id)
+      [CommunityChestCard, ChanceCard].each { |deck| deck.shuffle_and_save_for_game!(game.id) }
       game
     end
   end
