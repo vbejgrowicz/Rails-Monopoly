@@ -1,4 +1,4 @@
-class GenerateAction
+class GenerateActionFromTile
   def self.run(turn)
     new(turn).run
   end
