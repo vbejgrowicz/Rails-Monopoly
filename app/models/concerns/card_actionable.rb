@@ -8,6 +8,7 @@ module CardActionable
 
     validates :description, presence: true
 
+    belongs_to :action
     has_many joined_assoc.to_sym, dependent: :destroy
     has_many :games, through: joined_assoc.to_sym
   end
