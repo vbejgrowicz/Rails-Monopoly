@@ -19,7 +19,7 @@ class ActionButton extends React.Component {
       const receiver = this.props.players.find(player => player.id === turnAction.transaction.receiver_id);
       return (
         <button onClick={this.props.updateTurnAction(turnAction, cable)}>
-          Pay ${turnAction.transaction.amount} to {receiver.username}
+          Pay ${turnAction.transaction.amount} {receiver ? `to ${receiver.username}` : ''}
         </button>
       );
     }

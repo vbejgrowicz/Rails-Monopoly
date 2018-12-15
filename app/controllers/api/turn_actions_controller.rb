@@ -14,7 +14,7 @@ class Api::TurnActionsController < ApplicationController
         ]
       }
     end
-    if @turn_action.pay?
+    if @turn_action.pay? && @turn_action.game_transaction # TODO: temporary until transactions are generated for luxury tax, income tax, etc...
       pay_rent = PayRent.run(@turn_action)
       presenter[:data] = {
         players: [
