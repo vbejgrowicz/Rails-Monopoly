@@ -14,4 +14,8 @@ class TurnAction < ApplicationRecord
   def pay?
     action.name == 'pay'
   end
+
+  def draw?
+    action.name == 'draw'
+  end
 end
