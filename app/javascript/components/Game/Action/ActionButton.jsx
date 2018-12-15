@@ -6,11 +6,10 @@ import { updateTurnActionRequest, updateTurnActionReceived, updatePropertiesOwne
 import { getSubscription } from '../../../utils/cable';
 
 class ActionButton extends React.Component {
-  onClickDraw = () => {
+  onClickDraw = async (e) => {
     const { turnAction, cable } = this.props;
-    this.props.updateTurnAction(turnAction, cable).then(() => {
-      // this.props.fetchNextTurnAction()
-    });
+    const _var = await this.props.updateTurnAction(turnAction, cable)(e)
+    // this.props.fetchNextTurnAction()
   }
 
   render() {
