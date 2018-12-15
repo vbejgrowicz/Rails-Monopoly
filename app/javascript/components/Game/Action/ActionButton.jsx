@@ -6,6 +6,13 @@ import { updateTurnActionRequest, updateTurnActionReceived, updatePropertiesOwne
 import { getSubscription } from '../../../utils/cable';
 
 class ActionButton extends React.Component {
+  onClickDraw = () => {
+    const { turnAction, cable } = this.props;
+    this.props.updateTurnAction(turnAction, cable).then(() => {
+      // this.props.fetchNextTurnAction()
+    });
+  }
+
   render() {
     const { turnAction, cable } = this.props;
     if (turnAction.action === 'buy') {
@@ -20,6 +27,13 @@ class ActionButton extends React.Component {
       return (
         <button onClick={this.props.updateTurnAction(turnAction, cable)}>
           Pay ${turnAction.transaction.amount} {receiver ? `to ${receiver.username}` : ''}
+        </button>
+      );
+    }
+    if (turnAction.action === 'draw') {
+      return (
+        <button onClick={this.onClickDraw}>
+          Draw
         </button>
       );
     }
@@ -67,6 +81,7 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
+    // fetchNextTurnAction: () => {},
   };
 };
 
