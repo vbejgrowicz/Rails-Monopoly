@@ -32,6 +32,10 @@ class Api::TurnActionsController < ApplicationController
       }
     end
 
+    if @turn_action.draw?
+      DrawCard.run(@turn_action)
+    end
+
     @turn_action.update!(completed: true)
     presenter[:turn_action] = TurnActionPresenter.new(@turn_action)
     render json: presenter
