@@ -16,8 +16,8 @@ class DrawCard
     event_name = @turn_action.turn.end_space.event.name
     draw_class = DRAW_CARD_TO_CLASS[event_name]
     if draw_class
-      # card = draw_class.get_top_card_for_game(@turn_action.turn.game_id)
-      # GenerateActionFromCard(@turn_action.turn, card)
+      card = draw_class.get_top_card_for_game(@turn_action.turn.game_id)
+      GenerateActionFromCard.run(@turn_action.turn, card)
     end
   end
 end
