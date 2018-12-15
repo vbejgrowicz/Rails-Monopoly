@@ -2,6 +2,7 @@ class Api::TurnActionsController < ApplicationController
   def update
     @turn_action = TurnAction.find(params[:id])
     presenter = {}
+
     if @turn_action.buy?
       purch_prop = PurchaseProperty.run(@turn_action)
       presenter[:data] = {
@@ -14,6 +15,7 @@ class Api::TurnActionsController < ApplicationController
         ]
       }
     end
+
     if @turn_action.pay? && @turn_action.game_transaction # TODO: temporary until transactions are generated for luxury tax, income tax, etc...
       pay_rent = PayRent.run(@turn_action)
       presenter[:data] = {
@@ -29,6 +31,7 @@ class Api::TurnActionsController < ApplicationController
         ]
       }
     end
+
     @turn_action.update!(completed: true)
     presenter[:turn_action] = TurnActionPresenter.new(@turn_action)
     render json: presenter
