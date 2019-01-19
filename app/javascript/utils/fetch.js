@@ -17,7 +17,7 @@ const put = (relPath, params = {}) => fetch(`${baseUrl}${relPath}`, { ...baseOpt
 
 const destroy = (relPath, params = {}) => fetch(`${baseUrl}${relPath}`, { ...baseOpts, method: 'DELETE', body: JSON.stringify(params) });
 
-const apiRequest = async (fetchReq, callBack) => {
+const apiRequest = async (fetchReq, callBack = () => {}) => {
   const resp = await fetchReq();
   const json = await resp.json();
   const status = { success: false, error: false };
