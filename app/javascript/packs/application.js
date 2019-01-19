@@ -6,5 +6,11 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+import { post } from '../utils/fetch';
 
 console.log('Hello World from Webpacker')
+
+window.updateRoll = (spaces) => {
+  const arr = window.location.pathname.split('/');
+  post(`/api/games/${arr[arr.length - 1]}/turns/update_last`, { spaces });
+};

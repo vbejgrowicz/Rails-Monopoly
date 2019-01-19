@@ -11,6 +11,18 @@ class Api::TurnsController < ApplicationController
     render json: { turn: TurnPresenter.new(@turn) }
   end
 
+  def update_last
+    turn = Turn.last
+    raise 'too big!' if params[:spaces] > 12
+    if params[:spaces] <= 6
+      turn.roll.update!(die_one: params[:spaces], die_two: 0)
+    else
+      turn.roll.update!(die_one: 6, die_two: params[:spaces] - 6)
+    end
+    turn.update!(end_space_id: turn.start_space_id + params[:spaces])
+    render json: { success: true}
+  end
+
   private
 
   def update_params
