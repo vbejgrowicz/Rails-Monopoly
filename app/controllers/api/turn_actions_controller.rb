@@ -6,35 +6,15 @@ class Api::TurnActionsController < ApplicationController
 
   def update
     @turn_action = TurnAction.find(params[:id])
-    presenter = {}
 
     if @turn_action.buy?
       purch_prop = PurchaseProperty.run(@turn_action)
-      presenter[:data] = {
-        players: [
-          {
-            money: purch_prop.player.money,
-            player_id: purch_prop.player.id,
-            property_id: purch_prop.property.id,
-          },
-        ]
-      }
+      broadcast_property_purchase(purch_prop)
     end
 
     if @turn_action.pay? && @turn_action.game_transaction # TODO: temporary until transactions are generated for luxury tax, income tax, etc...
       pay_rent = PayRent.run(@turn_action)
-      presenter[:data] = {
-        players: [
-          {
-            player_id: pay_rent.sender.id,
-            money: pay_rent.sender.money,
-          },
-          {
-            player_id: pay_rent.receiver.id,
-            money: pay_rent.receiver.money,
-          },
-        ]
-      }
+      broadcast_player_transaction(pay_rent)
     end
 
     if @turn_action.draw?
@@ -42,7 +22,23 @@ class Api::TurnActionsController < ApplicationController
     end
 
     @turn_action.update!(completed: true)
-    presenter[:turn_action] = TurnActionPresenter.new(@turn_action)
-    render json: presenter
+    render json: { turn_action: TurnActionPresenter.new(@turn_action) }
+  end
+
+  private
+
+  def broadcast_property_purchase(purch_prop)
+    ActionCable.server.broadcast('players_money', players: [{ money: purch_prop.player.money, player_id: purch_prop.player.id }])
+    ActionCable.server.broadcast('properties', players: [{ player_id: purch_prop.player.id, property_id: purch_prop.property.id }])
+  end
+
+  def broadcast_player_transaction(player_transaction)
+    ActionCable.server.broadcast(
+      'players_money',
+      players: [
+        { player_id: player_transaction.sender.id, money: player_transaction.sender.money },
+        { player_id: player_transaction.receiver.id, money: player_transaction.receiver.money }
+      ]
+    )
   end
 end

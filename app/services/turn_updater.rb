@@ -27,6 +27,7 @@ class TurnUpdater
   def move
     validate_valid_move!
     @turn.player.move_to(@turn.end_space_id)
+    ActionCable.server.broadcast('players', player: PlayerPresenter.new(@turn.player))
     GenerateActionFromTile.run(@turn)
   end
 

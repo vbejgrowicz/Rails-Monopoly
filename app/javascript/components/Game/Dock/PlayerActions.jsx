@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { dieMapper } from '../../../utils/helpers';
-import { get, put, apiRequest } from '../../../utils/fetch';
-import { getSubscription } from '../../../utils/cable';
-import { updateTurnRequest, updateTurnReceived, fetchPlayerRequest,
-  fetchPlayerReceived, fetchTurnsRequest, fetchTurnsReceived,
-} from '../../../actions';
+import { put, apiRequest } from '../../../utils/fetch';
+import { updateTurnRequest } from '../../../actions';
 
 class PlayerActions extends React.Component {
   constructor(props) {
@@ -17,39 +14,21 @@ class PlayerActions extends React.Component {
     this.movePlayer = this.movePlayer.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.renderActionButton = this.renderActionButton.bind(this);
-
-    this.turnsChannel = getSubscription(props.cable, 'turns');
-    this.playerChannel = getSubscription(props.cable, 'player');
   }
 
-  rollDice = async () => {
+  rollDice = () => {
     const { currentTurn } = this.props;
-    const updateTurn = await this.props.updateTurn('roll', currentTurn.id);
-    if (updateTurn.success) {
-      this.turnsChannel.send(updateTurn.json);
-    }
+    this.props.updateTurn('roll', currentTurn.id);
   }
 
-  movePlayer = async () => {
+  movePlayer = () => {
     const { currentTurn } = this.props;
-    const updateTurn = await this.props.updateTurn('move', currentTurn.id);
-    if (updateTurn.success) {
-      const fetchPlayer = await this.props.fetchPlayer(updateTurn.json.turn.player.id);
-      if (fetchPlayer.success) {
-        this.playerChannel.send(fetchPlayer.json);
-      }
-    }
+    this.props.updateTurn('move', currentTurn.id);
   }
 
-  endTurn = async () => {
+  endTurn = () => {
     const { currentTurn } = this.props;
-    const updateTurn = await this.props.updateTurn('end', currentTurn.id);
-    if (updateTurn.success) {
-      const fetchTurns = await this.props.fetchTurns();
-      if (fetchTurns.success) {
-        this.turnsChannel.send(fetchTurns.json);
-      }
-    }
+    this.props.updateTurn('end', currentTurn.id);
   }
 
   renderActionButton() {
@@ -93,17 +72,13 @@ PlayerActions.propTypes = {
   isActivePlayer: PropTypes.bool.isRequired,
   currentTurn: PropTypes.object.isRequired,
   updateTurn: PropTypes.func.isRequired,
-  fetchPlayer: PropTypes.func.isRequired,
-  fetchTurns: PropTypes.func.isRequired,
   activePlayer: PropTypes.object.isRequired,
-  cable: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ cable, currentUser, turns, activeGame }) => ({
+const mapStateToProps = ({ currentUser, turns, activeGame }) => ({
   isActivePlayer: currentUser.id === turns.items[0].player.user_id,
   activePlayer: activeGame.players.find(player => player.id === turns.items[0].player.id),
   currentTurn: turns.items[0],
-  cable,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -111,24 +86,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const gameId = ownProps.match.params.id;
     dispatch(updateTurnRequest());
     const updateTurn = () => put(`/api/games/${gameId}/turns/${turnId}`, { turn_action });
-    return apiRequest(updateTurn, (json) => {
-      dispatch(updateTurnReceived(json.turn));
-    });
-  },
-  fetchPlayer: async (playerId) => {
-    dispatch(fetchPlayerRequest());
-    const fetchPlayer = () => get(`/api/players/${playerId}`);
-    return apiRequest(fetchPlayer, (json) => {
-      dispatch(fetchPlayerReceived(json.player));
-    });
-  },
-  fetchTurns: async () => {
-    const gameId = ownProps.match.params.id;
-    dispatch(fetchTurnsRequest());
-    const getTurns = () => get(`/api/games/${gameId}/turns`);
-    return apiRequest(getTurns, (json) => {
-      dispatch(fetchTurnsReceived(json.turns));
-    });
+    return apiRequest(updateTurn);
   },
 });
 
