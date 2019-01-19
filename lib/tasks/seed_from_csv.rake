@@ -29,6 +29,11 @@ namespace :seed_from_csv do
     CsvUploads::Users.run(begin_destroy: args.begin_destroy)
   end
 
+  desc 'Seed Actions'
+  task :actions, [:begin_destroy] => :environment do |_, args|
+    CsvUploads::Actions.run(begin_destroy: args.begin_destroy)
+  end
+
   desc 'Seed Chance Cards'
   task :chance_cards, [:begin_destroy] => :environment do |_, args|
     CsvUploads::ChanceCards.run(begin_destroy: args.begin_destroy)
@@ -39,12 +44,7 @@ namespace :seed_from_csv do
     CsvUploads::CommunityChestCards.run(begin_destroy: args.begin_destroy)
   end
 
-  desc 'Seed Actions'
-  task :actions, [:begin_destroy] => :environment do |_, args|
-    CsvUploads::Actions.run(begin_destroy: args.begin_destroy)
-  end
-
-  task all: [:color_sets, :properties, :events, :spaces, :tokens, :users, :chance_cards, :community_chest_cards, :actions]
+  task all: [:color_sets, :properties, :events, :spaces, :tokens, :users, :actions, :chance_cards, :community_chest_cards]
 
   task :all_with_destroy do |_, args|
     Rake::Task["seed_from_csv:color_sets"].invoke(true)
@@ -53,8 +53,8 @@ namespace :seed_from_csv do
     Rake::Task["seed_from_csv:spaces"].invoke(true)
     Rake::Task["seed_from_csv:tokens"].invoke(true)
     Rake::Task["seed_from_csv:users"].invoke(true)
+    Rake::Task["seed_from_csv:actions"].invoke(true)
     Rake::Task["seed_from_csv:chance_cards"].invoke(true)
     Rake::Task["seed_from_csv:community_chest_cards"].invoke(true)
-    Rake::Task["seed_from_csv:actions"].invoke(true)
   end
 end
