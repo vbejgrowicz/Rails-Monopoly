@@ -14,8 +14,9 @@ class Api::TurnsController < ApplicationController
   def update_last
     turn = Turn.last
     raise 'too big!' if params[:spaces] > 12
+    raise 'too small!' if params[:spaces] <= 1
     if params[:spaces] <= 6
-      turn.roll.update!(die_one: params[:spaces], die_two: 0)
+      turn.roll.update!(die_one: params[:spaces] - 1, die_two: 1)
     else
       turn.roll.update!(die_one: 6, die_two: params[:spaces] - 6)
     end
