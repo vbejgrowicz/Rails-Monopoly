@@ -16,6 +16,15 @@ const updateTurnReceived = turn => ({
   payload: { turn },
 });
 
+const fetchTurnActionsRequest = () => ({
+  type: 'FETCH_TURN_ACTIONS_REQUEST',
+});
+
+const fetchTurnActionsReceived = turnActions => ({
+  type: 'FETCH_TURN_ACTIONS_RECEIVED',
+  payload: { turnActions },
+});
+
 const updateTurnActionRequest = () => ({
   type: 'UPDATE_TURN_ACTION_REQUEST',
 });
@@ -32,4 +41,6 @@ export {
   updateTurnReceived,
   updateTurnActionRequest,
   updateTurnActionReceived,
+  fetchTurnActionsRequest,
+  fetchTurnActionsReceived,
 };

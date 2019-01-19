@@ -53,6 +53,22 @@ export default function turns(state = { isFetching: true, items: [] }, action) {
         items: state.items.map(updateNestedHandler),
         isUpdating: false,
       };
+    case 'FETCH_TURN_ACTIONS_REQUEST':
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case 'FETCH_TURN_ACTIONS_RECEIVED':
+      return {
+        ...state,
+        items: state.items.map((turn) => {
+          if (turn.id === action.payload.turnActions[0].turn_id) {
+            return { ...turn, actions: action.payload.turnActions };
+          }
+          return turn;
+        }),
+        isFetching: false,
+      };
     case 'RECEIVE_BROADCASTED_TURN_DATA':
       if (action.payload.turn) {
         return { ...state, items: state.items.map(updateHandler) };

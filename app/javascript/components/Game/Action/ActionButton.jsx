@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { put, apiRequest } from '../../../utils/fetch';
-import { updateTurnActionRequest, updateTurnActionReceived, updatePropertiesOwner, updatePlayersMoney } from '../../../actions';
+import { apiRequest, get, put } from '../../../utils/fetch';
+import { fetchTurnActionsRequest, fetchTurnActionsReceived, updateTurnActionRequest,
+  updateTurnActionReceived, updatePropertiesOwner, updatePlayersMoney,
+} from '../../../actions';
 import { getSubscription } from '../../../utils/cable';
 
 class ActionButton extends React.Component {
   onClickDraw = async (e) => {
     const { turnAction, cable } = this.props;
-    const _var = await this.props.updateTurnAction(turnAction, cable)(e)
-    // this.props.fetchNextTurnAction()
+    await this.props.updateTurnAction(turnAction, cable)(e);
+    this.props.fetchTurnActions(turnAction.turn_id);
   }
 
   render() {
@@ -80,7 +82,13 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    // fetchNextTurnAction: () => {},
+    fetchTurnActions: (turnId) => {
+      dispatch(fetchTurnActionsRequest());
+      const fetchTurnActions = () => get(`/api/turns/${turnId}/turn_actions`);
+      return apiRequest(fetchTurnActions, (json) => {
+        dispatch(fetchTurnActionsReceived(json.turn_actions));
+      });
+    },
   };
 };
 

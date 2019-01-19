@@ -1,4 +1,9 @@
 class Api::TurnActionsController < ApplicationController
+  def index
+    @turn_actions = TurnAction.where(turn_id: params[:turn_id]).order(id: :desc)
+    render json: { turn_actions: @turn_actions.map { |turn_action| TurnActionPresenter.new(turn_action) } }
+  end
+
   def update
     @turn_action = TurnAction.find(params[:id])
     presenter = {}
