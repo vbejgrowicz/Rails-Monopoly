@@ -11,7 +11,7 @@ class GameDock extends React.Component {
   componentWillMount() {
     subscribe(this.props.cable, 'TurnsChannel', this.props.handleTurnsBroadcast, 'turns');
     subscribe(this.props.cable, 'PlayersChannel', this.props.handlePlayerBroadcast, 'player');
-    subscribe(this.props.cable, 'PlayersChannel', this.props.handlePlayerMoneyBroadcast, 'playerMoney');
+    subscribe(this.props.cable, 'PlayersMoneyChannel', this.props.handlePlayerMoneyBroadcast, 'playerMoney');
     subscribe(this.props.cable, 'PropertiesChannel', this.props.handlePropertyOwnerBroadcast, 'property');
   }
 
