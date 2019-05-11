@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_15_021032) do
+ActiveRecord::Schema.define(version: 2019_05_11_164411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_021032) do
     t.integer "turn_action_id", null: false
     t.integer "deed_id"
     t.string "transaction_type", null: false
-    t.integer "sender_id", null: false
+    t.integer "sender_id"
     t.integer "receiver_id"
     t.integer "amount", null: false
     t.boolean "canceled", default: false, null: false
@@ -171,7 +171,9 @@ ActiveRecord::Schema.define(version: 2018_12_15_021032) do
     t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "card_id"
     t.index ["turn_id", "action_id"], name: "index_turn_actions_on_turn_id_and_action_id"
+    t.index ["turn_id", "card_id"], name: "index_turn_actions_on_turn_id_and_card_id", unique: true
   end
 
   create_table "turns", force: :cascade do |t|
