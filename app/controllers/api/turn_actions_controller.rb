@@ -39,10 +39,9 @@ class Api::TurnActionsController < ApplicationController
   def broadcast_player_transaction(player_transaction)
     ActionCable.server.broadcast(
       'players_money',
-      players: [
-        { player_id: player_transaction.sender.id, money: player_transaction.sender.money },
-        { player_id: player_transaction.receiver.id, money: player_transaction.receiver.money }
-      ]
+      players: [player_transaction.sender, player_transaction.receiver].compact.map do |player|
+        { player_id: player.id, money: player.money }
+      end
     )
   end
 end
