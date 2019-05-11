@@ -18,4 +18,12 @@ class TurnAction < ApplicationRecord
   def draw?
     action.name == 'draw'
   end
+
+  def receive?
+    action.name == 'receive'
+  end
+
+  def move?
+    action.name == 'move'
+  end
 end
