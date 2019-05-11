@@ -13,12 +13,8 @@ class Api::TurnActionsController < ApplicationController
     end
 
     if @turn_action.pay? && @turn_action.game_transaction # TODO: temporary until transactions are generated for luxury tax, income tax, etc...
-      if @turn_action.game_transaction.rent?
-        pay_rent = PayRent.run(@turn_action)
-        broadcast_player_transaction(pay_rent)
-      elsif @turn_action.game_transaction.bank_transaction?
-        # do something else
-      end
+      payment = Payment.run(@turn_action)
+      broadcast_player_transaction(payment)
     end
 
     if @turn_action.draw?
