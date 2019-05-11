@@ -11,6 +11,12 @@ class TurnActionPresenter < ApplicationPresenter
     else
       json[:transaction] = {}
     end
+
+    if @object.card
+      json[:card] = CardPresenter.new(@object.card)
+    else
+      json[:card] = {}
+    end
     json
   end
 end
