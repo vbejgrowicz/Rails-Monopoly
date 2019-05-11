@@ -1,0 +1,42 @@
+@import 'colors';
+@import url('https://fonts.googleapis.com/css?family=Tajawal:400,700');
+
+.event-card {
+  font-family: 'Tajawal', sans-serif;
+  border: 1px solid #000;
+  width: 400px;
+  height: 200px;
+  box-sizing: border-box;
+  padding: 10px;
+
+  .event-title {
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    height: 15%;
+  }
+
+  .event-body {
+    height: 85%;
+    display: flex;
+
+    .event-left, .event-right {
+      width: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .event-left {
+      color: #5a5252;
+    }
+
+    .event-right {
+      background-image: url('income-tax.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+}
