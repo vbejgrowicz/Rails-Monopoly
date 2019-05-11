@@ -1,22 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import GameTile from '../Board/GameTile';
 import ActionButton from './ActionButton';
-import PropertyCard from '../Property/PropertyCard';
+import ActionDisplay from './ActionDisplay';
 
 class ActionModal extends React.Component {
   render() {
-    const { actionSpace, shouldShow, properties } = this.props;
+    const { actionSpace, shouldShow, properties, card } = this.props;
     return shouldShow && (
       <div className="outer-modal action">
         <div className="modal">
           <div className="contents">
-            {actionSpace.is_property ? (
-              <PropertyCard item={properties.find(prop => prop.id === actionSpace.property_id)} />
-            ) : (
-              <GameTile item={actionSpace} shouldShowTokens={false} />
-            )}
+            <ActionDisplay actionSpace={actionSpace} properties={properties} card={card} />
             <ActionButton />
           </div>
         </div>
@@ -29,6 +24,7 @@ ActionModal.propTypes = {
   shouldShow: PropTypes.bool.isRequired,
   actionSpace: PropTypes.object.isRequired,
   properties: PropTypes.array.isRequired,
+  card: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ turns, activeGame, spaces, properties, currentUser }) => {
@@ -43,6 +39,7 @@ const mapStateToProps = ({ turns, activeGame, spaces, properties, currentUser })
       shouldShow: false,
       actionSpace: {},
       properties: [],
+      card: {},
     };
   }
 
@@ -50,6 +47,7 @@ const mapStateToProps = ({ turns, activeGame, spaces, properties, currentUser })
     shouldShow: true,
     actionSpace: spaces.items.find(space => space.id === currentTurn.end_space_id),
     properties: properties.items,
+    card: currentTurn.actions[0].card,
   };
 };
 
