@@ -12,7 +12,7 @@ class Api::TurnActionsController < ApplicationController
       broadcast_property_purchase(purch_prop)
     end
 
-    if @turn_action.pay? && @turn_action.game_transaction # TODO: temporary until transactions are generated for luxury tax, income tax, etc...
+    if (@turn_action.pay? || @turn_action.receive?) && @turn_action.game_transaction # TODO: temporary until transactions are generated for luxury tax, income tax, etc...
       payment = Payment.run(@turn_action)
       broadcast_player_transaction(payment)
     end
