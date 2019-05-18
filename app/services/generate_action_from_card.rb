@@ -9,7 +9,7 @@ class GenerateActionFromCard
   end
 
   def run
-    turn_action = TurnAction.create!(turn_id: @turn.id, action_id: @card.action_id, card_id: @card.id)
+    turn_action = TurnAction.create!(turn_id: @turn.id, action_id: @card.action_id, card: @card)
     if turn_action.pay?
       GameTransaction.create!(
         turn_action_id: turn_action.id,
